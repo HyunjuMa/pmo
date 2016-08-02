@@ -32,6 +32,23 @@ module.exports = function(app, User) {
     });
   });//create user
 
+  app.post('/register', function(req,res){
+    var user = new User();
+    user.name = req.body.name;
+    user.email = req.body.email;
+    user.phone = req.body.phone;
+    user.pw = req.body.pw;
+
+    user.save(function(err) {
+      if(err) {
+        console.error(err);
+        res.json({result: 0});
+        return;
+      }
+      res.json({result: 1});
+    });
+  });//create user
+
   app.put('/api/users/:user_id', function(req,res){
     res.end();
   });//update
