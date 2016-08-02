@@ -39,6 +39,9 @@ module.exports = function(app, User) {
     user.email = req.body.email;
     user.pw = req.body.pw;
 
+    console.log('name: ' + user.name);
+    console.log('pw: ' + user.pw);
+
     user.save(function(err) {
       if(err) {
         console.error(err);
