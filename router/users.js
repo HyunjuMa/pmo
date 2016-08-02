@@ -32,11 +32,11 @@ module.exports = function(app, User) {
     });
   });//create user
 
+//regi-login
   app.post('/register', function(req,res){
     var user = new User();
     user.name = req.body.name;
     user.email = req.body.email;
-    user.phone = req.body.phone;
     user.pw = req.body.pw;
 
     user.save(function(err) {
@@ -48,6 +48,25 @@ module.exports = function(app, User) {
       res.json({result: 1});
     });
   });//create user
+
+  app.post('/login', function(req,res){
+    var name = req.body.name;
+    var pw = req.body.pw;
+
+    User.findOne({name: name, pw: pw}, function(err, user) {
+      if(err){
+        console.log(err);
+        return res.status(500).send();
+      }
+
+      if(!user) {
+        return res.status(404).send();
+      }
+
+      return res.status(200).send();
+    })
+  });
+
 
   app.put('/api/users/:user_id', function(req,res){
     res.end();
