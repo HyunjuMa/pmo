@@ -17,6 +17,13 @@ module.exports = function(app, fs)
     })
   });
 
+  app.get('/register', function(req,res){
+    console.log("regiserter");
+    res.render('register', {
+      title:"register"
+    })
+  });
+
   app.get('/myproject', function(req,res){
     console.log("myprojectloaded");
     res.render('myproject', {
