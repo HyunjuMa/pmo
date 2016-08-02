@@ -53,6 +53,9 @@ module.exports = function(app, User) {
     var name = req.body.name;
     var pw = req.body.pw;
 
+    console.log('name: ' + name);
+    console.log('pw: ' + pw);
+
     User.findOne({name: name, pw: pw}, function(err, user) {
       if(err){
         console.log(err);
