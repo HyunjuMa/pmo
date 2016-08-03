@@ -88,11 +88,11 @@ module.exports = function(app, User) {
     sess = req.session;
     if(sess.name) {
       req.session.destroy(function(err){
-        if(err) console.log(err);
-        else res.redirect('/');
+        if(err) {console.log(err);}
+        else {res.redirect('/');}
       })
-      else res.redirect('/');
     }
+    else {res.redirect('/');}
   })
 
 
