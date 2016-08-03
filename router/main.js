@@ -17,7 +17,6 @@ module.exports = function(app, fs)
       title: "Dashboard",
       length: 5,
       page_name: 'dashboard' // navbar set active에서 쓸 것
-      session: req.session.name;
     })
   });
 
@@ -25,7 +24,7 @@ module.exports = function(app, fs)
     console.log("regiserter");
     res.render('register', {
       title:"register",
-      page_name: 'register' //이 자체 안쓸듯
+      page_name: 'register' //안씀
     })
   });
 
