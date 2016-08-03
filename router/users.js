@@ -84,7 +84,7 @@ module.exports = function(app, User) {
 
   });
 
-  app.post('/logout', function(req,res){
+  app.get('/logout', function(req,res){
     sess = req.session;
     if(sess.name) {
       req.session.destroy(function(err){
