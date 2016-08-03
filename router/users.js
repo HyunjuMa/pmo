@@ -75,7 +75,9 @@ module.exports = function(app, User) {
       }
 
       //success
-      req.session.name = name;
+      sess = req.session;
+      sess.name = name;
+      console.log("*login succeed with session name : " + sess.name);
       res.redirect('/dashboard');
       return res.status(200).send();
     })
