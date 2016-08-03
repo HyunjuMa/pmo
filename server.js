@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var fs = require('fs');
 var mongoose = require('mongoose');
+var session = require('express-session');
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -18,10 +19,11 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 app.use(session({
-  secret:'11',
+  secret:'password for pmo',
   resave: false,
   saveUninitialized: true
 }));
+
 
 var router = require('./router/index')(app, fs);
 

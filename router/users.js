@@ -56,6 +56,7 @@ module.exports = function(app, User) {
     });
   });//create user
 
+//login**
   app.post('/login', function(req,res){
     var name = req.body.name;
     var pw = req.body.pw;
@@ -72,6 +73,10 @@ module.exports = function(app, User) {
       if(!user) {
         return res.status(404).send();
       }
+
+      //success
+      alert('로그인 성공!');
+      req.session.name = name;
       res.redirect('/dashboard');
       return res.status(200).send();
     })
