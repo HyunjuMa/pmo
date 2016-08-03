@@ -2,7 +2,7 @@
 module.exports = function(app, fs)
 {
   app.get('/', function(req,res){
-    console.log("first page loaded");
+    console.log("first page -currently login- loaded");
     res.render('index', {
       title: "PMO Repo",
       length: 5
@@ -13,14 +13,16 @@ module.exports = function(app, fs)
     console.log("dashboard loaded");
     res.render('dashboard', {
       title: "Dashboard",
-      length: 5
+      length: 5,
+      page_name: 'dashboard' // navbar set active에서 쓸 것
     })
   });
 
   app.get('/register', function(req,res){
     console.log("regiserter");
     res.render('register', {
-      title:"register"
+      title:"register",
+      page_name: 'register' //이 자체 안쓸듯
     })
   });
 
@@ -29,7 +31,8 @@ module.exports = function(app, fs)
     res.render('myproject', {
       //title: req.query.projectname,
       title: "myproject",
-      length: 5
+      length: 5,
+      page_name: 'myproject'
     })
   });
 
@@ -38,7 +41,8 @@ module.exports = function(app, fs)
     res.render('project1', {
       //title: req.query.projectname, 이건 꼭 해야함! project1이 아니기 때문
       title: "p1",
-      length: 5
+      length: 5,
+      page_name: 'project1'
     })
   });
 
@@ -48,7 +52,8 @@ module.exports = function(app, fs)
 //    console.log(req.query.username);
     res.render('newproject', {
       title: "New Project",
-      length: 5
+      length: 5,
+      page_name: 'newproject'
     })
   });
 
@@ -56,7 +61,8 @@ module.exports = function(app, fs)
     console.log("messagesloaded");
     res.render('messages', {
       title: "messages",
-      length: 5
+      length: 5,
+      page_name: 'messages'
     })
   });
 
@@ -64,7 +70,8 @@ module.exports = function(app, fs)
     console.log("mypage loaded");
     res.render('mypage', {
       title: "mypage",
-      length: 5
+      length: 5,
+      page_name: 'mypage'
     })
   });
 
