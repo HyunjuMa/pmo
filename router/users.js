@@ -15,6 +15,8 @@ module.exports = function(app, User) {
     res.end();
   });
 
+// 유저 디비는 미리 넣는다고 가정하므로 필요없음
+/*
   app.post('/api/users', function(req,res){
     var user = new User();
     user.name = req.body.name;
@@ -32,7 +34,9 @@ module.exports = function(app, User) {
     });
   });//create user
 
-//regi-login
+*/
+
+//regi-login, regi부분 테스트
   app.post('/register', function(req,res){
     var user = new User();
     user.name = req.body.name;
@@ -53,13 +57,13 @@ module.exports = function(app, User) {
   });//create user
 
   app.post('/login', function(req,res){
-    var name = req.body.name;
+    var username = req.body.username;
     var pw = req.body.pw;
 
-    console.log('name: ' + name);
-    console.log('pw: ' + pw);
+    console.log('name: ' + username);
+    console.log('password: ' + pw);
 
-    User.findOne({name: name, pw: pw}, function(err, user) {
+    User.findOne({username: username, pw: pw}, function(err, user) {
       if(err){
         console.log(err);
         return res.status(500).send();
@@ -72,7 +76,7 @@ module.exports = function(app, User) {
       return res.status(200).send();
     })
   });
-
+//결과 alert?
 
   app.put('/api/users/:user_id', function(req,res){
     res.end();
