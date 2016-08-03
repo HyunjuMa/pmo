@@ -92,7 +92,10 @@ module.exports = function(app, User) {
         else {res.redirect('/');}
       })
     }
-    else {res.redirect('/');}
+    else {
+      console.log("session destroyed, check session: " + sess);
+      res.redirect('/');
+    }
   })
 
 

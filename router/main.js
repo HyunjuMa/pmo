@@ -3,8 +3,6 @@ module.exports = function(app, fs)
 {
   app.get('/', function(req,res){
     console.log("first page -currently login- loaded");
-    if(sess.name) {
-      console.log("logout test, session name : " + sess.name); }
     res.render('index', {
       title: "PMO Repo",
       length: 5
