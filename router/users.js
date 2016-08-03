@@ -57,13 +57,13 @@ module.exports = function(app, User) {
   });//create user
 
   app.post('/login', function(req,res){
-    var username = req.body.username;
+    var name = req.body.name;
     var pw = req.body.pw;
 
-    console.log('name: ' + username);
+    console.log('name: ' + name);
     console.log('password: ' + pw);
 
-    User.findOne({username: username, pw: pw}, function(err, user) {
+    User.findOne({name: name, pw: pw}, function(err, user) {
       if(err){
         console.log(err);
         return res.status(500).send();
