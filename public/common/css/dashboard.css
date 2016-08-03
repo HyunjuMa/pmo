@@ -8,21 +8,13 @@ body {
 }
 
 
-.container-fluid {
+.container-fluid, .row, .table-responsive {
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
 }
 
-
-.row {
-
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-}
 
 /*
  * Global add-ons
