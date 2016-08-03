@@ -83,7 +83,18 @@ module.exports = function(app, User) {
     })
 
   });
-//결과 alert?
+
+  app.post('/logout', function(req,res){
+    sess = req.session;
+    if(sess.name) {
+      req.session.destroy(function(err){
+        if(err) console.log(err);
+        else res.redirect('/');
+      })
+      else res.redirect('/');
+    }
+  })
+
 
   app.put('/api/users/:user_id', function(req,res){
     res.end();
