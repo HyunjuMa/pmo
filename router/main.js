@@ -10,13 +10,13 @@ module.exports = function(app, fs)
   });
 
   app.get('/dashboard', function(req,res){
-    console.log("dashboard loaded");
-    //var name = req.session.name;
+    console.log("dashboard loaded--");
+    name = req.session.name;
+    console.log(name);
     res.render('dashboard', {
       title: "Dashboard",
       length: 5,
       page_name: 'dashboard' // navbar set active에서 쓸 것
-      username: req.session.name;
     })
   });
 
