@@ -12,11 +12,12 @@ module.exports = function(app, fs)
   app.get('/dashboard', function(req,res){
     console.log("dashboard loaded--");
     name = req.session.name;
-    console.log("session test: " + name);
+    //console.log("session test: " + name);
     res.render('dashboard', {
       title: "Dashboard",
       length: 5,
-      page_name: 'dashboard' // navbar set active에서 쓸 것
+      page_name: 'dashboard', // navbar set active에서 쓸 것
+      name: sess.name
     })
   });
 
@@ -34,7 +35,8 @@ module.exports = function(app, fs)
       //title: req.query.projectname,
       title: "myproject",
       length: 5,
-      page_name: 'myproject'
+      page_name: 'myproject',
+      name: sess.name
     })
   });
 
@@ -44,7 +46,8 @@ module.exports = function(app, fs)
       //title: req.query.projectname, 이건 꼭 해야함! project1이 아니기 때문
       title: "p1",
       length: 5,
-      page_name: 'project1'
+      page_name: 'project1',
+      name: sess.name
     })
   });
 
@@ -55,7 +58,8 @@ module.exports = function(app, fs)
     res.render('newproject', {
       title: "New Project",
       length: 5,
-      page_name: 'newproject'
+      page_name: 'newproject',
+      name: sess.name
     })
   });
 
@@ -64,7 +68,8 @@ module.exports = function(app, fs)
     res.render('messages', {
       title: "messages",
       length: 5,
-      page_name: 'messages'
+      page_name: 'messages',
+      name: sess.name
     })
   });
 
@@ -73,7 +78,8 @@ module.exports = function(app, fs)
     res.render('mypage', {
       title: "mypage",
       length: 5,
-      page_name: 'mypage'
+      page_name: 'mypage',
+      name: sess.name
     })
   });
 
