@@ -75,7 +75,7 @@ module.exports = function(app, User) {
       }
 
       //success
-      res.send('<script>alert('로그인 성공!'); </script>');
+      res.send('<script>alert('login succeed!'); </script>');
       req.session.name = name;
       res.redirect('/dashboard');
       return res.status(200).send();
