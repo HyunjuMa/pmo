@@ -72,9 +72,10 @@ module.exports = function(app, User) {
       if(!user) {
         return res.status(404).send();
       }
-
+      res.redirect('/dashboard');
       return res.status(200).send();
     })
+
   });
 //결과 alert?
 
