@@ -67,11 +67,11 @@ module.exports = function(app, User) {
     User.findOne({name: name, pw: pw}, function(err, user) {
       if(err){
         console.log(err);
-        return res.status(500).send();
+        return res.status(500).send('<script type="text/javascript"> alert("잘못된 로그인 정보"); </script>');
       }
 
       if(!user) {
-        return res.status(404).send();
+        return res.status(404).send('<script type="text/javascript"> alert("잘못된 로그인 정보"); </script>');
       }
 
       //success
