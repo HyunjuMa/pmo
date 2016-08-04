@@ -6,7 +6,7 @@ var session = require('express-session');
 var fs = require('fs');
 var mongoose = require('mongoose');
 var session = require('express-session');
-var flash = require('connect-flash');
+
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -17,7 +17,6 @@ app.listen(3000, '0.0.0.0', function() {
 });
 
 app.use(express.static('public'));
-app.use(flash);
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 app.use(session({

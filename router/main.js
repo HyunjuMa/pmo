@@ -13,7 +13,6 @@ module.exports = function(app, fs)
     sess = req.session;
     if(!sess.name) {
       //로그인 안된 상태에서 들어오면
-      req.flash('Please log in ');
       res.redirect('/');
     };
 

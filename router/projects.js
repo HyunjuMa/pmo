@@ -17,11 +17,11 @@ module.exports = function(app, Project) {
 
   app.post('/api/projects', function(req,res){
     var project = new Project();
-    project.title = req.body.title;
-    project.abstract = req.body.abstract;
-    project.participant = req.body.participant;
+    project.name = req.body.pname;
+    project.desc = req.body.pdesc;
+    project.pm = req.body.pm;
     project.task = req.body.task;
-    project.bp = req.body.bp;
+//    project.bp = req.body.bp;
 
     project.save(function(err) {
       if(err) {
