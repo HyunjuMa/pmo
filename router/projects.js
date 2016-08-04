@@ -3,7 +3,7 @@ module.exports = function(app, Project) {
 //user schema test
 
   var tasknum = 0;
-  
+
   app.get('/api/projects', function(req,res){
     Project.find(function(err, projects){
       if(err) return res.status(500).send({error: 'db failure'});
@@ -40,7 +40,7 @@ module.exports = function(app, Project) {
         res.json({result: 0});
         return;
       }
-      res.json({result: 1});
+      res.json(project);
     });
   });//create a project
 
