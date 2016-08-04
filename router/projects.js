@@ -16,10 +16,10 @@ module.exports = function(app, Project) {
   });
 
   app.post('/testlist', function(req,res) {
-    var tasklist = [];
+    var tasklist = ['없지롱'];
     tasklist = req.body.tasklist;
     //console.log(tasklist);
-    res.end();
+    res.json(tasklist);
   })
 
   app.post('/api/projects', function(req,res){
