@@ -1,6 +1,9 @@
 
 module.exports = function(app, Project) {
 //user schema test
+
+  var tasknum = 0;
+  
   app.get('/api/projects', function(req,res){
     Project.find(function(err, projects){
       if(err) return res.status(500).send({error: 'db failure'});
@@ -15,19 +18,20 @@ module.exports = function(app, Project) {
     res.end();
   });
 
-  app.post('/testlist', function(req,res) {
-    var tasklist = ['없지롱'];
+  app.post('/testdb', function(req,res) {
+    var tasklist = [];
     tasklist = req.body.task;
     //console.log(tasklist);
     res.json(tasklist);
   })
 
-  app.post('/api/projects', function(req,res){
+  app.post('/newprojectadded', function(req,res){
+    tasknum ++;
     var project = new Project();
-    project.name = req.body.pname;
-    project.desc = req.body.pdesc;
+    project.pname = req.body.pname;
+    project.pdesc = req.body.pdesc;
     project.pm = req.body.pm;
-    project.task = req.body.task;
+    project.task[tasknum].task_name = req.body.task;
 //    project.bp = req.body.bp;
 
     project.save(function(err) {
