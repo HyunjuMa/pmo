@@ -43,8 +43,8 @@ module.exports = function(app, User) {
     user.email = req.body.email;
     user.pw = req.body.pw;
 
-    console.log('name: ' + user.name);
-    console.log('pw: ' + user.pw);
+    //console.log('name: ' + user.name);
+    //console.log('pw: ' + user.pw);
 
     user.save(function(err) {
       if(err) {
@@ -61,8 +61,8 @@ module.exports = function(app, User) {
     var name = req.body.name;
     var pw = req.body.pw;
 
-    console.log('name: ' + name);
-    console.log('password: ' + pw);
+    //console.log('name: ' + name);
+    //console.log('password: ' + pw);
 
     User.findOne({name: name, pw: pw}, function(err, user) {
       if(err){

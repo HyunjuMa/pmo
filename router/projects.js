@@ -25,20 +25,24 @@ module.exports = function(app, Project) {
 
   app.post('/newprojectadded', function(req,res){
 
+    sess = req.session;
+
     var project = new Project();
     project.pname = req.body.pname;
     project.pdesc = req.body.pdesc;
-    project.pm = req.body.pm;
+    project.pm = sess.name;
 
     var tasklist = [];
     var tasknum = 0;
     tasklist = req.body.task;
     tasknum = tasklist.length;
+
     for(var i=0; i<tasknum; i++) {
-      project.task[i].task_name = tasklist[i];
+      project.task.tname = tasklist[i];
+      //console.log(project.task.tname);  
     }
-//    project.task = req.body.task;
-//    project.bp = req.body.bp;
+    console.log(project.task.tname);
+    //project.bp = req.body.bp;
 
     project.save(function(err) {
       if(err) {
