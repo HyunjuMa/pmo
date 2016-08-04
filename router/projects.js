@@ -17,7 +17,7 @@ module.exports = function(app, Project) {
 
   app.post('/testlist', function(req,res) {
     var tasklist = ['없지롱'];
-    tasklist = req.body.tasklist;
+    tasklist = req.body.task;
     //console.log(tasklist);
     res.json(tasklist);
   })
