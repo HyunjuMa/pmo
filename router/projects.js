@@ -28,21 +28,29 @@ module.exports = function(app, Project) {
     sess = req.session;
 
     var project = new Project();
+
     project.pname = req.body.pname;
     project.pdesc = req.body.pdesc;
     project.pm = sess.name;
 
-    var tasklist = [];
+    project.task.tname = req.body.task;
+    console.log(project.task);
+
+ /*   var tasklist = [];
     var tasknum = 0;
     tasklist = req.body.task;
     tasknum = tasklist.length;
 
-    for(var i=0; i<tasknum; i++) {
-      project.task.tname = tasklist[i];
-      //console.log(project.task.tname);  
+        for(var i=0; i<tasknum; i++) {
+      task.tname = tasklist[i];
+      //console.log(project.task.tname);
     }
     console.log(project.task.tname);
     //project.bp = req.body.bp;
+
+   */
+
+
 
     project.save(function(err) {
       if(err) {
