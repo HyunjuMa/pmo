@@ -11,7 +11,7 @@ module.exports = function(app, fs)
 
   app.get('/dashboard', function(req,res){
     sess = req.session;
-    if(!sess) {
+    if(!sess.name) {
       //로그인 안된 상태에서 들어오면
       res.redirect('/');
     };
