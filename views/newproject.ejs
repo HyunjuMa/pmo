@@ -25,12 +25,18 @@
           <div class="form-bottom">
             <form role="form" action="/" method="post" class="form-newproject">
               <div class="form-group">
-                <label class="sr-only" for="projectname">프로젝트명: </label>
-                   <input type="text" name="projectname" placeholder="" class="form-projectname form-control" id="projectname">
+                <label class="sr-only" for="projectname">프로젝트명</label>
+                   프로젝트명: <input type="text" name="pname" placeholder="" class="form-projectname form-control" id="pname">
               </div>
               <div class="form-group">
-                 <label class="sr-only" for="form-password">설명: </label>
-                   <textarea type="text" name="projectdesc" placeholder="" class="form-projectdesc form-control" id="projectdesc"> </textarea>
+                 <label class="sr-only" for="form-password">프로젝트설명</label>
+                   설명: <textarea type="text" name="pdesc" placeholder="" class="form-projectdesc form-control" id="pdesc"> </textarea>
+              </div>
+              <div class="form-group">
+                   PM: <%=name%>
+              </div>
+              <div class="form-group">
+                   일정: <input type="date" name="pschedule" placeholder="" class="form-pschedule form-control" id="pschedule">
               </div>
               <button type="submit" class="btn">등록!</button>
             </form>
