@@ -13,8 +13,8 @@ module.exports = function(app, fs)
     sess = req.session;
     if(!sess.name) {
       //로그인 안된 상태에서 들어오면
-      
-      res.redirect('/');
+
+      res.redirect('/').send('<script type="text/javascript"> alert("잘못된 로그인 정보"); </script>');
     };
 
     console.log("dashboard loaded--");
