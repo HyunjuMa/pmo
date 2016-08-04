@@ -26,31 +26,31 @@ module.exports = function(app, Project) {
   app.post('/newprojectadded', function(req,res){
 
     sess = req.session;
-
     var project = new Project();
 
     project.pname = req.body.pname;
     project.pdesc = req.body.pdesc;
     project.pm = sess.name;
 
-    project.task.tname = req.body.task;
-    console.log(project.task);
-
- /*   var tasklist = [];
+    var tasklist = [];
     var tasknum = 0;
     tasklist = req.body.task;
     tasknum = tasklist.length;
 
-        for(var i=0; i<tasknum; i++) {
+    for(var i=0; i<tasknum; i++) {
+      var tname = tasklist[i];
+      project.task.push({
+        tname: tname
+      });
+    }
+
+/*
+    for(var i=0; i<tasknum; i++) {
       task.tname = tasklist[i];
       //console.log(project.task.tname);
     }
-    console.log(project.task.tname);
+*/
     //project.bp = req.body.bp;
-
-   */
-
-
 
     project.save(function(err) {
       if(err) {
