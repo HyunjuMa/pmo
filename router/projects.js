@@ -60,7 +60,7 @@ module.exports = function(app, Project) {
       }
       res.json(project);
     });
-  });//create a project
+  });//create a project : done on 2016-08-04
 
   app.put('/api/projects/:project_id', function(req,res){
     res.end();
