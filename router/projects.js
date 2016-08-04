@@ -29,11 +29,11 @@ module.exports = function(app, Project) {
     project.pname = req.body.pname;
     project.pdesc = req.body.pdesc;
     project.pm = req.body.pm;
-    
+
     var tasklist = [];
     var tasknum = 0;
     tasklist = req.body.task;
-    tasknum = tasklist.length();
+    tasknum = tasklist.length;
     for(var i=0; i<tasknum; i++) {
       project.task[i].task_name = tasklist[i];
     }
