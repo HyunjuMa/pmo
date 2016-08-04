@@ -10,8 +10,14 @@ module.exports = function(app, fs)
   });
 
   app.get('/dashboard', function(req,res){
+  
+    if(!req.session) {
+      //로그인 안된 상태에서 들어오면
+      res.redirect('/');
+    };
+    
     console.log("dashboard loaded--");
-    name = req.session.name;
+    //name = req.session.name;
     //console.log("session test: " + name);
     res.render('dashboard', {
       title: "Dashboard",
