@@ -15,6 +15,11 @@ module.exports = function(app, Project) {
     res.end();
   });
 
+  app.post('/testlist', function(req,res) {
+    console.log(tasklist);
+    res.end();
+  })
+
   app.post('/api/projects', function(req,res){
     var project = new Project();
     project.name = req.body.pname;
