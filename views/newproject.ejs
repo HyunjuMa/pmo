@@ -16,5 +16,28 @@
   <body>
     <% include ./navbar.ejs %>
     <h1>새 프로젝트 등록</h1>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="form-box">
+          <div class="form-top">
+            <h3>newproject:</h3>
+          </div>
+          <div class="form-bottom">
+            <form role="form" action="/" method="post" class="form-newproject">
+              <div class="form-group">
+                <label class="sr-only" for="projectname">프로젝트명: </label>
+                   <input type="text" name="projectname" placeholder="" class="form-projectname form-control" id="projectname">
+              </div>
+              <div class="form-group">
+                 <label class="sr-only" for="form-password">설명: </label>
+                   <textarea type="text" name="projectdesc" placeholder="" class="form-projectdesc form-control" id="projectdesc"> </textarea>
+              </div>
+              <button type="submit" class="btn">등록!</button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </body>
 </html>
