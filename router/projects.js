@@ -2,8 +2,6 @@
 module.exports = function(app, Project) {
 //user schema test
 
-  var tasknum = 0;
-
   app.get('/api/projects', function(req,res){
     Project.find(function(err, projects){
       if(err) return res.status(500).send({error: 'db failure'});
@@ -26,12 +24,20 @@ module.exports = function(app, Project) {
   })
 
   app.post('/newprojectadded', function(req,res){
-    tasknum ++;
+
     var project = new Project();
     project.pname = req.body.pname;
     project.pdesc = req.body.pdesc;
     project.pm = req.body.pm;
-    project.task[tasknum].task_name = req.body.task;
+    
+    var tasklist = [];
+    var tasknum = 0;
+    tasklist = req.body.task;
+    tasknum = tasklist.length();
+    for(var i=0; i<tasknum; i++) {
+      project.task[i].task_name = tasklist[i];
+    }
+//    project.task = req.body.task;
 //    project.bp = req.body.bp;
 
     project.save(function(err) {
