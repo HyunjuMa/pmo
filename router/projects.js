@@ -16,8 +16,9 @@ module.exports = function(app, Project) {
   });
 
   app.post('/testlist', function(req,res) {
-
-    console.log(tasklist);
+    var tasklist = [];
+    tasklist = req.body.tasklist;
+    //console.log(tasklist);
     res.end();
   })
 
