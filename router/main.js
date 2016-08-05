@@ -13,28 +13,6 @@ module.exports = function(app, fs)
     })
   });
 
-  app.get('/dashboard', function(req,res){
-    sess = req.session;
-    if(!sess.name) {
-      //로그인 안된 상태에서 들어오면
-      res.redirect('/');
-    };
-//    var myprojects = [];
-//    myprojects = req.body.myprojects;
-    console.log(myprojects);
-
-    console.log("dashboard loaded--");
-    //name = req.session.name;
-    //console.log("session test: " + name);
-    res.render('dashboard', {
-      title: "Dashboard",
-      length: 5,
-      page_name: 'dashboard', // navbar set active에서 쓸 것
-      name: sess.name
-    })
-
-
-  });
 
   app.get('/register', function(req,res){
     console.log("regiserter");
