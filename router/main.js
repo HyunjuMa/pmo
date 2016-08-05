@@ -5,8 +5,7 @@ module.exports = function(app, fs)
     res.send(404);
   });
   */
-  sess = req.session;
-  
+
   app.get('/', function(req,res){
     //console.log("first page -currently login- loaded");
     res.render('index', {
@@ -26,6 +25,7 @@ module.exports = function(app, fs)
 
   app.get('/myproject', function(req,res){
     console.log("myprojectloaded");
+    sess = req.session;
     res.render('myproject', {
       //title: req.query.projectname,
       title: "myproject",
@@ -37,6 +37,7 @@ module.exports = function(app, fs)
 
   app.get('/project1', function(req,res){
     console.log("project1loaded");
+    sess = req.session;
     res.render('project1', {
       //title: req.query.projectname, 이건 꼭 해야함! project1이 아니기 때문
       title: "p1",
@@ -62,6 +63,7 @@ module.exports = function(app, fs)
 
   app.get('/messages', function(req,res){
     console.log("messagesloaded");
+    sess = req.session;
     res.render('messages', {
       title: "messages",
       length: 5,
@@ -71,6 +73,7 @@ module.exports = function(app, fs)
   });
 
   app.get('/mypage', function(req,res){
+    sess = req.session;
     console.log("mypage loaded");
     res.render('mypage', {
       title: "mypage",
