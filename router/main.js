@@ -5,6 +5,8 @@ module.exports = function(app, fs)
     res.send(404);
   });
   */
+  sess = req.session;
+  
   app.get('/', function(req,res){
     //console.log("first page -currently login- loaded");
     res.render('index', {
@@ -46,6 +48,8 @@ module.exports = function(app, fs)
 
 
   app.get('/newproject', function(req,res){
+    sess = req.session;
+
     console.log("newprojectloaded");
 //    console.log(req.query.username);
     res.render('newproject', {
