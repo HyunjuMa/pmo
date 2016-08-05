@@ -9,12 +9,14 @@ module.exports = function(app, Project) {
     var myprojectlist = [];
     console.log(name);
 
-    Project.find({pm: name}, function(err, projects){
+    Project.find({pm: name}, function(err, myprojectlist){
       if(err) return res.status(500).send({error: 'db failure'});
-//      myproject = res.json();
-      //
-      res.redirect('/dashboard');
+      
+      res.send(myprojectlist);
+      //res.redirect('/dashboard').;
     })
+    
+    res.redirect('/dashboard');
   });//getmyproject
 
 

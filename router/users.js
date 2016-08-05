@@ -81,7 +81,7 @@ module.exports = function(app, User) {
 //      res.redirect('/dashboard');
       //dashboard 부르기 전에 내 프로젝트 목록 받아와서 뿌려야 함.
       res.redirect('/findmyproject');
-      return res.status(200).send();
+      //return res.status(200).send();
     })
 
   });
