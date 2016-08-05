@@ -1,6 +1,10 @@
 
 module.exports = function(app, fs)
 {
+  /*app.get('*', function(req,res){
+    res.send(404);
+  });
+  */
   app.get('/', function(req,res){
     console.log("first page -currently login- loaded");
     res.render('index', {
@@ -15,7 +19,8 @@ module.exports = function(app, fs)
       //로그인 안된 상태에서 들어오면
       res.redirect('/');
     };
-
+//여기    var myprojects = [];
+//    myprojects = req.query.myprojects;
     console.log("dashboard loaded--");
     //name = req.session.name;
     //console.log("session test: " + name);
@@ -25,6 +30,8 @@ module.exports = function(app, fs)
       page_name: 'dashboard', // navbar set active에서 쓸 것
       name: sess.name
     })
+
+    console.log(myprojects);
   });
 
   app.get('/register', function(req,res){

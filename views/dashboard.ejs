@@ -58,12 +58,12 @@
               </thead>
               <tbody>
                 <!-- 반복문으로 내 프로젝트 뿌릴 예정, 이 전에 myproject에 프로젝트 들 중 pm이 나인것 찾아와야함 -->
-                <% for(var i=0; i<myprojectlist.length; i++) { %>
+                <% for(var i=0; i<myprojects.length; i++) { %>
                 <tr>
                   <td> <%= i+1 %> </td>
-                  <td> <%= myprojectlist[i].pm %> </td>
-                  <td> <%= myprojectlist[i].pname %> </td>
-                  <td> <%= myprojectlist[i].pdesc %> </td>
+                  <td> <%= myprojects[i].pm %> </td>
+                  <td> <%= myprojects[i].pname %> </td>
+                  <td> <%= myprojects[i].pdesc %> </td>
                   <td> zzz </td>
                 </tr>
                <% } %>

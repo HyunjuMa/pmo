@@ -6,17 +6,16 @@ module.exports = function(app, Project) {
   app.get('/findmyproject', function(req,res){
     sess = req.session;
     var name = sess.name;
-    var myprojectlist = [];
     console.log(name);
 
-    Project.find({pm: name}, function(err, myprojectlist){
+    Project.find({pm: name}, function(err, myprojects){
       if(err) return res.status(500).send({error: 'db failure'});
-      
-      res.send(myprojectlist);
-      //res.redirect('/dashboard').;
+
+      //res.send(myprojects);  출력 잘됨!!
+      res.redirect('/dashboard');
     })
-    
-    res.redirect('/dashboard');
+
+    //res.redirect('/dashboard');
   });//getmyproject
 
 
@@ -33,13 +32,6 @@ module.exports = function(app, Project) {
   app.get('/api/projects/title/:title', function(req,res){
     res.end();
   });
-
-  app.post('/testdb', function(req,res) {
-    var tasklist = [];
-    tasklist = req.body.task;
-    //console.log(tasklist);
-    res.json(tasklist);
-  })
 
   app.post('/newprojectadded', function(req,res){
 
@@ -86,5 +78,4 @@ module.exports = function(app, Project) {
   app.delete('api/projects/:project_id', function(req,res){
     res.end();
   });//delete
-
 }
