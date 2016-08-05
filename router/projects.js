@@ -6,13 +6,13 @@ module.exports = function(app, Project) {
   app.get('/findmyproject', function(req,res){
     sess = req.session;
     var name = sess.name;
-    console.log(name);
+    //console.log(name);
 
     Project.find({pm: name}, function(err, myprojects){
       if(err) return res.status(500).send({error: 'db failure'});
-
-      //res.send(myprojects);  출력 잘됨!!
-      res.redirect('/dashboard');
+      
+      //res.send(myprojects);  //출력 잘됨!!
+      //res.redirect('/dashboard');
     })
 
     //res.redirect('/dashboard');

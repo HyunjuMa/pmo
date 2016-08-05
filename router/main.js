@@ -19,8 +19,10 @@ module.exports = function(app, fs)
       //로그인 안된 상태에서 들어오면
       res.redirect('/');
     };
-//여기    var myprojects = [];
-//    myprojects = req.query.myprojects;
+    var myprojects = [];
+    myprojects = req.body.myprojects;
+    console.log(myprojects);
+    
     console.log("dashboard loaded--");
     //name = req.session.name;
     //console.log("session test: " + name);
@@ -31,7 +33,7 @@ module.exports = function(app, fs)
       name: sess.name
     })
 
-    console.log(myprojects);
+    
   });
 
   app.get('/register', function(req,res){
