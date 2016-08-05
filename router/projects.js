@@ -6,7 +6,7 @@ module.exports = function(app, Project) {
   app.get('/findmyproject', function(req,res){
     sess = req.session;
     var name = sess.name;
-    var myproject = [];
+    var myprojectlist = [];
     console.log(name);
 
     Project.find({pm: name}, function(err, projects){
