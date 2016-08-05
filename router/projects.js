@@ -10,10 +10,10 @@ module.exports = function(app, Project) {
 
     Project.find({pm: name}, function(err, myprojects){
       if(err) return res.status(500).send({error: 'db failure'});
-      
-      //res.send(myprojects);  //출력 잘됨!!
-      //res.redirect('/dashboard');
-    })
+
+      res.redirect(myprojects, '/dashboard');  //출력 잘됨!!
+      //res.redirect('/dashboard').send(myprojects);
+    });
 
     //res.redirect('/dashboard');
   });//getmyproject

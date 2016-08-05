@@ -6,7 +6,7 @@ module.exports = function(app, fs)
   });
   */
   app.get('/', function(req,res){
-    console.log("first page -currently login- loaded");
+    //console.log("first page -currently login- loaded");
     res.render('index', {
       title: "PMO Repo",
       length: 5
@@ -19,10 +19,10 @@ module.exports = function(app, fs)
       //로그인 안된 상태에서 들어오면
       res.redirect('/');
     };
-    var myprojects = [];
-    myprojects = req.body.myprojects;
+//    var myprojects = [];
+//    myprojects = req.body.myprojects;
     console.log(myprojects);
-    
+
     console.log("dashboard loaded--");
     //name = req.session.name;
     //console.log("session test: " + name);
@@ -33,7 +33,7 @@ module.exports = function(app, fs)
       name: sess.name
     })
 
-    
+
   });
 
   app.get('/register', function(req,res){
