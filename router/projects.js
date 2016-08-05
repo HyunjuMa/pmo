@@ -2,21 +2,22 @@
 module.exports = function(app, Project) {
 //user schema test
 
-  //모든 프로젝트 보는것은 따로 버튼 만들어서????? 
+  //모든 프로젝트 보는것은 따로 버튼 만들어서?????
   app.get('/findmyproject', function(req,res){
     sess = req.session;
     var name = sess.name;
     var myproject = [];
-    
+    console.log(name);
+
     Project.find({pm: name}, function(err, projects){
       if(err) return res.status(500).send({error: 'db failure'});
-      myproject = res.json();
+//      myproject = res.json();
       //
       res.redirect('/dashboard');
     })
   });//getmyproject
-  
-  
+
+
   app.get('/projects', function(req,res) {
     Project.find(function(err, projects) {
       if(err) return res.status(500).send({error: 'db failure'});
