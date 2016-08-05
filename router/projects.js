@@ -27,6 +27,8 @@ module.exports = function(app, Project) {
       res.redirect('/');
     };
 
+    var name = sess.name;
+    
     console.log("dashboard loaded--");
 
     Project.find({pm: name}, function(err, myprojects){
