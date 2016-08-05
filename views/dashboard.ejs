@@ -13,18 +13,15 @@
 
     <% include ./navbar.ejs %>
 
-    
-
   </head>
   <body>
     <h1> 현재 팀 내 진행 중인 프로젝트 </h1>
-
-
+    
     <div class="container-fluid">
       <div class="row">
         <br>
         <!--div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"-->
-          <div class="row placeholders">
+          <!--div class="row placeholders">
             <div class="col-xs-6 col-sm-3 placeholder">
               <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
               <h4>Label</h4>
@@ -45,42 +42,31 @@
               <h4>Label</h4>
               <span class="text-muted">Something else</span>
             </div>
-          </div>
+          </div-->
 
-          <h2 class="sub-header">Project List</h2>
+          <h2 class="sub-header">'내' Project List</h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
+                  <th>PM</th>
+                  <th>프로젝트명</th>
+                  <th>설명</th>
+                  <th> nothing for now </th>
                 </tr>
               </thead>
               <tbody>
+                <!-- 반복문으로 내 프로젝트 뿌릴 예정, 이 전에 myproject에 프로젝트 들 중 pm이 나인것 찾아와야함 -->
+                <% for(var i=0; i<myproject.length; i++) { %> 
                 <tr>
-                  <td>1,013</td>
-                  <td>torquent</td>
-                  <td>per</td>
-                  <td>conubia</td>
-                  <td>nostra</td>
+                  <td> <%= i+1 %> </td>
+                  <td> <%= myproject[i].pm %> </td>
+                  <td> <%= myproject[i].pname %> </td>
+                  <td> <%= myproject[i].pdesc %> </td>
+                  <td> zzz </td>
                 </tr>
-                <tr>
-                  <td>1,014</td>
-                  <td>per</td>
-                  <td>inceptos</td>
-                  <td>himenaeos</td>
-                  <td>Curabitur</td>
-                </tr>
-                <tr>
-                  <td>1,015</td>
-                  <td>sodales</td>
-                  <td>ligula</td>
-                  <td>in</td>
-                  <td>libero</td>
-                </tr>
+               <% } %>
               </tbody>
             </table>
           </div>

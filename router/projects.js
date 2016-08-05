@@ -2,12 +2,27 @@
 module.exports = function(app, Project) {
 //user schema test
 
-  app.get('/api/projects', function(req,res){
-    Project.find(function(err, projects){
+  //모든 프로젝트 보는것은 따로 버튼 만들어서????? 
+  app.get('/findmyproject', function(req,res){
+    sess = req.session;
+    var name = sess.name;
+    var myproject = [];
+    
+    Project.find({pm: name}, function(err, projects){
+      if(err) return res.status(500).send({error: 'db failure'});
+      myproject = res.json();
+      //
+      res.redirect('/dashboard');
+    })
+  });//getmyproject
+  
+  
+  app.get('/projects', function(req,res) {
+    Project.find(function(err, projects) {
       if(err) return res.status(500).send({error: 'db failure'});
       res.json(projects);
     })
-  });//getall
+  })
 
   app.get('/api/projects/:project_id', function(req,res){
     res.end();
@@ -43,7 +58,6 @@ module.exports = function(app, Project) {
         tname: tname
       });
     }
-
 /*
     for(var i=0; i<tasknum; i++) {
       task.tname = tasklist[i];
@@ -60,7 +74,7 @@ module.exports = function(app, Project) {
       }
       res.json(project);
     });
-  });//create a project : done on 2016-08-04
+  });//create a project
 
   app.put('/api/projects/:project_id', function(req,res){
     res.end();
