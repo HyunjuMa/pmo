@@ -131,7 +131,7 @@ module.exports = function(app, Project) {
         res.json({result: 0});
         return;
       }
-      res.json(project);
+      res.redirect('/dashboard');
       });
     });//create a project
 
