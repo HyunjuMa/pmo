@@ -93,7 +93,7 @@ module.exports = function(app, Project) {
     app.get('/newproject', function(req,res){
       sess = req.session;
 
-      Project.find({pm: name}, function(err, myprojects){
+      Project.find({pm: sess.name}, function(err, myprojects){
         if(err) return res.status(500).send({error: 'db failure'});
 
         res.render('newproject', {
