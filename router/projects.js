@@ -93,14 +93,17 @@ module.exports = function(app, Project) {
     app.get('/newproject', function(req,res){
       sess = req.session;
 
-      console.log("newprojectloaded");
-  //    console.log(req.query.username);
-      res.render('newproject', {
-        title: "New Project",
-        length: 5,
-        page_name: 'newproject',
-        name: sess.name
-      })
+      Project.find({pm: name}, function(err, myprojects){
+        if(err) return res.status(500).send({error: 'db failure'});
+
+        res.render('newproject', {
+          title: "New Project",
+          length: 5,
+          page_name: 'newproject',
+          name: sess.name,
+          myprojects: myprojects
+        })
+      });
     });
 
 
