@@ -35,7 +35,7 @@ db.once('open', function() {
   console.log("**** Conneced to mongod server ****");
 });
 
-mongoose.connect('mongodb://localhost/users'); //사용할 디비 이름
+mongoose.connect('mongodb://localhost/pmo'); //사용할 디비 이름
 
 //define db model
 var User = require('./models/user');
