@@ -22,7 +22,7 @@ module.exports = function(app, fs)
       page_name: 'register' //안씀
     })
   });
-
+/*
   app.get('/myproject', function(req,res){
     console.log("myprojectloaded");
     sess = req.session;
@@ -61,6 +61,8 @@ module.exports = function(app, fs)
     })
   });
 
+//얘네 다같이 project router로 이사감
+*/
   app.get('/messages', function(req,res){
     console.log("messagesloaded");
     sess = req.session;

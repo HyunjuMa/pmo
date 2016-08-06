@@ -28,7 +28,7 @@ module.exports = function(app, Project) {
     };
 
     var name = sess.name;
-    
+
     console.log("dashboard loaded--");
 
     Project.find({pm: name}, function(err, myprojects){
@@ -50,47 +50,80 @@ module.exports = function(app, Project) {
   });
 
 
-  app.get('/projects', function(req,res) {
-    Project.find(function(err, projects) {
-      if(err) return res.status(500).send({error: 'db failure'});
-      res.json(projects);
+    app.get('/projects', function(req,res) {
+      Project.find(function(err, projects) {
+        if(err) return res.status(500).send({error: 'db failure'});
+        res.json(projects);
+      })
     })
-  })
 
-  app.get('/api/projects/:project_id', function(req,res){
-    res.end();
-  });
-  app.get('/api/projects/title/:title', function(req,res){
-    res.end();
-  });
+    app.get('/api/projects/:project_id', function(req,res){
+      res.end();
+    });
+    app.get('/api/projects/title/:title', function(req,res){
+      res.end();
+    });
 
-  app.post('/newprojectadded', function(req,res){
 
-    sess = req.session;
-    var project = new Project();
+    app.get('/myproject', function(req,res){
+      console.log("myprojectloaded");
+      sess = req.session;
+      res.render('myproject', {
+        //title: req.query.projectname,
+        title: "myproject",
+        length: 5,
+        page_name: 'myproject',
+        name: sess.name
+      })
+    });
 
-    project.pname = req.body.pname;
-    project.pdesc = req.body.pdesc;
-    project.pm = sess.name;
+    app.get('/project1', function(req,res){
+      console.log("project1loaded");
+      sess = req.session;
+      res.render('project1', {
+        //title: req.query.projectname, 이건 꼭 해야함! project1이 아니기 때문
+        title: "p1",
+        length: 5,
+        page_name: 'project1',
+        name: sess.name
+      })
+    });
 
-    var tasklist = [];
-    var tasknum = 0;
-    tasklist = req.body.task;
-    tasknum = tasklist.length;
 
-    for(var i=0; i<tasknum; i++) {
-      var tname = tasklist[i];
-      project.task.push({
-        tname: tname
-      });
-    }
-/*
-    for(var i=0; i<tasknum; i++) {
-      task.tname = tasklist[i];
-      //console.log(project.task.tname);
-    }
-*/
-    //project.bp = req.body.bp;
+    app.get('/newproject', function(req,res){
+      sess = req.session;
+
+      console.log("newprojectloaded");
+  //    console.log(req.query.username);
+      res.render('newproject', {
+        title: "New Project",
+        length: 5,
+        page_name: 'newproject',
+        name: sess.name
+      })
+    });
+
+
+    app.post('/newprojectadded', function(req,res){
+
+      sess = req.session;
+      var project = new Project();
+
+      project.pname = req.body.pname;
+      project.pdesc = req.body.pdesc;
+      project.pm = sess.name;
+
+      var tasklist = [];
+      var tasknum = 0;
+      tasklist = req.body.task;
+      tasknum = tasklist.length;
+
+      for(var i=0; i<tasknum; i++) {
+        var tname = tasklist[i];
+        project.task.push({
+          tname: tname
+        });
+      }
 
     project.save(function(err) {
       if(err) {
@@ -99,8 +132,8 @@ module.exports = function(app, Project) {
         return;
       }
       res.json(project);
-    });
-  });//create a project
+      });
+    });//create a project
 
   app.put('/api/projects/:project_id', function(req,res){
     res.end();
