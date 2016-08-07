@@ -8,14 +8,11 @@ module.exports = function(app, Project) {
     sess = req.session;
     var name = sess.name;
     //console.log(name);
-
     Project.find({pm: name}, function(err, myprojects){
       if(err) return res.status(500).send({error: 'db failure'});
-
       res.redirect('/dashboard');  //출력 잘됨!!
       //res.redirect('/dashboard').send(myprojects);
     });
-
     //res.redirect('/dashboard');
   });//getmyproject
 */
