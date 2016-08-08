@@ -39,7 +39,7 @@ module.exports = function(app, Project) {
       Project.find({_id: pid}, function(err, project){
         if(err) return res.status(500).send({error: 'db failure'});
 
-        console.log(project);
+        console.log(project.pname);
         /*
         res.render("?", {
           title: "?",
