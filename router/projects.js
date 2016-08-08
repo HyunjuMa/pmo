@@ -92,6 +92,9 @@ module.exports = function(app, Project) {
       var name = sess.name;
       var myprojects = sess.myprojects;
 
+      console.log(name);
+      console.log(myprojects);
+
       Project.find({pm: name}, function(err, myprojects){
         if(err) return res.status(500).send({error: 'error:500'});
 
