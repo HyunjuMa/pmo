@@ -14,8 +14,12 @@ module.exports = function(app, Project) {
     Project.find({pm: sess.name}, function(err, myprojects){
       if(err) return res.status(500).send({error: 'db failure'});
 
-      sess.myprojects = myprojects;
-      console.log(myprojects[0].pname);  
+      for(var i=0; i<myprojects.length; i++) {
+        sess.myprojects[i] = myprojects[i];
+      }
+      console.log(sess.myprojects[0].pname);
+      //console.log(myprojects[0].pname);  //얘는 됨
+
       res.render('dashboard', {
         title: "Dashboard",
         length: 5,
