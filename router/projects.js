@@ -11,7 +11,7 @@ module.exports = function(app, Project) {
       res.redirect('/');
     };
 
-    Project.find({pm: name}, function(err, myprojects){
+    Project.find({pm: sess.name}, function(err, myprojects){
       if(err) return res.status(500).send({error: 'db failure'});
 
 //      console.log(myprojects);  //출력 잘됨!!
@@ -19,7 +19,7 @@ module.exports = function(app, Project) {
         title: "Dashboard",
         length: 5,
         page_name: 'dashboard', // navbar set active에서 쓸 것
-        name: name
+        name: sess.name
         //myprojects: myprojects
       })
     });
@@ -39,6 +39,7 @@ module.exports = function(app, Project) {
       Project.find({_id: pid}, function(err, project){
         if(err) return res.status(500).send({error: 'db failure'});
 
+        res.end();
 //        console.log(project.pname); // undefined
         /*
         res.render("?", {
@@ -60,17 +61,14 @@ module.exports = function(app, Project) {
       console.log("myprojectloaded");
       sess = req.session;
 
-      Project.find({pm: sess.name}, function(err, myprojects){
-        if(err) return res.status(500).send({error: 'db failure'});
-
         res.render("myproject", {
           title: "my projects",
           length: 5,
           page_name: 'myproject',
-          name: sess.name,
-          myprojects: myprojects
+          name: sess.name
+          //myprojects: myprojects
         })
-      });
+
     });
 
   // 여기 바꿔야함.
@@ -89,7 +87,6 @@ module.exports = function(app, Project) {
 
     app.get('/newproject', function(req,res){
       sess = req.session;
-
 
         res.render('newproject', {
           title: "New Project",
