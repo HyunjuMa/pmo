@@ -19,8 +19,8 @@ module.exports = function(app, Project) {
         title: "Dashboard",
         length: 5,
         page_name: 'dashboard', // navbar set active에서 쓸 것
-        name: sess.name
-        //myprojects: myprojects
+        name: sess.name,
+        myprojects: myprojects
       })
     });
   });
@@ -38,7 +38,7 @@ module.exports = function(app, Project) {
 
       Project.find({_id: pid}, function(err, project){
         if(err) return res.status(500).send({error: 'db failure'});
-
+        console.log(pid);
         res.end();
 //        console.log(project.pname); // undefined
         /*
@@ -88,14 +88,18 @@ module.exports = function(app, Project) {
     app.get('/newproject', function(req,res){
       sess = req.session;
 
-        res.render('newproject', {
-          title: "New Project",
+      Project.find({pm: sess.name}, function(err, myprojects){
+        if(err) return res.status(500).send({error: 'db failure'});
+
+      //      console.log(myprojects);  //출력 잘됨!!
+        res.render('dashboard', {
+          title: "Dashboard",
           length: 5,
-          page_name: 'newproject',
-          name: sess.name
-          //myprojects: myprojects
+          page_name: 'dashboard', // navbar set active에서 쓸 것
+          name: sess.name,
+          myprojects: myprojects
         })
-    });
+      });
 
 
     app.post('/newprojectadded', function(req,res){

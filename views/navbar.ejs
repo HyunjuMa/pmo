@@ -55,7 +55,24 @@
            <ul class="nav navbar-nav">
              <li <% if (page_name === 'dashboard') { %>class="active" <% } %> ><a href="dashboard">Dashboard</a></li>
              <li <% if (page_name === 'newproject') { %>class="active" <% } %>><a href="newproject">New Project</a></li>
+             <li <% if (page_name === 'myproject') { %>class="active" <% } %>class="dropdown">
+               <a href="myproject" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> My Projects <span class="caret"></span></a>
+               <ul class="dropdown-menu">
 
+                 <% for(var i=0; i<myprojects.length; i++) { %>
+                 <li><a href= "projects/<%= myprojects[i]._id %>" > <%= myprojects[i].pname %> </a> </li>
+                 <% } %>
+
+                 <li><a href="project1">Project 1</a></li>
+                 <li><a href="project2">Project 2</a></li>
+                 <li><a href="#">Something else</a></li>
+                 <li role="separator" class="divider"></li>
+                 <li class="dropdown-header">Nav header</li>
+                 <li><a href="#">Separated link</a></li>
+                 <li><a href="#">One more separated link</a></li>
+               </ul>
+             </li>
+             <li <% if (page_name === 'messages') { %>class="active" <% } %>><a href="messages">Messages</a></li-->
            </ul>
            <ul class="nav navbar-nav navbar-right">
              <li <% if (page_name === 'mypage') { %>class="active" <% } %>><a href="mypage"> <%=name%>님 </a></li>
