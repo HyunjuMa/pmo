@@ -11,13 +11,13 @@ module.exports = function(app, Project) {
       res.redirect('/');
     };
 
-    Project.find({pm: sess.name}, function(err, myprojects){
+    Project.find({pm: name}, function(err, myprojects){
       if(err) return res.status(500).send({error: 'db failure'});
 
       for(var i=0; i<myprojects.length; i++) {
         sess.myprojects[i].pname = myprojects[i].pname;
+        console.log(sess.myprojects[i].pname);
       }
-      console.log(sess.myprojects[0].pname);
       //console.log(myprojects[0].pname);  //얘는 됨
 
       res.render('dashboard', {
