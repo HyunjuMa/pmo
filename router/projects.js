@@ -100,6 +100,7 @@ module.exports = function(app, Project) {
           myprojects: myprojects
         })
       });
+    });
 
 
     app.post('/newprojectadded', function(req,res){
