@@ -15,9 +15,9 @@ module.exports = function(app, Project) {
       if(err) return res.status(500).send({error: 'db failure'});
 
       for(var i=0; i<myprojects.length; i++) {
-        sess.myprojects[i] = myprojects[i];
+        sess.myprojects[i].pname = myprojects[i].pname;
       }
-      console.log(sess.myprojects[0]);
+      console.log(sess.myprojects[0].pname);
       //console.log(myprojects[0].pname);  //얘는 됨
 
       res.render('dashboard', {
