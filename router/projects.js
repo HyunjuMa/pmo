@@ -19,8 +19,8 @@ module.exports = function(app, Project) {
         title: "Dashboard",
         length: 5,
         page_name: 'dashboard', // navbar set active에서 쓸 것
-        name: name,
-        myprojects: myprojects
+        name: name
+        //myprojects: myprojects
       })
     });
   });
@@ -32,14 +32,14 @@ module.exports = function(app, Project) {
       })
     })
 
-    app.get('/projects/:p_id', function(req,res){
+    app.get('/:p_id', function(req,res){
       //navbar.pname 클릭하면 projectid가지고 여기로 온다! 이거 가지고 프로젝트 모든 정보 불러와서 띄워야함. .ejs 파일네임??
       var pid = req.params.p_id;
 
       Project.find({_id: pid}, function(err, project){
         if(err) return res.status(500).send({error: 'db failure'});
 
-        console.log(project.pname);
+//        console.log(project.pname); // undefined
         /*
         res.render("?", {
           title: "?",
@@ -90,17 +90,14 @@ module.exports = function(app, Project) {
     app.get('/newproject', function(req,res){
       sess = req.session;
 
-      Project.find({pm: sess.name}, function(err, myprojects){
-        if(err) return res.status(500).send({error: 'db failure'});
 
         res.render('newproject', {
           title: "New Project",
           length: 5,
           page_name: 'newproject',
-          name: sess.name,
-          myprojects: myprojects
+          name: sess.name
+          //myprojects: myprojects
         })
-      });
     });
 
 
