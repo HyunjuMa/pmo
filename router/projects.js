@@ -32,25 +32,24 @@ module.exports = function(app, Project) {
       })
     })
 
-    app.get('/projects/:project_id', function(req,res){
+    app.get('/projects/:p_id', function(req,res){
       //navbar.pname 클릭하면 projectid가지고 여기로 온다! 이거 가지고 프로젝트 모든 정보 불러와서 띄워야함. .ejs 파일네임??
-      var pid = req.param('project_id');
-      console.log(pid);
-      /*
-      Project.find({_id: project_id}, function(err, project){
+      var pid = req.params.p_id;
+
+      Project.find({_id: p_id}, function(err, project){
         if(err) return res.status(500).send({error: 'db failure'});
 
-        console.log(myprojects);
+        console.log(project);
+        /*
         res.render("?", {
           title: "?",
           length: 5,
           page_name: '?',
           name: sess.name,
           myprojects: myprojects
-        })
+        })*/
       });
-      */
-      res.end();
+
     });
 
     app.get('/projects/title/:title', function(req,res){
