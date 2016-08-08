@@ -64,8 +64,8 @@
                 <tr>
                   <td> <%= i+1 %> </td>
                   <td> <%= myprojects[i].pm %> </td>
-                  <td> <%= myprojects[i].pname %> </td>
-                  <td> <%= myprojects[i].pdesc %> </td>
+                  <td> <a href = "projects/<%= myprojects[i]._id %>" > <%= myprojects[i].pname %> </a> </td>
+                  <td> <%= myprojects[i].pdesc %> </td> <!-- 진행상황 쓸예정 -->
                   <td> zzz </td>
                 </tr>
                <% } %>

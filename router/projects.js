@@ -3,7 +3,6 @@ module.exports = function(app, Project) {
 
   app.get('/dashboard', function(req,res){
     sess = req.session;
-
     if(!sess.name) {
       //로그인 안된 상태에서 들어오면
       res.redirect('/');
@@ -23,80 +22,15 @@ module.exports = function(app, Project) {
     });
   });
 
-  /*
-    app.get('/:p_id', function(req,res){
-      //navbar.pname 클릭하면 projectid가지고 여기로 온다! 이거 가지고 프로젝트 모든 정보 불러와서 띄워야함. .ejs 파일네임??
-      var pid = req.params.p_id;
-
-      Project.find({_id: pid}, function(err, project){
-        if(err) return res.status(500).send({error: 'db failure'});
-
-        //console.log(project); // 이걸 결과값 잘찍음
-        res.end();
-        /*
-        res.render("project1", {
-          title: project.pname,
-          length: 5,
-          page_name: 'project1',
-          name: sess.name,
-          project: project
-        })
-        
-        });
-   });*/
-
-    app.get('/projects/title/:title', function(req,res){
-      res.end();
-    });
-
-  /*
-    app.get('/myproject', function(req,res){
-      console.log("myprojectloaded");
-      sess = req.session;
-
-      Project.find({pm: sess.name}, function(err, myprojects){
-        if(err) return res.status(500).send({error: 'db failure'});
-
-        res.render("myproject", {
-          title: "my projects",
-          length: 5,
-          page_name: 'myproject',
-          name: sess.name,
-          myprojects: myprojects
-        })
-      });
-    });
-*/
-
-  // 여기 바꿔야함.
-  /*
-    app.get('/project1', function(req,res){
-      console.log("project1loaded");
-      sess = req.session;
-      res.render('project1', {
-        //title: req.query.projectname, 이건 꼭 해야함! project1이 아니기 때문
-        title: "p1",
-        length: 5,
-        page_name: 'project1',
-        name: sess.name
-      })
-    });
-    */
-
     app.get('/newproject', function(req,res){
       sess = req.session;
 
-      Project.find({pm: sess.name}, function(err, myprojects){
-        if(err) return res.status(500).send({error: 'db failure'});
-
-        res.render('newproject', {
-          title: "New Project",
-          length: 5,
-          page_name: 'newproject',
-          name: sess.name,
-          myprojects: myprojects
-        })
-      });
+      res.render('newproject', {
+        title: "New Project",
+        length: 5,
+        page_name: 'newproject',
+        name: sess.name
+      })
     });
 
     app.post('/newprojectadded', function(req,res){
@@ -131,6 +65,28 @@ module.exports = function(app, Project) {
     });//create a project and then go to dashboard
 
 
+
+  app.get('/projects/:project_id', function(req,res){
+    var pid = req.params.project_id;
+    sess = req.session;
+
+    Project.find({_id: pid}, function(err, project){
+      if(err) return res.status(500).send({error: 'db failure'});
+      //console.log(pid); //working fine
+      //console.log(project); //working fine
+
+      res.render('project1', {
+        title: "project1",
+        length: 5,
+        page_name: 'project1',
+        name: sess.name,
+        project: project
+      });
+    });
+
+  })
+
+
   app.put('/projects/:project_id', function(req,res){
     res.end();
   });//update
@@ -139,23 +95,4 @@ module.exports = function(app, Project) {
     res.end();
   });//delete
 
-
-  //dropdown click event controller 을 만들기 ㅟㅇ해 모든것 전역으로? xxxx
-
-/*
-  app.get('/:myproject[i].pname', function(req,res) {
-  sess = req.session;
-  Project.find({pm: sess.name}, function(err, myprojects){
-    if(err) return res.status(500).send({error: 'db failure'});
-     console.log("?????");
-     res.render('myproject[i].pname', {
-          title: "...",
-          length: 5,
-          page_name: 'myproject[i].pname',
-          name: sess.name,
-          myprojects: myprojects
-        })
-    });
-  }); // not working as i thought
-*/
-}
+};
