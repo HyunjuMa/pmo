@@ -15,7 +15,7 @@ module.exports = function(app, Project) {
       if(err) return res.status(500).send({error: 'db failure'});
 
       sess.myprojects = myprojects;
-      console.log(sess.myprojects);  //출력 잘됨!!
+      console.log(sess.myprojects[1].pname);  //출력 잘됨!!
       res.render('dashboard', {
         title: "Dashboard",
         length: 5,
