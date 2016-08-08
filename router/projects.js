@@ -14,6 +14,7 @@ module.exports = function(app, Project) {
     Project.find({pm: sess.name}, function(err, myprojects){
       if(err) return res.status(500).send({error: 'db failure'});
 
+      sess.myprojects = myprojects;
 //      console.log(myprojects);  //출력 잘됨!!
       res.render('dashboard', {
         title: "Dashboard",
@@ -38,6 +39,7 @@ module.exports = function(app, Project) {
 
       Project.find({_id: pid}, function(err, project){
         if(err) return res.status(500).send({error: 'db failure'});
+
         console.log(pid);
         res.end();
 //        console.log(project.pname); // undefined
@@ -87,16 +89,18 @@ module.exports = function(app, Project) {
 
     app.get('/newproject', function(req,res){
       sess = req.session;
+      var name = sess.name;
+      var myprojects = sess.myprojects;
 
-      Project.find({pm: sess.name}, function(err, myprojects){
-        if(err) return res.status(500).send({error: 'db failure'});
+      Project.find({pm: name}, function(err, myprojects){
+        if(err) return res.status(500).send({error: 'error:500'});
 
       //      console.log(myprojects);  //출력 잘됨!!
         res.render('dashboard', {
           title: "Dashboard",
           length: 5,
           page_name: 'dashboard', // navbar set active에서 쓸 것
-          name: sess.name,
+          name: name,
           myprojects: myprojects
         })
       });
