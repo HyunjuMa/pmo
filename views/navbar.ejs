@@ -60,7 +60,7 @@
                <ul class="dropdown-menu">
 
                  <% for(var i=0; i<myprojects.length; i++) { %>
-                 <li><a href= "projects/<%= myprojects[i]._id %>" > <%= myprojects[i].pname %> </a> </li>
+                 <li><a href= <%= myprojects[i]._id %> > <%= myprojects[i].pname %> </a> </li>
                  <% } %>
 
                  <li><a href="project1">Project 1</a></li>
@@ -72,7 +72,7 @@
                  <li><a href="#">One more separated link</a></li-->
                </ul>
              </li>
-             <li <% if (page_name === 'messages') { %>class="active" <% } %>><a href="messages">Messages</a></li-->
+             <li <% if (page_name === 'messages') { %>class="active" <% } %>><a href="messages">Messages</a></li>
            </ul>
            <ul class="nav navbar-nav navbar-right">
              <li <% if (page_name === 'mypage') { %>class="active" <% } %>><a href="mypage"> <%=name%>님 </a></li>

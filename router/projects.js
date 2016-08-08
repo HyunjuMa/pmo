@@ -1,4 +1,3 @@
-
 module.exports = function(app, Project) {
 //user schema test
 
@@ -14,17 +13,12 @@ module.exports = function(app, Project) {
     Project.find({pm: name}, function(err, myprojects){
       if(err) return res.status(500).send({error: 'db failure'});
 
-      for(var i=0; i<myprojects.length; i++) {
-        sess.myprojects[i].pname = myprojects[i].pname;
-        console.log(sess.myprojects[i].pname);
-      }
-      //console.log(myprojects[0].pname);  //얘는 됨
-
+//      console.log(myprojects);  //출력 잘됨!!
       res.render('dashboard', {
         title: "Dashboard",
         length: 5,
         page_name: 'dashboard', // navbar set active에서 쓸 것
-        name: sess.name,
+        name: name,
         myprojects: myprojects
       })
     });
@@ -37,26 +31,29 @@ module.exports = function(app, Project) {
       })
     })
 
-    app.get('/:p_id', function(req,res){
+    app.get('/:project_id', function(req,res){
       //navbar.pname 클릭하면 projectid가지고 여기로 온다! 이거 가지고 프로젝트 모든 정보 불러와서 띄워야함. .ejs 파일네임??
-      var pid = req.params.p_id;
+      var pid = req.params.project_id;
+      //console.log(pid);
+
 
       Project.find({_id: pid}, function(err, project){
         if(err) return res.status(500).send({error: 'db failure'});
 
-        console.log(pid);
-        res.end();
-//        console.log(project.pname); // undefined
-        /*
-        res.render("?", {
-          title: "?",
+        console.log(project);
+/*
+        res.render("project1", {
+          title: project.pname,
           length: 5,
-          page_name: '?',
+          page_name: 'project1',
           name: sess.name,
-          myprojects: myprojects
-        })*/
-      });
+          project: project
+        })
+        */
+        });
 
+
+      res.end();
     });
 
     app.get('/projects/title/:title', function(req,res){
@@ -67,14 +64,17 @@ module.exports = function(app, Project) {
       console.log("myprojectloaded");
       sess = req.session;
 
+      Project.find({pm: sess.name}, function(err, myprojects){
+        if(err) return res.status(500).send({error: 'db failure'});
+
         res.render("myproject", {
           title: "my projects",
           length: 5,
           page_name: 'myproject',
-          name: sess.name
-          //myprojects: myprojects
+          name: sess.name,
+          myprojects: myprojects
         })
-
+      });
     });
 
   // 여기 바꿔야함.
@@ -93,21 +93,16 @@ module.exports = function(app, Project) {
 
     app.get('/newproject', function(req,res){
       sess = req.session;
-      var name = sess.name;
-      var myprojects = sess.myprojects;
 
-      console.log(name);
-      console.log(myprojects);
+      Project.find({pm: sess.name}, function(err, myprojects){
+        if(err) return res.status(500).send({error: 'db failure'});
+        else console.log('newproject loaded');
 
-      Project.find({pm: name}, function(err, myprojects){
-        if(err) return res.status(500).send({error: 'error:500'});
-
-      //      console.log(myprojects);  //출력 잘됨!!
-        res.render('dashboard', {
-          title: "Dashboard",
+        res.render('newproject', {
+          title: "New Project",
           length: 5,
-          page_name: 'dashboard', // navbar set active에서 쓸 것
-          name: name,
+          page_name: 'newproject',
+          name: sess.name,
           myprojects: myprojects
         })
       });
@@ -162,7 +157,6 @@ module.exports = function(app, Project) {
   sess = req.session;
   Project.find({pm: sess.name}, function(err, myprojects){
     if(err) return res.status(500).send({error: 'db failure'});
-
      console.log("?????");
      res.render('myproject[i].pname', {
           title: "...",
