@@ -17,7 +17,7 @@ module.exports = function(app, Project) {
       for(var i=0; i<myprojects.length; i++) {
         sess.myprojects[i] = myprojects[i];
       }
-      console.log(sess.myprojects[0].pname);
+      console.log(sess.myprojects[0]);
       //console.log(myprojects[0].pname);  //얘는 됨
 
       res.render('dashboard', {
