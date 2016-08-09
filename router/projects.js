@@ -8,10 +8,12 @@ module.exports = function(app, Project) {
       res.redirect('/');
     };
 
+    //.sort({"_id": 1})  ??
     Project.find(function(err, allprojects){
       if(err) return res.status(500).send({error: 'db failure: failed to retrieve all projects'})
-      
-      //이부분 조건문으로 빼도 됨 
+
+      //이부분 조건문으로 빼도 됨
+      //for문으로 처리?.......
       Project.find({pm: sess.name}, function(err, myprojects){
       if(err) return res.status(500).send({error: 'db failure'});
 
@@ -24,8 +26,8 @@ module.exports = function(app, Project) {
         allprojects: allprojects,
         myprojects: myprojects
       })
-    });
     })
+    }).sort({"_id": -1});
   });
 
     app.get('/newproject', function(req,res){

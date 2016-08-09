@@ -54,7 +54,8 @@
                   <th>PM</th>
                   <th>프로젝트명</th>
                   <th>설명</th>
-                  <th> nothing for now </th>
+                  <th>진행상황</th>
+                  <th>수정/삭제</th>
                 </tr>
               </thead>
               <tbody>
@@ -66,6 +67,7 @@
                   <td> <a href = "<%= myprojects[i]._id %>" > <%= myprojects[i].pname %> </a> </td>
                   <td> <%= myprojects[i].pdesc %> </td>
                   <td> zzz </td> <!-- 진행상황 쓸예정 -->
+                  <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href = ""> <span class="glyphicon glyphicon-wrench" aria-hidden="true" > </span> </a> </td>
                 </tr>
                <% } %>
               </tbody>

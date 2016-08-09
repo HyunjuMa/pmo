@@ -15,7 +15,28 @@
   </head>
   <body>
     <% include ./navbar.ejs %>
-    <h1> <%= project[0].pname %> </h1>
-    <p> <%= project[0].pm %> </p>
+    <h1> <%= project[0].pname %> </h1> <h2> <%= project[0].pm %> </h2>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-9">
+          <div class="row" style="border: 1px solid gray;">
+            <h3> Task1: 제안서 작성 </h3>
+          </div> <!--task 하나당 디브 하나 새로팜-->
+          <br>
+          <div class="row" style="border: 1px solid gray;">
+            
+            <h3> Task2: </h3>
+          </div> <!--task 하나당 디브 하나 새로팜-->
+          <br>
+        </div> <!-- left division -->
+        <div class="col-md-3">
+          <h3> 프로젝트 개요 </h3>
+          <p> <%= project[0].pdesc %> </p>
+          <p> <%= project[0].bp[0] %> </p>
+        </div> <!-- right division -->
+      </div> <!-- div class row -->
+    </div>
+
   </body>
 </html>
