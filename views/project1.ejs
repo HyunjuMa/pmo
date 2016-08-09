@@ -3,7 +3,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title><%= title %></title>
 
     <!-- CSS , menu bar 따로 넣어야함 .. -->
@@ -20,16 +22,31 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-9">
-          <div class="row" style="border: 1px solid gray;">
-            <h3> Task1: 제안서 작성 </h3>
-          </div> <!--task 하나당 디브 하나 새로팜-->
-          <br>
-          <div class="row" style="border: 1px solid gray;">
-            
-            <h3> Task2: </h3>
-          </div> <!--task 하나당 디브 하나 새로팜-->
-          <br>
-        </div> <!-- left division -->
+          <div class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading">Panel Header</div>
+            <div class="panel-body">Panel Content <span class="caret" > </span> </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">Panel Header</div>
+            <div class="panel-body">Panel Content <span class="caret"> </span> </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">Panel Header</div>
+            <div class="panel-body">Panel Content <span class="caret"></span> </div>
+          </div>
+            <div class="panel panel-default">
+            <div class="panel-heading">Panel Header</div>
+            <div class="panel-body">
+              <div class="comment-frame">
+                <div class="comment-box" style="border: 1px solid light-gray">
+                  <textarea class="comment-box-input js-new-comment-input" placeholder="Write a comment" tabindex="1" dir="auto" style="overflow: hidden; word-wrap: break-word; height:100px;"> </textarea>
+                </div> <!--box-->
+              </div> <!--frame-->
+            </div> <!-- panel-body-->
+          </div>
+          </div> <!-- panel group -->
+        </div> <!-- left division, colmd9 -->
         <div class="col-md-3">
           <h3> 프로젝트 개요 </h3>
           <p> <%= project[0].pdesc %> </p>
