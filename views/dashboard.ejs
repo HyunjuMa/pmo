@@ -17,7 +17,6 @@
 
   </head>
   <body>
-    <h1> 현재 팀 내 진행 중인 프로젝트 </h1>
 
     <div class="container-fluid">
       <div class="row">
@@ -64,14 +63,17 @@
                 <tr>
                   <td> <%= i+1 %> </td>
                   <td> <%= myprojects[i].pm %> </td>
-                  <td> <a href = "projects/<%= myprojects[i]._id %>" > <%= myprojects[i].pname %> </a> </td>
-                  <td> <%= myprojects[i].pdesc %> </td> <!-- 진행상황 쓸예정 -->
-                  <td> zzz </td>
+                  <td> <a href = "<%= myprojects[i]._id %>" > <%= myprojects[i].pname %> </a> </td>
+                  <td> <%= myprojects[i].pdesc %> </td>
+                  <td> zzz </td> <!-- 진행상황 쓸예정 -->
                 </tr>
                <% } %>
               </tbody>
             </table>
           </div>
+        
+          <h1> 현재 팀 내 진행 중인 프로젝트 </h1>
+        
         <!--/div-->
       </div>
     </div>

@@ -66,14 +66,14 @@ module.exports = function(app, Project) {
 
 
 
-  app.get('/projects/:project_id', function(req,res){
+  app.get('/:project_id', function(req,res){
     var pid = req.params.project_id;
     sess = req.session;
 
     Project.find({_id: pid}, function(err, project){
       if(err) return res.status(500).send({error: 'db failure'});
       //console.log(pid); //working fine
-      //console.log(project); //working fine
+      console.log(project); //working fine
 
       res.render('project1', {
         title: "project1",
