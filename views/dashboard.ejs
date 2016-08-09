@@ -45,7 +45,7 @@
             </div>
           </div-->
 
-          <h2 class="sub-header">'내' Project List</h2>
+          <h2 class="sub-header"> 내 프로젝트 </h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -71,9 +71,35 @@
               </tbody>
             </table>
           </div>
-        
-          <h1> 현재 팀 내 진행 중인 프로젝트 </h1>
-        
+
+          <h2 class="sub-header"> 팀 내 모든 프로젝트 </h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>PM</th>
+                  <th>프로젝트명</th>
+                  <th>설명</th>
+                  <th>진행상황</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- 반복문으로 모든 프로젝트 뿌림 -->
+                <% for(var i=0; i<allprojects.length; i++) { %>
+                <tr>
+                  <td> <%= i+1 %> </td>
+                  <td> <%= allprojects[i].pm %> </td>
+                  <td> <a href = "<%= allprojects[i]._id %>" > <%= allprojects[i].pname %> </a> </td>
+                  <td> <%= allprojects[i].pdesc %> </td>
+                  <td> zzz </td> <!-- 진행상황 쓸예정 -->
+                </tr>
+               <% } %>
+              </tbody>
+            </table>
+          </div>
+
+
         <!--/div-->
       </div>
     </div>

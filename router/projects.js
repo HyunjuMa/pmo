@@ -8,7 +8,11 @@ module.exports = function(app, Project) {
       res.redirect('/');
     };
 
-    Project.find({pm: sess.name}, function(err, myprojects){
+    Project.find(function(err, allprojects){
+      if(err) return res.status(500).send({error: 'db failure: failed to retrieve all projects'})
+      
+      //이부분 조건문으로 빼도 됨 
+      Project.find({pm: sess.name}, function(err, myprojects){
       if(err) return res.status(500).send({error: 'db failure'});
 
 //      console.log(myprojects);  //출력 잘됨!!
@@ -17,9 +21,11 @@ module.exports = function(app, Project) {
         length: 5,
         page_name: 'dashboard', // navbar set active에서 쓸 것
         name: sess.name,
+        allprojects: allprojects,
         myprojects: myprojects
       })
     });
+    })
   });
 
     app.get('/newproject', function(req,res){
