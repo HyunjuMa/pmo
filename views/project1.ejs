@@ -6,18 +6,51 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+
     <title><%= title %></title>
 
-    <!-- CSS , menu bar 따로 넣어야함 .. -->
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="common/css/style.css">
 
+    <link rel="stylesheet" href="common/css/progressbar.css">
+
+    <script>
+    function removeProj(id){
+      var result = confirm("정말 삭제하시겠습니까?");
+      if(result)
+      {
+        $.ajax({
+  			  url:"/delete/"+id,
+  			  type:"delete",
+  			  dataType:"json",
+  			  success: function(result){
+            location.href="dashboard";
+  			  },
+  			  error:function(request,status,error){
+  		       console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+  			  }
+  		  });
+      }
+    }
+    </script>
   </head>
   <body>
     <% include ./navbar.ejs %>
-    <h1> <%= project[0].pname %> </h1> <h2> <%= project[0].pm %> </h2>
+    <!-- 기본은 게시판 형태, 산출물 업로드/다운로드가 핵심 -->
+    <h1 style="font-weight:bold;"> <%= project[0].pname %> </h1> <!--h2> <%= project[0].pm %> </h2-->
+      <br><br>
+      <div class="container-fluid" align="right">
+        <ul class="progressbar">
+
+         <% for(var i=0; i<project[0].task.length; i++) { %>
+          <li> <a href=""> <%=i+1%>. <%= project[0].task[i].tname %> </a> </li>
+          <!-- if문으로 active 경우 처리해줄것-->
+         <% } %>
+        </ul>
+    </div>
 
     <div class="container-fluid">
       <div class="row">
@@ -57,11 +90,8 @@
               <div id="collapse3" class="panel-collapse collapse">
                 <div class="panel-body">
                   이 자리에 인풋박스, 첨부파일 가능한 공
-                  <form role="form">
-                    <div class="form-group">
-                      <textarea class="form-control" rows="5" id="comment"></textarea>
-                    </div>
-                  </form>
+                  <input name="test" rows="5"/>
+                  <a href = ""> <span class="glyphicon glyphicon-paperclip" aria-hidden="true" > </span> </a>
                 </div>
               </div>
             </div> <!--panel-->
@@ -69,9 +99,13 @@
         </div> <!--col(left)-->
 
         <div class="col-md-3">
+
           <h3> 프로젝트 개요 </h3>
           <p> <%= project[0].pdesc %> </p>
           <p> <%= project[0].bp[0] %> </p>
+          <a href="/delete/<%=project[0]._id %>"> 프로젝트 삭제 </a> <br>
+          <button type='button' id="<%=project[0]._id %>" class='btn btn-default rmProduct' onclick="removeProj(this.id)"> 프로젝트 삭제</button>
+
         </div> <!-- right division -->
 
       </div> <!-- div class row -->

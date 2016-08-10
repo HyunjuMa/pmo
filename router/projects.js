@@ -95,12 +95,16 @@ module.exports = function(app, Project) {
   })
 
 
-  app.put('/:project_id', function(req,res){
+  app.put('/:pid', function(req,res){
     res.end();
   });//update
 
-  app.delete('/:project_id', function(req,res){
-    res.end();
+  app.delete('/delete/:pid', function(req,res){
+    Project.remove({_id: req.params.pid}, function(err, deletedproject){
+      if(err) return res.status(500).send({error: 'db failure'});
+      console.log("이게 불리긴 불립니다");
+      res.json(deletedproject);
+    })
   });//delete
 
 };
