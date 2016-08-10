@@ -95,11 +95,11 @@ module.exports = function(app, Project) {
   })
 
 
-  app.put('/projects/:project_id', function(req,res){
+  app.put('/:project_id', function(req,res){
     res.end();
   });//update
 
-  app.delete('/projects/:project_id', function(req,res){
+  app.delete('/:project_id', function(req,res){
     res.end();
   });//delete
 
