@@ -124,8 +124,9 @@ module.exports = function(app, Project) {
       // Task[]는 어떻게 할지??????????????????????? ***** ***
       // https://velopert.com/545 배열의 값 제거하기 이용
       // 일단 form을 먼저 만들어야 한다!!
+      
 
-      console.log("got to update router");
+      console.log("got here: update router");
       res.redirect('/'+pid);
     })
   });//update
