@@ -21,7 +21,7 @@
       <div class="row">
         <div class="form-box">
           <div class="form-top">
-            <form role="form" action="/update/<%= project[0].pid %>" onSubmit="return make_tasklist()" method="post" class="form-newproject">
+            <form role="form" action="/update/<%= project[0].pid %>" method="post" class="form-newproject">
               <div class="form-group" style="font-weight:bold;">
                    PM: <%=name%>
               </div> (PM변경은 Administrator에게 요청하세요)
@@ -35,7 +35,7 @@
               </div>
                 <div class="input-group">
                   Task <br>
-                  <% json(project[0].task); %>
+                  <%= project[0].task[3].tname %>
                   <input type="checkbox" name="task" value="estimation" checked disabled> Spec 산정 및 견적 산정 <br>
                   <input type="hidden" name="task" value="견적산정" checked>
                   <!--disabled는 체크박스 modify못하게 하지만 동시에 post때 값 무시, 그래서 redundant하지만 hidden type 추가-->
