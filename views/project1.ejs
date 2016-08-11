@@ -63,10 +63,10 @@
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href= "<%= project[0].task[i]._id %> " > Task # <%= i %> : <%= project[0].task[i].tname %> </a>
+                    <a data-toggle="collapse" data-parent="#accordion" href= "#<%=project[0].task[i]._id%>"> Task # <%= i %> : <%= project[0].task[i].tname %> </a>
                   </h4>
                 </div>
-                <div id=" <%= project[0].task[i]._id %>" class="panel-collapse collapse in">
+                <div id="<%=project[0].task[i]._id%>" class="panel-collapse collapse in">
                   <div class="panel-body">
                     <%= project[0].task[i]._id %>
 
