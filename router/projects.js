@@ -94,6 +94,25 @@ module.exports = function(app, Project) {
 
   })
 
+  app.get('/update/:pid', function(req,res){
+
+    sess = req.session;
+
+    Project.find({_id: req.params.pid}, function(err, project){
+      if(err) return res.status(500).send({error: 'db failure'});
+      //console.log(pid); //working fine
+      //console.log(project); //working fine
+
+      res.render('updateproject', {
+        title: "프로젝트 수정/삭제",
+        length: 10,
+        page_name: 'updateproject',
+        name: sess.name,
+        project: project
+      });
+    });
+  })
+
 
   app.post('/update/:pid', function(req,res){
     Project.update({_id: req.params.pid}, function(err, updatedproject) {
