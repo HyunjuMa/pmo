@@ -111,7 +111,7 @@ module.exports = function(app, Project) {
     Project.remove({_id: req.params.pid}, function(err, deletedproject){
       if(err) return res.status(500).send({error: 'db failure'});
       console.log("delete succeeded with get method???");
-      res.end();
+      res.redirect('/dashboard');
     })
   });//delete
 
