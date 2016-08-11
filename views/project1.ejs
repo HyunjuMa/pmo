@@ -68,29 +68,16 @@
                 <!-- 여길 <div id="<%=project[0].task[i]._id%>" class="panel-collapse collapse in"> 로 해주면 열려있음. 진행중인거 이프문으로 여기 오게! -->
                 <div id="<%=project[0].task[i]._id%>" class="panel-collapse collapse">
                   <div class="panel-body">
-                    <%= project[0].task[i]._id %>
 
-                    태스크 이름 : <%= project[0].task[i].tname %>
-                    필수 산출물 :
+                    산출물 업로드 <a href = ""> <span class="glyphicon glyphicon-paperclip" aria-hidden="true" > </span> </a> <br>
+                    산출물 설명 : <input name="test" size="50"/> 
+
+
                   </div>
                 </div>
               </div>
 
             <% } %>
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Collapsible Group 3</a>
-                </h4>
-              </div>
-              <div id="collapse3" class="panel-collapse collapse">
-                <div class="panel-body">
-                  이 자리에 인풋박스, 첨부파일 가능한 공
-                  <input name="test" rows="5"/>
-                  <a href = ""> <span class="glyphicon glyphicon-paperclip" aria-hidden="true" > </span> </a>
-                </div>
-              </div>
-            </div> <!--panel-->
           </div> <!--group-->
         </div> <!--col(left)-->
 
