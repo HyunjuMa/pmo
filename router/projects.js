@@ -102,7 +102,9 @@ module.exports = function(app, Project) {
       // newproject 부분 이랑 똑같이 일단 받아옴
       // 그 다음, $set 말고 'replace'하는 방법으로
       // db.people.update( { name: "Betty" }, { "name": "Betty 2nd", age: 1 }) 처럼
-      // Task[]는 어떻게 할지??????????????????????? ***** *** 
+      // Task[]는 어떻게 할지??????????????????????? ***** ***
+      // https://velopert.com/545 배열의 값 제거하기 이용
+      // 일단 form을 먼저 만들어야 한다!!
 
       console.log("got to update router");
       res.redirect('/'+pid);
