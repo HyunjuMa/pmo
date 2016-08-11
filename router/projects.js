@@ -95,17 +95,19 @@ module.exports = function(app, Project) {
   })
 
 
-  app.put('/:pid', function(req,res){
-    res.end();
-  });//update
-
-  app.delete('/delete/:pid', function(req,res){
-    Project.remove({_id: req.params.pid}, function(err, deletedproject){
+  app.post('/update/:pid', function(req,res){
+    Project.update({_id: req.params.pid}, function(err, updatedproject) {
       if(err) return res.status(500).send({error: 'db failure'});
-      console.log("이게 불리긴 불립니다");
-      res.json(deletedproject);
+
+      // newproject 부분 이랑 똑같이 일단 받아옴
+      // 그 다음, $set 말고 'replace'하는 방법으로
+      // db.people.update( { name: "Betty" }, { "name": "Betty 2nd", age: 1 }) 처럼
+      // Task[]는 어떻게 할지??????????????????????? ***** *** 
+
+      console.log("got to update router");
+      res.redirect('/'+pid);
     })
-  });//delete
+  });//update
 
   app.get('/delete/:pid', function(req,res){
     Project.remove({_id: req.params.pid}, function(err, deletedproject){
@@ -114,5 +116,4 @@ module.exports = function(app, Project) {
       res.redirect('/dashboard');
     })
   });//delete
-
 };
