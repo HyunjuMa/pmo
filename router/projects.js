@@ -122,9 +122,10 @@ module.exports = function(app, Project) {
                              { $set:
                               {pname: req.body.pname,
                                pdesc: req.body.pdesc,
-                               task: 
+                              // task:
                              }}, function(err, project){
       if(err) return res.status(500).send({error: 'db failure'});
+      //
     })
     res.redirect("/dashboard");
   });//update
