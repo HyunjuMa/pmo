@@ -5,7 +5,8 @@ var Schema = mongoose.Schema;
 var taskSchema = new Schema({
   tname: String,
   product: String, //일단 String
-  deadline: Date
+  deadline: Date,
+  lastupdated: Date
 });
 
 var bpSchema = new Schema({
@@ -15,7 +16,6 @@ var bpSchema = new Schema({
     phone: String
   }
 });
-
 
 var projectSchema = new Schema({
   pname: String,

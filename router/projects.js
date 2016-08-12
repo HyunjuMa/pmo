@@ -8,7 +8,6 @@ module.exports = function(app, Project) {
       res.redirect('/');
     };
 
-    //.sort({"_id": 1})  ??
     Project.find(function(err, allprojects){
       if(err) return res.status(500).send({error: 'db failure: failed to retrieve all projects'})
 
@@ -90,7 +89,7 @@ module.exports = function(app, Project) {
         name: sess.name,
         project: project
       });
-    });
+    }).sort({"_id": -1});
 
   })
 
@@ -116,9 +115,16 @@ module.exports = function(app, Project) {
   app.post('/update/:pid', function(req,res){
     console.log("post update ");
     var pid = req.params.pid;
-    Project.findOneAndUpdate({_id: pid}, { $set: {pname: req.body.pname, pdesc: req.body.pdesc} }, function(err, project){
-      if(err) return res.status(500).send({error: 'db failure'});
+    var newtasklist = [];
+    newtasklist = req.body.task;
 
+    Project.findOneAndUpdate({_id: pid},
+                             { $set:
+                              {pname: req.body.pname,
+                               pdesc: req.body.pdesc,
+                               task: 
+                             }}, function(err, project){
+      if(err) return res.status(500).send({error: 'db failure'});
     })
     res.redirect("/dashboard");
   });//update

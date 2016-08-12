@@ -45,14 +45,14 @@
          </div>
          <div id="navbar" class="navbar-collapse collapse">
            <ul class="nav navbar-nav">
-             <li <% if (page_name === 'dashboard') { %>class="active" <% } %> ><a href="dashboard"> <span class="glyphicon glyphicon-tasks" aria-hidden="true" > </span> Dashboard</a></li>
-             <li <% if (page_name === 'newproject') { %>class="active" <% } %>><a href="newproject">새 프로젝트</a></li>
-             <li <% if (page_name === 'updateproject') { %>class="active" <% } %>><a href="updateproject">프로젝트 수정</a></li>
+             <li <% if (page_name === 'dashboard') { %>class="active" <% } %> ><a href="/dashboard"> <span class="glyphicon glyphicon-tasks" aria-hidden="true" > </span> Dashboard</a></li>
+             <li <% if (page_name === 'newproject') { %>class="active" <% } %>><a href="/newproject">새 프로젝트</a></li>
+             <li <% if (page_name === 'updateproject') { %>class="active" <% } %>><a href="/updateproject">프로젝트 수정</a></li>
            </ul>
            <ul class="nav navbar-nav navbar-right">
              <!--li <% if (page_name === 'messages') { %>class="active" <% } %>><a href="messages">Messages <span class="badge" > 42 </span></a></li-->
-             <li <% if (page_name === 'mypage') { %>class="active" <% } %>><a href="mypage"> <%=name%>님 </a></li>
-             <li> <a href="logout"> 로그아웃 </a> </li>
+             <li <% if (page_name === '/mypage') { %>class="active" <% } %>><a href="mypage"> <%=name%>님 </a></li>
+             <li> <a href="/logout"> 로그아웃 </a> </li>
              <!--li><a href="../navbar-static-top/">Static top</a></li>
              <li><a href="../navbar-fixed-top/">Fixed top</a></li-->
            </ul>
@@ -61,7 +61,6 @@
      </nav>
 
    </div> <!-- /container -->
-
 
    <script src="/common/js/jquery-2.2.4.js"></script>
    <script src="/bootstrap/js/bootstrap.min.js"></script>
