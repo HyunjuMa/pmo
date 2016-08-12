@@ -61,6 +61,14 @@
                 <div class="input-group">
                   Task <br>
 
+                  <ul>
+                  <% for(var i=0; i<project[0].task.length; i++) { %>
+
+                   <li> <a href=""> <%= project[0].task[i].tname.substr(2) %> </a> </li>
+                   <!-- if문으로 active 경우 처리해줄것-->
+                  <% } %>
+                </ul>
+
                   <input type="checkbox" name="task" value="estimation" checked disabled> Spec 산정 및 견적 산정 <br>
                   <input type="hidden" name="task" value="1.견적산정" checked>
                   <!--disabled는 체크박스 modify못하게 하지만 동시에 post때 값 무시, 그래서 redundant하지만 hidden type 추가-->
