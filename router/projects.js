@@ -113,29 +113,23 @@ module.exports = function(app, Project) {
     });
   })
 
-
   app.post('/update/:pid', function(req,res){
-    Project.update({_id: req.params.pid}, function(err, updatedproject) {
+    console.log("post update ");
+    var pid = req.params.pid;
+    Project.findOneAndUpdate({_id: pid}, { $set: {pname: req.body.pname, pdesc: req.body.pdesc} }, function(err, project){
       if(err) return res.status(500).send({error: 'db failure'});
 
-      // newproject 부분 이랑 똑같이 일단 받아옴
-      // 그 다음, $set 말고 'replace'하는 방법으로
-      // db.people.update( { name: "Betty" }, { "name": "Betty 2nd", age: 1 }) 처럼
-      // Task[]는 어떻게 할지??????????????????????? ***** ***
-      // https://velopert.com/545 배열의 값 제거하기 이용
-      // 일단 form을 먼저 만들어야 한다!!
-      
-
-      console.log("got here: update router");
-      res.redirect('/'+pid);
     })
+    res.redirect("/"+pid);
   });//update
 
-  app.get('/delete/:pid', function(req,res){
+
+  app.delete('/delete/:pid', function(req,res){
     Project.remove({_id: req.params.pid}, function(err, deletedproject){
       if(err) return res.status(500).send({error: 'db failure'});
-      console.log("delete succeeded with get method???");
-      res.redirect('/dashboard');
+      console.log("..");
+      res.json(deletedproject);
     })
   });//delete
+
 };

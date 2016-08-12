@@ -4,6 +4,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+
     <title><%= title %></title>
 
     <!-- CSS , menu bar 따로 넣어야함 .. -->
@@ -11,6 +16,26 @@
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/common/css/style.css">
+
+     <script>
+    function removeProj(id){
+      var result = confirm("정말 삭제하시겠습니까?");
+      if(result)
+      {
+        $.ajax({
+  			  url:"/delete/"+id,
+  			  type:"delete",
+  			  dataType:"json",
+  			  success: function(result){
+            location.href="../dashboard";
+  			  },
+  			  error:function(request,status,error){
+  		       console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+  			  }
+  		  });
+      }
+    }
+  </script>
 
   </head>
   <body>
@@ -21,7 +46,7 @@
       <div class="row">
         <div class="form-box">
           <div class="form-top">
-            <form role="form" action="/update/<%= project[0].pid %>" method="post" class="form-newproject">
+            <form role="form" action="/update/<%=project[0]._id %>"method="post" class="form-newproject">
               <div class="form-group" style="font-weight:bold;">
                    PM: <%=name%>
               </div> (PM변경은 Administrator에게 요청하세요)
@@ -31,7 +56,7 @@
               </div>
               <div class="form-group">
                  <label class="sr-only" for="form-password">프로젝트설명</label>
-                   설명: <textarea type="text" name="pdesc" value="<%= project[0].pdesc %>" class="form-projectdesc form-control" id="pdesc"> </textarea>
+                   설명: <input type="text" name="pdesc" value="<%= project[0].pdesc %>" class="form-projectdesc form-control" id="pdesc">
               </div>
                 <div class="input-group">
                   Task <br>
@@ -42,13 +67,13 @@
                   <input type="checkbox" name="task" value="build-plan" checked disabled> 구축 계획 <br>
                   <input type="hidden" name="task" value="구축계획" checked>
 
-                  <input type="checkbox" name="task" value="kickoff"> Kick-off Meeting <br>
-                  <input type="checkbox" name="task" value="작업요청"> 작업 요청서 작성 및 승인 <br>
+                  <input type="checkbox" name="task" value="kickoff" <% for(var i=0; i<project[0].task.length; i++) { if (project[0].task[i].tname === "kickoff") { %> checked <% }} %> > Kick-off Meeting <br>
+                  <input type="checkbox" name="task" value="작업요청" <% for(var i=0; i<project[0].task.length; i++) { if (project[0].task[i].tname === "작업요청") { %> checked <% }} %> > 작업 요청서 작성 및 승인 <br>
 
                   <input type="checkbox" name="task" value="equip-delivery" checked disabled> 장비 납품 <br>
                   <input type="hidden" name="task" value="납품" checked>
 
-                  <input type="checkbox" name="task" value="IP할당" > 네트워크 할당 요청, 수령 및 공사 진행 <br>
+                  <input type="checkbox" name="task" value="IP할당" <% for(var i=0; i<project[0].task.length; i++) { if (project[0].task[i].tname === "IP할당") { %> checked <% }} %>> 네트워크 할당 요청, 수령 및 공사 진행 <br>
 
                   <input type="checkbox" name="task" value="at" checked disabled> 인수시험 절차서 작성 및 검토 <br>
                   <input type="hidden" name="task" value="인수시험" checked>
@@ -58,13 +83,14 @@
                   <input type="checkbox" name="task" value="final-acceptance" checked disabled> 최종 인수 <br>
                   <input type="hidden" name="task" value="최종인수" checked>
 
-                  <input type="checkbox" name="task" value="시설현황"> 시설현황 입력
+                  <input type="checkbox" name="task" value="시설현황" <% for(var i=0; i<project[0].task.length; i++) { if (project[0].task[i].tname === "시설현황") { %> checked <% }} %> > 시설현황 입력
                   <!--input type="checkbox" name="task" value="bp" checked> 인력/BP 관리<br-->
                 </div><!-- /input-group -->
               <div class="form-group">
 
               </div>
-              <button type="submit" class="btn" style="margin:auto; display:block;"> 수정 </button> <a href="/update/<%=project[0]._id %>"> 수정 </a> <br> <a href="/delete/<%=project[0]._id %>"> 삭제 </a> <br>
+              <button type="submit" class="btn" style="margin:auto; display:block;"> 수정 </button> <button type='button' id="<%=project[0]._id %>" class="btn" onclick="removeProj(this.id)"> 프로젝트 삭제</button>
+
             </form>
 
           </div>
@@ -72,5 +98,6 @@
       </div>
     </div>
   </body>
+
   <br><br>
 </html>
