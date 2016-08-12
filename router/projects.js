@@ -120,7 +120,7 @@ module.exports = function(app, Project) {
       if(err) return res.status(500).send({error: 'db failure'});
 
     })
-    res.redirect("/"+pid);
+    res.redirect("/dashboard");
   });//update
 
 
