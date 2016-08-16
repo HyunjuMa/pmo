@@ -165,7 +165,7 @@ module.exports = function(app, Project) {
     var addedtasknum = 0;
     addedtasklist = req.body.task;
     addedtasknum = addedtasklist.length;
-  
+
 //find 먼저
     Project.findOne({_id: pid}, function(err, project) {
       if(err)
@@ -184,7 +184,7 @@ module.exports = function(app, Project) {
             res.json({result: 0});
             return;
           }
-          res.redirect('/update/:pid');
+          res.redirect('/'+pid);
           });
       }
     });
