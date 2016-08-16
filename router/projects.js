@@ -130,39 +130,12 @@ module.exports = function(app, Project) {
     res.redirect("/dashboard");
   });//update
 
-/*
-  app.post('/:pid/:tname', function(req,res) {
-    console.log("new task added");
-    //insert new task into given pid
-    var pid = req.params.pid;
-    var tname = req.params.tname;
-
-    Project.findOne({_id: pid}, function(err, project) {
-      if(err)
-        res.json(err);
-      else{
-        project.task.push({tname: tname});
-
-        project.save(function(err) {
-          if(err) res.json(err);
-          else {
-            console.log("task added successfully");
-            res.redirect("/update/:pid");
-          }
-        })
-      }
-    });
-    res.redirect("/update/:pid");
-  }) //
-*/
-
 
 
   app.post('/:pid/taskadded', function(req,res){
     console.log("taskadded router got its req");
     var pid = req.params.pid;
     var addedtasklist = [];
-    var addedtasknum = 0;
     addedtasklist = req.body.task;
 
 //find 먼저
@@ -173,7 +146,6 @@ module.exports = function(app, Project) {
 
         for(var i=0; i<addedtasklist.length; i++) {
           var tname = addedtasklist[i];
-
           project.task.push({
             tname: tname
           });
@@ -191,6 +163,19 @@ module.exports = function(app, Project) {
     });
   });//get pid, and add tasks and save it
 
+  for(var i=0; i<tasknum; i++) {
+    var tname = tasklist[i];
+    project.task.push({
+      tname: tname
+    });
+  }
+
+  project.save(function(err) {
+  if(err) {
+    console.error(err);
+    res.json({result: 0});
+    return;
+  }
 
   app.delete('/delete/:pid/:tid', function(req,res){
     console.log("post update task -- delete");
