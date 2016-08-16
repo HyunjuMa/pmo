@@ -15,7 +15,7 @@ module.exports = function(app, User) {
     res.end();
   });
 
-  app.post('/create/user', function(req,res){
+  app.post('/newuser', function(req,res){
     var user = new User();
     user.name = req.body.name;
     user.pw = req.body.pw;
@@ -98,6 +98,7 @@ module.exports = function(app, User) {
     })
     res.end();
   }); //update using get req
+
 
   app.get('/delete/:uid', function(req,res){
     User.remove({_id: req.params.uid}, function(err) {
