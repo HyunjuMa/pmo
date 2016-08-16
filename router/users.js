@@ -89,15 +89,33 @@ module.exports = function(app, User) {
     })
   })
 
-  app.post('/newpw', function(req,res){
-    User.findOneAndUpdate({_id: req.body.uid}, {$set: {pw: req.body.pw}}, function(err){
-      if(err) return res.status(500).send({error: 'db failure'});
-      console.log('got here to update pw');
-      console.log(req.body.pw);
-      res.redirect('/admin');
+  app.post('/changepw', function(req,res){
+    User.findOne({_id: req.body.uid}, function(err, user) {
+      if(err) res.json(err);
+      else {
+        user.pw = req.body.pw;
+        user.save();
+        res.redirect('/admin');
+      }
+      
     })
-    res.end();
   }); //update using get req
+
+  Project.findOne({_id: pid}, function(err, project) {
+    if(err)
+      res.json(err);
+    else{
+      //console.log(tname);
+      project.task.push({tname: tname});
+
+      project.save(function(err) {
+        if(err) {
+          console.error(err);
+          res.json({result: 0});
+        }
+        res.redirect("/update/"+pid);
+        });
+    }
 
 
   app.delete('/deleteUser/:uid', function(req,res){
