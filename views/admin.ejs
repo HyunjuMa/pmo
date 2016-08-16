@@ -1,0 +1,33 @@
+<!Doctype html>
+<html>
+  <head>
+  </head>
+  <body>
+    <h3> 새 사용자 등록 </h3>
+    <form action="/newuser">
+      사용자 이름 <input type="text" name="name">
+      비밀번호 <input type="password" name="pw">
+      <button type="submit"> 등록 </button>
+    </form>
+
+    <h3> 사용자 목록 </h3> <a href="get_all_users" > 모두 불러오기 </a>
+    <form>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>이름</th>
+          <th>삭제</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+          </td>
+        </tr>
+        <% 여기에 모든 유저 렌더해줘야함 for(var i=0; ) %>
+
+      </tbody>
+    </form>
+
+  </body>
+</html>

@@ -15,13 +15,9 @@ module.exports = function(app, User) {
     res.end();
   });
 
-// 유저 디비는 미리 넣는다고 가정하므로 필요없음
-/*
-  app.post('/api/users', function(req,res){
+  app.post('/create/user', function(req,res){
     var user = new User();
     user.name = req.body.name;
-    user.email = req.body.email;
-    user.phone = req.body.phone;
     user.pw = req.body.pw;
 
     user.save(function(err) {
@@ -30,31 +26,11 @@ module.exports = function(app, User) {
         res.json({result: 0});
         return;
       }
-      res.json({result: 1});
+      res.redirect('/admin');
     });
-  });//create user
+  });//create user (can be done by 'Admin' only)
 
-*/
 
-//regi-login, regi부분 테스트
-  app.post('/register', function(req,res){
-    var user = new User();
-    user.name = req.body.name;
-    user.email = req.body.email;
-    user.pw = req.body.pw;
-
-    //console.log('name: ' + user.name);
-    //console.log('pw: ' + user.pw);
-
-    user.save(function(err) {
-      if(err) {
-        console.error(err);
-        res.json({result: 0});
-        return;
-      }
-      res.json({result: 1});
-    });
-  });//create user
 
 //login**
   app.post('/login', function(req,res){
@@ -98,6 +74,19 @@ module.exports = function(app, User) {
       console.log("session destroyed, check session: " + sess);
       res.redirect('/');
     }
+  })
+
+  app.get('/get_all_users', function(req,res){
+    User.find(function(err, allusers){
+      if(err) return res.status(500).send({error: 'db failure: failed to retrieve all users'});
+
+      res.render('admin', {
+        title: "관리 페이지",
+        length: 5,
+        page_name: 'adminpage', // navbar set active에서 쓸 것
+        users: allusers
+      })
+    })
   })
 
 

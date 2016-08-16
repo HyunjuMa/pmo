@@ -73,6 +73,17 @@ module.exports = function(app, fs)
       name: sess.name
     })
   });
+  
+  app.get('/admin', function(req,res){
+    sess = req.session;
+    console.log("Admin!");
+    res.render('admin', {
+      title: "관리 페이지",
+      length: 5,
+      page_name: "adminpage",
+      name: sess.name
+    })
+  })
 
   app.get('/mypage', function(req,res){
     sess = req.session;
