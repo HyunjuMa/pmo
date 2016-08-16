@@ -121,7 +121,7 @@ module.exports = function(app, Project) {
     Project.findOneAndUpdate({_id: pid},
                              { $set:
                               {pname: req.body.pname,
-                               pdesc: req.body.pdesc,
+                               pdesc: req.body.pdesc
                               // task:
                              }}, function(err, project){
       if(err) return res.status(500).send({error: 'db failure'});
@@ -129,6 +129,30 @@ module.exports = function(app, Project) {
     })
     res.redirect("/dashboard");
   });//update
+
+
+  app.delete('/delete/:pid/:tid', function(req,res){
+    console.log("post update task -- delete");
+    var pid = req.params.pid;
+    var tid = req.params.tid;
+
+    Project.findOne({_id: pid}, function(err, project) {
+      if(err)
+        res.json(err);
+      else{
+        project.task.pull({_id: tid});
+        project.save(function(err, output) {
+          if(err) {
+            res.json(err);
+          }
+          //res.json(output));
+        })
+      }
+    });
+    res.redirect("/update/:pid"); // 이거 체크
+    //res.redirect('/dashboard');
+  });//delete task from a project, 수정화면에서 마이너스 버튼 누르면 여기로 와야함
+
 
 
   app.delete('/delete/:pid', function(req,res){
