@@ -97,26 +97,9 @@ module.exports = function(app, User) {
         user.save();
         res.redirect('/admin');
       }
-      
+
     })
   }); //update using get req
-
-  Project.findOne({_id: pid}, function(err, project) {
-    if(err)
-      res.json(err);
-    else{
-      //console.log(tname);
-      project.task.push({tname: tname});
-
-      project.save(function(err) {
-        if(err) {
-          console.error(err);
-          res.json({result: 0});
-        }
-        res.redirect("/update/"+pid);
-        });
-    }
-
 
   app.delete('/deleteUser/:uid', function(req,res){
     User.remove({_id: req.params.uid}, function(err) {
