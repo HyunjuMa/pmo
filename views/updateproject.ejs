@@ -99,7 +99,6 @@
               <button type="submit" class="btn" style="margin:auto; display:inline;"> 수정 </button> <button type='button' id="<%=project[0]._id %>" class="btn" style="display:inline;" onclick="removeProj(this.id)"> 프로젝트 삭제</button>
             </form>
 
-            <form role="form" action="/<%=project[0]._id %>/taskadded %>" method="post" class="form-newproject">
 
                 <div class="input-group">
                   Task <br>
@@ -112,14 +111,15 @@
                    </li>
                    <!-- if문으로 active 경우 처리해줄것 -->
                   <% } %>
-
-                  <% for(var k=0; k<optiontasks.length; k++) { %>
-                    <input type="checkbox" name="task" value="<%= optiontasks[k] %>" > <%= optiontasks[k].substr(2) %>
-                  <% } %>
                 </ul>
                   <!--input type="checkbox" name="task" value="bp" checked> 인력/BP 관리<br-->
                 </div><!-- /input-group -->
+            <form role="form" action="/<%=project[0]._id %>/taskadded %>" method="post" class="form-newproject">
+
               <div class="form-group">
+                <% for(var k=0; k<optiontasks.length; k++) { %>
+                  <input type="checkbox" name="task" value="<%= optiontasks[k] %>" > <%= optiontasks[k].substr(2) %>
+                <% } %>
               </div>
               <button type="submit"> 태스크 수정 </button>
             </form>
