@@ -130,6 +130,30 @@ module.exports = function(app, Project) {
     res.redirect("/dashboard");
   });//update
 
+  app.post('/:pid/:tname', function(req,res) {
+    console.log("new task added");
+    //insert new task into given pid
+    var pid = req.params.pid;
+    var tname = req.params.tname;
+
+    Project.findOne({_id: pid}, function(err, project) {
+      if(err)
+        res.json(err);
+      else{
+        project.task.push({tname: tname});
+
+        project.save(function(err) {
+          if(err) res.json(err);
+          else {
+            console.log("task added successfully");
+            res.redirect("/update/:pid");
+          }
+        })
+      }
+    });
+    res.redirect("/update/:pid");
+  })
+
 
   app.delete('/delete/:pid/:tid', function(req,res){
     console.log("post update task -- delete");
@@ -149,7 +173,7 @@ module.exports = function(app, Project) {
         })
       }
     });
-    res.redirect("/update/:pid"); // 이거 체크
+    res.redirect("/update/:pid");
     //res.redirect('/dashboard');
   });//delete task from a project, 수정화면에서 마이너스 버튼 누르면 여기로 와야함
 
