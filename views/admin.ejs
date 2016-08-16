@@ -18,7 +18,7 @@
 
     <link rel="stylesheet" href="common/css/progressbar.css">
 
-     <% include ./navbar.ejs %>
+    <% include ./navbar.ejs %>
 
     <script>
     function removeUser(id){
@@ -71,13 +71,13 @@
       <button type="submit"> 등록 </button>
     </form>
 
-     <form action="/changepw" method="post">
+     <form action="/changepw" method="post" float="middle">
         <table>
         <thead>
         <tr>
           <th>#</th>
           <th>이름</th>
-          <th>비밀번호 재설정</th>
+          <!--th>비밀번호 재설정</th-->
           <th>사용자 삭제</th>
         </tr>
         </thead>
@@ -86,13 +86,11 @@
           <tr>
             <td> <%= i+1 %> </td>
             <td> <%= users[i].name %> </td>
-
-            <td> <input type="hidden" name="uid" value="<%= users[i]._id %> " > <input type="password" name="pw"> <button type="submit"> <span class="glyphicon glyphicon-wrench" aria-hidden="true" > </span> </button> </td>
-            <!--td> <input type="password" id="<%= users[i]._id %>" name="pw" style="border:1px solid black;"> <button type="submit" id="<%= users[i]._id %>" > <span class="glyphicon glyphicon-wrench" aria-hidden="true" > </span> </button> </td-->
+            <!--td> <input type="hidden" name="uid" value="<%= users[i]._id %> " > <input type="password" name="pw"> <button type="submit"> <span class="glyphicon glyphicon-wrench" aria-hidden="true" > </span> </button> </td-->
             <td> <button onclick="removeUser(this.id)"> <span class="glyphicon glyphicon-trash" aria-hidden="true" > </span> </button> </td>
           </tr>
          <% } %>
-          </tbody>
+        </tbody>
       </table>
       </form>
 
