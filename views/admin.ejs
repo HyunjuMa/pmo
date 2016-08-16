@@ -21,7 +21,7 @@
      <% include ./navbar.ejs %>
 
     <script>
-       
+
     </script>
 
   </head>
@@ -31,7 +31,7 @@
     <div class="row">
 
     <h3> 새 사용자 등록 </h3>
-    <form action="/newuser">
+    <form action="/newuser" method="post">
       사용자 이름 <input type="text" name="name">
       비밀번호 <input type="password" name="pw">
       <button type="submit"> 등록 </button>
