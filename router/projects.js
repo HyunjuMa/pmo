@@ -131,7 +131,7 @@ module.exports = function(app, Project) {
   });//update
 
 
-
+/*
   app.post('/:pid/taskadded', function(req,res){
     console.log("taskadded router got its req");
     var pid = req.params.pid;
@@ -162,10 +162,32 @@ module.exports = function(app, Project) {
       }
     });
   });//get pid, and add tasks and save it
+*/
 
+  app.post('/taskadded/:pid', function(req,res){
+    var pid = req.params.pid;
+    var tname = req.body.task;
 
-  app.delete('/delete/:pid/:tid', function(req,res){
-    console.log("post update task -- delete");
+    Project.findOne({_id: pid}, function(err, project) {
+      if(err)
+        res.json(err);
+      else{
+        //console.log(tname);
+        project.task.push({tname: tname});
+
+        project.save(function(err) {
+          if(err) {
+            console.error(err);
+            res.json({result: 0});
+          }
+          res.redirect("/update/"+pid);
+          });
+      }
+    });
+    //res.redirect('/update/'+pid);
+  })
+
+  app.delete('/:pid/:tid', function(req,res){
     var pid = req.params.pid;
     var tid = req.params.tid;
 
@@ -179,10 +201,10 @@ module.exports = function(app, Project) {
             res.json(err);
           }
           //res.json(output));
+          res.redirect("/update/"+pid);
         })
       }
     });
-    res.redirect("/update/:pid");
     //res.redirect('/dashboard');
   });//delete task from a project, 수정화면에서 마이너스 버튼 누르면 여기로 와야함
 
