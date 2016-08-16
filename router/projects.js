@@ -154,6 +154,9 @@ module.exports = function(app, Project) {
     });
     res.redirect("/update/:pid");
   }) //
+*/
+
+
 
   app.post('/:pid/taskadded', function(req,res){
     console.log("taskadded router got its req");
@@ -161,9 +164,8 @@ module.exports = function(app, Project) {
     var addedtasklist = [];
     var addedtasknum = 0;
     addedtasklist = req.body.task;
-    addedtasknum = addedtasklist.length; */
-    
-
+    addedtasknum = addedtasklist.length;
+  
 //find 먼저
     Project.findOne({_id: pid}, function(err, project) {
       if(err)
