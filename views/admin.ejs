@@ -87,7 +87,7 @@
             <td> <%= i+1 %> </td>
             <td> <%= users[i].name %> </td>
 
-            <td> <input type="hidden" name="uid" value="<%= users[i]._id %> " > <input type="password" id="pw" name="pw"> <button type="submit"> </td>
+            <td> <input type="hidden" name="uid" value="<%= users[i]._id %> " > <input type="password" name="pw"> <button type="submit"> <span class="glyphicon glyphicon-wrench" aria-hidden="true" > </span> </button> </td>
             <!--td> <input type="password" id="<%= users[i]._id %>" name="pw" style="border:1px solid black;"> <button type="submit" id="<%= users[i]._id %>" > <span class="glyphicon glyphicon-wrench" aria-hidden="true" > </span> </button> </td-->
             <td> <button onclick="removeUser(this.id)"> <span class="glyphicon glyphicon-trash" aria-hidden="true" > </span> </button> </td>
           </tr>
