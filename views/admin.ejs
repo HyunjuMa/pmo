@@ -1,8 +1,35 @@
 <!Doctype html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+
+    <title><%= title %></title>
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="common/css/style.css">
+
+    <link rel="stylesheet" href="common/css/progressbar.css">
+
+     <% include ./navbar.ejs %>
+
+    <script>
+       
+    </script>
+
   </head>
   <body>
+
+  <div class="container-fluid">
+    <div class="row">
+
     <h3> 새 사용자 등록 </h3>
     <form action="/newuser">
       사용자 이름 <input type="text" name="name">
@@ -10,24 +37,30 @@
       <button type="submit"> 등록 </button>
     </form>
 
-    <h3> 사용자 목록 </h3> <a href="get_all_users" > 모두 불러오기 </a>
-    <form>
-      <thead>
+     <form role="form" action="/update/+" method="post">
+        <table>
+        <thead>
         <tr>
           <th>#</th>
           <th>이름</th>
-          <th>삭제</th>
+          <th>사용자 삭제</th>
         </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-          </td>
-        </tr>
-        <% 여기에 모든 유저 렌더해줘야함 for(var i=0; ) %>
+        </thead>
+        <tbody>
+          <% for(var i=0; i<users.length; i++) { %>
+          <tr>
+            <td> <%= i+1 %> </td>
+            <td> <%= users[i].name %> </td>
 
-      </tbody>
-    </form>
+            <!--td> <input type="password" id="<%= users[i]._id %>" name="pw" style="border:1px solid black;"> <button type="submit" id="<%= users[i]._id %>" > <span class="glyphicon glyphicon-wrench" aria-hidden="true" > </span> </button> </td-->
+            <td> <a href = "delete/<%= users[i]._id %>" > <span class="glyphicon glyphicon-trash" aria-hidden="true" > </span> </a> </td>
+          </tr>
+         <% } %>
+          </tbody>
+      </table>
+      </form>
 
+    </div>
+    </div> <!--container-->
   </body>
 </html>

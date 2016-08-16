@@ -45,11 +45,9 @@ module.exports = function(app, User) {
         console.log(err);
         return res.status(500);
       }
-
       if(!user) {
         return res.status(404);
       }
-
       //success
       sess = req.session;
       sess.name = name;
@@ -76,7 +74,8 @@ module.exports = function(app, User) {
     }
   })
 
-  app.get('/get_all_users', function(req,res){
+  app.get('/admin', function(req,res){
+    sess = req.session;
     User.find(function(err, allusers){
       if(err) return res.status(500).send({error: 'db failure: failed to retrieve all users'});
 
@@ -84,18 +83,28 @@ module.exports = function(app, User) {
         title: "관리 페이지",
         length: 5,
         page_name: 'adminpage', // navbar set active에서 쓸 것
-        users: allusers
+        users: allusers,
+        name: sess.name
       })
     })
   })
 
-
-  app.put('/api/users/:user_id', function(req,res){
+  app.post('/update/:uid', function(req,res){
+    User.findOneAndUpdate({_id: req.params.uid}, {$set: {pw: req.body.pw}}, function(err){
+      if(err) return res.status(500).send({error: 'db failure'});
+      console.log('got here to update pw');
+      console.log(req.body.pw);
+      res.redirect('/admin');
+    })
     res.end();
-  });//update
+  }); //update using get req
 
-  app.delete('api/users/:user_id', function(req,res){
-    res.end();
+  app.get('/delete/:uid', function(req,res){
+    User.remove({_id: req.params.uid}, function(err) {
+      if(err) return res.status(500).send({error: 'db failure'});
+      res.redirect('/admin');
+    })
   });//delete
+
 
 }
