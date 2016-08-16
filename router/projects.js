@@ -130,6 +130,7 @@ module.exports = function(app, Project) {
     res.redirect("/dashboard");
   });//update
 
+/*
   app.post('/:pid/:tname', function(req,res) {
     console.log("new task added");
     //insert new task into given pid
@@ -152,7 +153,40 @@ module.exports = function(app, Project) {
       }
     });
     res.redirect("/update/:pid");
-  })
+  }) //
+
+  app.post('/:pid/taskadded', function(req,res){
+    console.log("taskadded router got its req");
+    var pid = req.params.pid;
+    var addedtasklist = [];
+    var addedtasknum = 0;
+    addedtasklist = req.body.task;
+    addedtasknum = addedtasklist.length; */
+    
+
+//find 먼저
+    Project.findOne({_id: pid}, function(err, project) {
+      if(err)
+        res.json(err);
+      else{
+        for(var i=0; i<addedtasknum; i++) {
+          var tname = addedtasklist[i];
+          project.task.push({
+            tname: tname
+          });
+        }
+
+        project.save(function(err) {
+          if(err) {
+            console.error(err);
+            res.json({result: 0});
+            return;
+          }
+          res.redirect('/update/:pid');
+          });
+      }
+    });
+  });//get pid, and add tasks and save it
 
 
   app.delete('/delete/:pid/:tid', function(req,res){
