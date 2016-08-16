@@ -164,15 +164,16 @@ module.exports = function(app, Project) {
     var addedtasklist = [];
     var addedtasknum = 0;
     addedtasklist = req.body.task;
-    addedtasknum = addedtasklist.length;
 
 //find 먼저
     Project.findOne({_id: pid}, function(err, project) {
       if(err)
         res.json(err);
       else{
-        for(var i=0; i<addedtasknum; i++) {
+
+        for(var i=0; i<addedtasklist.length; i++) {
           var tname = addedtasklist[i];
+
           project.task.push({
             tname: tname
           });
