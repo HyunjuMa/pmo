@@ -21,6 +21,40 @@
      <% include ./navbar.ejs %>
 
     <script>
+    function removeUser(id){
+      var result = confirm("사용자를 정말 삭제하시겠습니까?");
+      if(result)
+      {
+        $.ajax({
+  			  url:"/deleteUser/"+id,
+  			  type:"delete",
+  			  dataType:"json",
+  			  success: function(result){
+            location.href="../admin";
+  			  },
+  			  error:function(request,status,error){
+  		       console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+  			  }
+  		  });
+      }
+    }
+/*
+     function updateUser(id) {
+       var result = confirm(tname+"을(를) 추가하시겠습니까?");
+       if(result){
+         $.ajax({
+  			  url:"/"+pid+"/"+tname,
+  			  type:"post",
+  			  dataType:"json",
+  			  success: function(result){
+            location.href="../update/"+pid;
+  			  },
+  			  error:function(request,status,error){
+  		       console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+  			  }
+  		  });
+       }
+     }*/
 
     </script>
 
@@ -37,12 +71,13 @@
       <button type="submit"> 등록 </button>
     </form>
 
-     <form role="form" action="/update/+" method="post">
+     <form role="form" action="/newpw" method="post">
         <table>
         <thead>
         <tr>
           <th>#</th>
           <th>이름</th>
+          <th>비밀번호 재설정</th>
           <th>사용자 삭제</th>
         </tr>
         </thead>
@@ -52,8 +87,9 @@
             <td> <%= i+1 %> </td>
             <td> <%= users[i].name %> </td>
 
+            <td> <input type="hidden" name="uid" value="<%= users[i]._id %> " > <input type="password" id="pw" name="pw"> <button type="submit"> </td>
             <!--td> <input type="password" id="<%= users[i]._id %>" name="pw" style="border:1px solid black;"> <button type="submit" id="<%= users[i]._id %>" > <span class="glyphicon glyphicon-wrench" aria-hidden="true" > </span> </button> </td-->
-            <td> <a href = "delete/<%= users[i]._id %>" > <span class="glyphicon glyphicon-trash" aria-hidden="true" > </span> </a> </td>
+            <td> <button onclick="removeUser(this.id)"> <span class="glyphicon glyphicon-trash" aria-hidden="true" > </span> </button> </td>
           </tr>
          <% } %>
           </tbody>

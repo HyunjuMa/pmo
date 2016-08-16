@@ -89,8 +89,8 @@ module.exports = function(app, User) {
     })
   })
 
-  app.post('/update/:uid', function(req,res){
-    User.findOneAndUpdate({_id: req.params.uid}, {$set: {pw: req.body.pw}}, function(err){
+  app.post('/newpw', function(req,res){
+    User.findOneAndUpdate({_id: req.body.uid}, {$set: {pw: req.body.pw}}, function(err){
       if(err) return res.status(500).send({error: 'db failure'});
       console.log('got here to update pw');
       console.log(req.body.pw);
@@ -100,7 +100,7 @@ module.exports = function(app, User) {
   }); //update using get req
 
 
-  app.get('/delete/:uid', function(req,res){
+  app.delete('/deleteUser/:uid', function(req,res){
     User.remove({_id: req.params.uid}, function(err) {
       if(err) return res.status(500).send({error: 'db failure'});
       res.redirect('/admin');
