@@ -221,8 +221,8 @@ module.exports = function(app, Project) {
   app.get('/delete/:pid', function(req,res) {
     Project.remove({_id: req.params.pid}, function(err, deletedproject){
       if(err) return res.status(500).send({error: 'db failure'});
-      res.redirect('/dashboard'));
+      res.redirect('/dashboard');
     })
-  }); //delete, Admin이 프로젝트 보기 에서 
+  }); //delete, Admin이 프로젝트 보기 에서
 
 };
