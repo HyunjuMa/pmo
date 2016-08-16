@@ -163,19 +163,6 @@ module.exports = function(app, Project) {
     });
   });//get pid, and add tasks and save it
 
-  for(var i=0; i<tasknum; i++) {
-    var tname = tasklist[i];
-    project.task.push({
-      tname: tname
-    });
-  }
-
-  project.save(function(err) {
-  if(err) {
-    console.error(err);
-    res.json({result: 0});
-    return;
-  }
 
   app.delete('/delete/:pid/:tid', function(req,res){
     console.log("post update task -- delete");
