@@ -4,8 +4,10 @@ var Schema = mongoose.Schema;
 
 var taskSchema = new Schema({
   tname: String,
-  product: String, //일단 String
+  product: [String], //일단 String
+  desc: String,
   deadline: Date,
+  state: String,
   lastupdated: Date
 });
 

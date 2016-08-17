@@ -22,47 +22,22 @@ module.exports = function(app, fs)
       page_name: 'register' //안씀
     })
   });
-/*
-  app.get('/myproject', function(req,res){
-    console.log("myprojectloaded");
-    sess = req.session;
-    res.render('myproject', {
-      //title: req.query.projectname,
-      title: "myproject",
-      length: 5,
-      page_name: 'myproject',
-      name: sess.name
-    })
-  });
 
-  app.get('/project1', function(req,res){
-    console.log("project1loaded");
-    sess = req.session;
-    res.render('project1', {
-      //title: req.query.projectname, 이건 꼭 해야함! project1이 아니기 때문
-      title: "p1",
-      length: 5,
-      page_name: 'project1',
-      name: sess.name
-    })
-  });
-
-
-  app.get('/newproject', function(req,res){
-    sess = req.session;
-
-    console.log("newprojectloaded");
-//    console.log(req.query.username);
-    res.render('newproject', {
-      title: "New Project",
-      length: 5,
-      page_name: 'newproject',
-      name: sess.name
-    })
-  });
-
-//얘네 다같이 project router로 이사감
-*/
+  
+  app.post('/fileupload', function(req, res) {
+    var fstream;
+    req.pipe(req.busboy);
+    req.busboy.on('file', function (fieldname, file, filename) {
+        console.log("Uploading: " + filename);
+        fstream = fs.createWriteStream(__dirname + '/files/' + filename);
+        file.pipe(fstream);
+        fstream.on('close', function () {
+            res.redirect('back');
+        });
+    });
+});
+  
+  
   app.get('/messages', function(req,res){
     console.log("messagesloaded");
     sess = req.session;

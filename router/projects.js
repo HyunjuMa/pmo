@@ -1,3 +1,5 @@
+
+
 module.exports = function(app, Project) {
 //user schema test
 
@@ -70,6 +72,7 @@ module.exports = function(app, Project) {
       res.redirect('/dashboard');
       });
     });//create a project and then go to dashboard
+
 
 
 
@@ -187,6 +190,14 @@ module.exports = function(app, Project) {
     //res.redirect('/update/'+pid);
   })
 
+  /////file upload test
+
+
+
+
+
+
+  //////DELETE///
   app.delete('/:pid/:tid', function(req,res){
     var pid = req.params.pid;
     var tid = req.params.tid;
@@ -208,21 +219,19 @@ module.exports = function(app, Project) {
     //res.redirect('/dashboard');
   });//delete task from a project, 수정화면에서 마이너스 버튼 누르면 여기로 와야함
 
-
-
   app.delete('/delete/:pid', function(req,res){
     Project.remove({_id: req.params.pid}, function(err, deletedproject){
       if(err) return res.status(500).send({error: 'db failure'});
       console.log("..");
       res.json(deletedproject);
     })
-  });//delete
+  });// 프로젝트 수정 화면에서 delete
 
   app.get('/delete/:pid', function(req,res) {
     Project.remove({_id: req.params.pid}, function(err, deletedproject){
       if(err) return res.status(500).send({error: 'db failure'});
       res.redirect('/dashboard');
     })
-  }); //delete, Admin이 프로젝트 보기 에서
+  }); //delete, 각 PM과 Admin이 프로젝트 보기 에서 삭제할때
 
 };
