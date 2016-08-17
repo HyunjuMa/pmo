@@ -1,9 +1,9 @@
-var express = require('express');
-var app = express.Router();
+//var express = require('express');
+//var app = express.Router();
 
-var Project = require('../models/project');
+//var Project = require('../models/project');
 
-//module.exports = function(app, Project) {
+module.exports = function(app, Project) {
 
 
   app.get('/dashboard', function(req,res){
@@ -237,6 +237,6 @@ var Project = require('../models/project');
     })
   }); //delete, 각 PM과 Admin이 프로젝트 보기 에서 삭제할때
 
-//};
+};
 
-module.exports = app;
+//module.exports = app;
