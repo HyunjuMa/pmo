@@ -84,13 +84,10 @@ var taskSchema = new Schema({
                     <button type="submit" id="<%=project[0].task[i]._id%>">  등록 </button>
                     <br>
                     npm fileupload module test
-                    <form ref='upload'
-                      id='upload'
-                      action='/upload'
-                      method='post'
-                      encType="multipart/form-data">
+                    <form ref='upload' id='upload' action='/upload' method='post' encType="multipart/form-data">
                           <input type="file" name="myfile1" />
                           <input type="file" name="myfile2" />
+                          <input type="hidden" name="tid" value="<%=project[0].task[i]._id %>" />
                           <input type='submit' value='Upload!' />
                     </form>
 
