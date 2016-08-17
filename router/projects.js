@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express.Router();
 
-var Project = require('./models/project');
+var Project = require('../models/project');
 
 //module.exports = function(app, Project) {
 
