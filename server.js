@@ -48,6 +48,6 @@ mongoose.connect('mongodb://localhost/pmo'); //사용할 디비 이름
 
 //define db model
 var User = require('./models/user');
-var router2 = require('./router/users')(app, User);
-var Project = require('./models/project');
-var router3 = require('./router/projects')(app, Project);
+//var router2 = require('./router/users')(app, User);
+//var Project = require('./models/project');
+//var router3 = require('./router/projects')(app, Project);
