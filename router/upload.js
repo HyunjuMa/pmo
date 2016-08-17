@@ -31,10 +31,9 @@ router.post('/', function(req, res, next) {
 
 
       var dir = ('/tmp/'+value);
-      
+
       mkdirp(dir, function(err) {
       });
-
 
       	var writeStream = fs.createWriteStream('/tmp/'+value+'/'+filename);
         part.pipe(writeStream);
