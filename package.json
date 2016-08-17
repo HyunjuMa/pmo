@@ -11,6 +11,7 @@
     "express": "~4.13.1",
     "express-fileupload": "0.0.5",
     "express-session": "~1.13.0",
+    "mkdirp": "^0.5.1",
     "mongoose": "^4.5.7",
     "multer": "^1.2.0",
     "multiparty": "^4.1.2"

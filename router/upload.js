@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var multiparty = require('multiparty');
 var fs = require('fs');
+var mkdirp = require('mkdirp');
 
 /* GET home page. */
 router.post('/', function(req, res, next) {
@@ -29,11 +30,11 @@ router.post('/', function(req, res, next) {
       //console.log('normal field / name = '+name+' , value = '+value);
 
 
-      var dir = ('/tmp/'+value+'/'+filename);
+      var dir = ('/tmp/'+value);
+      
+      mkdirp(dir, function(err) {
+      });
 
-      if (!fs.existsSync(dir)){
-          console.log('mkdir '+ dir);
-      }
 
       	var writeStream = fs.createWriteStream('/tmp/'+value+'/'+filename);
         part.pipe(writeStream);
