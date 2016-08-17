@@ -7,12 +7,9 @@ var fs = require('fs');
 router.post('/', function(req, res, next) {
 
 	var form = new multiparty.Form();
-	
-	// get field name & value
-	form.on('field',function(name,value){
-		console.log('normal field / name = '+name+' , value = '+value);
-	});
-	
+
+
+
 	// file upload handling
 	form.on('part',function(part){
 		var filename;
@@ -22,33 +19,46 @@ router.post('/', function(req, res, next) {
 			size = part.byteCount;
 		}else{
 			part.resume();
-		
-		}	
 
-		console.log("Write Streaming file :"+filename);
-		var writeStream = fs.createWriteStream('/tmp/'+filename);
-		part.pipe(writeStream);
+		}
 
-		part.on('data',function(chunk){
-			console.log(filename+' read '+chunk.length + 'bytes');
-		});
-		
-		part.on('end',function(){
-			console.log(filename+' Part read complete');
-			writeStream.end();
-		});
+    console.log("Write Streaming file :"+filename);
+
+    // get field name & value
+    form.on('field', function(name,value){
+      //console.log('normal field / name = '+name+' , value = '+value);
+
+
+      var dir = ('/tmp/'+value+'/'+filename);
+
+      if (!fs.existsSync(dir)){
+          console.log('mkdir '+ dir);
+      }
+
+      	var writeStream = fs.createWriteStream('/tmp/'+value+'/'+filename);
+        part.pipe(writeStream);
+
+        part.on('data',function(chunk){
+          console.log(filename+' read '+chunk.length + 'bytes');
+        });
+
+        part.on('end',function(){
+          console.log(filename+' Part read complete');
+          writeStream.end();
+        });
+    });
 	});
 
 	// all uploads are completed
 	form.on('close',function(){
 		res.status(200).send('Upload complete');
 	});
-	
+
 	// track progress
 	form.on('progress',function(byteRead,byteExpected){
 		console.log(' Reading total  '+byteRead+'/'+byteExpected);
 	});
-	
+
 	form.parse(req);
 
 
