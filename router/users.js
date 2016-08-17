@@ -46,6 +46,7 @@ module.exports = function(app, User) {
         return res.status(500);
       }
       if(!user) {
+        cosole.log('not found');
         return res.status(404);
       }
       //success
