@@ -46,7 +46,8 @@ module.exports = function(app, User) {
         return res.status(500);
       }
       if(!user) {
-        console.log('not found');
+        
+        console.log('no user found under that name/password');
         return res.status(404);
       }
       //success
