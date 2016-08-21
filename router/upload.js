@@ -21,6 +21,26 @@ router.post('/', function(req, res, next) {
 		res.end('Received ' + count + ' files');
 	});
 
+	form.on('field', function(name, value){
+      //console.log('normal field / name = '+name+' , value = '+value);
+			//여기서 밸류는 task id
+      var dir = ('/tmp/'+value);
+      	mkdirp(dir, function(err) {
+      });
+
+      var writeStream = fs.createWriteStream('/tmp/'+value+'/'+filename);
+      part.pipe(writeStream);
+
+      part.on('data',function(chunk){
+        console.log(filename+' read '+chunk.length + 'bytes');
+      });
+
+      part.on('end',function(){
+        console.log(filename+' Part read complete');
+        writeStream.end();
+			});
+		});
+
 	form.parse(req, function(err, fields, files) {
 		console.log(fields);
 		Object.keys(fields).forEach(function(name) {
