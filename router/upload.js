@@ -42,7 +42,7 @@ console.log('Error parsing form: ' + err.stack);
     console.log("Write Streaming file :"+filename);
 
     // get field name & value
-    form.on('field', function(name,value){
+    form.on('field', function(name, value){
       //console.log('normal field / name = '+name+' , value = '+value);
 			//여기서 밸류는 task id
       var dir = ('/tmp/'+value);
@@ -86,7 +86,7 @@ console.log('Error parsing form: ' + err.stack);
 		});
 
 		console.log('Upload completed!');
-		res.setHeader('text/plain');
+//		res.setHeader('text/plain');
 		res.end('Received ' + files.length + ' files');
 		});
 
