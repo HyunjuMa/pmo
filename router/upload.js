@@ -7,7 +7,7 @@ var mkdirp = require('mkdirp');
 /* GET home page. */
 router.post('/', function(req, res, next) {
 
-	var count = 0;
+	var filename = "filename";
 	var form = new multiparty.Form();
 	form.on('error', function(err) {
 		console.log('Error parsing form: ' + err.stack);
@@ -54,7 +54,9 @@ router.post('/', function(req, res, next) {
 		});
 
 		var tid = fields['tid'];
-		var filename = files['myfile1'].filename;
+
+		filename = files[0].filename;
+
 		console.log(filename);
 
 		console.log('Upload completed!');
