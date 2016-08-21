@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-//var multer = require('multer');
+var multer = require('multer');
 //var router = require('./router/main')(app);
 var bodyParser = require('body-parser');
 var session = require('express-session');
