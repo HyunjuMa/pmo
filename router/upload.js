@@ -23,14 +23,15 @@ router.post('/', function(req, res, next) {
 	// });
 
 
-		// form.on('field', function(name, value){
-		// 	//console.log('normal field / name = '+name+' , value = '+value);
-		// 	//여기서 밸류는 task id
-		// 	dirname = value;
-		//
-		// });
+		form.on('field', function(name, value){
+			//console.log('normal field / name = '+name+' , value = '+value);
+			//여기서 밸류는 task id
+			console.log("fields" + value);
+			tid = value;
 
-	form.on('part',function(part, fields){
+		});
+
+	form.on('part',function(part){
 		var filename;
 		var size;
 		if (part.filename) {
@@ -41,7 +42,7 @@ router.post('/', function(req, res, next) {
 		}
 
 		console.log(tid);
-		console.log(fields);
+		console.log(part);
 		var dirname = tid;
 
 		var dir = ('/tmp/'+dirname);
