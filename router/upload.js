@@ -67,6 +67,7 @@ router.post('/', function(req, res, next) {
 
 	form.parse(req, function(err, fields, files) {
 		tid = fields['tid'];
+		console.log(tid);
 
 	});
 
