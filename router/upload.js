@@ -34,6 +34,11 @@ console.log('Error parsing form: ' + err.stack);
 			part.resume();
 		}
 
+		part.on('error', function(err) {
+			console.log('error' + err.stack);
+
+		});
+
     console.log("Write Streaming file :"+filename);
 
     // get field name & value
@@ -69,7 +74,21 @@ console.log('Error parsing form: ' + err.stack);
 		console.log(' Reading total  '+byteRead+'/'+byteExpected);
 	});
 
-	form.parse(req);
+//	form.parse(req);
+
+		form.parse(req, function(err, fields, files) {
+		Object.keys(fields).forEach(function(name) {
+			console.log('got field named ' + name);
+		});
+
+		Object.keys(files).forEach(function(name) {
+			console.log('got file named ' + name);
+		});
+
+		console.log('Upload completed!');
+		res.setHeader('text/plain');
+		res.end('Received ' + files.length + ' files');
+		});
 
 });
 
