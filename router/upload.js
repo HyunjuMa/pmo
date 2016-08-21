@@ -18,7 +18,7 @@ router.post('/', function(req, res, next) {
 	// form.on('close', function() {
 	// 	console.log('Upload completed! on Close');
 	// 	// res.setHeader('text/plain');
-	// 	res.end('Received ' + count + ' files');
+	//
 	// });
 
 
@@ -56,14 +56,13 @@ router.post('/', function(req, res, next) {
 		part.on('end',function(){
 			console.log(filename+' Part read complete');
 			writeStream.end();
+			res.end('Received files');
 		});
 
 		part.on('error', function(err) {
 			console.log('error' + err.stack);
 		});
 	});
-
-
 
 form.parse(req);
 
