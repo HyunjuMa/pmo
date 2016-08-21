@@ -41,7 +41,7 @@ router.post('/', function(req, res, next) {
 		}
 
 		console.log(tid);
-		console.log(fields['tid']);
+		console.log(fields);
 		var dirname = tid;
 
 		var dir = ('/tmp/'+dirname);
