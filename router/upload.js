@@ -18,6 +18,11 @@ router.post('/', function(req, res, next) {
         });
 */
 
+form.on('error', function(err) {
+console.log('Error parsing form: ' + err.stack);
+});
+
+
 	// file upload handling
 	form.on('part',function(part){
 		var filename;
