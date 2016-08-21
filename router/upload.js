@@ -8,7 +8,7 @@ var mkdirp = require('mkdirp');
 router.post('/', function(req, res, next) {
 
 	var form = new multiparty.Form();
-	
+
 	form.on('error', function(err) {
 		console.log('Error parsing form: ' + err.stack);
 	});
@@ -39,7 +39,8 @@ router.post('/', function(req, res, next) {
 			part.resume();
 		}
 
-		var dirname = form.fields['tid'];
+		console.log(form.fields);
+		var dirname = 'temp';
 
 		var dir = ('/tmp/'+dirname);
 		mkdirp(dir, function(err) {
