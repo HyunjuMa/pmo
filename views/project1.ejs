@@ -1,56 +1,56 @@
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
 
-    <title><%= title %></title>
+  <title><%= title %></title>
 
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="common/css/style.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="common/css/style.css">
 
-    <link rel="stylesheet" href="common/css/progressbar.css">
+  <link rel="stylesheet" href="common/css/progressbar.css">
 
-    <!--script>
-    function removeProj(id){
-      var result = confirm("정말 삭제하시겠습니까?");
-      if(result)
-      {
-        $.ajax({
-  			  url:"/delete/"+id,
-  			  type:"delete",
-  			  dataType:"json",
-  			  success: function(result){
-            location.href="dashboard";
-  			  },
-  			  error:function(request,status,error){
-  		       console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-  			  }
-  		  });
-      }
-    }
+  <!--script>
+  function removeProj(id){
+  var result = confirm("정말 삭제하시겠습니까?");
+  if(result)
+  {
+  $.ajax({
+  url:"/delete/"+id,
+  type:"delete",
+  dataType:"json",
+  success: function(result){
+  location.href="dashboard";
+},
+error:function(request,status,error){
+console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+}
+});
+}
+}
 
-  </script-->
-  </head>
-  <body>
-    <% include ./navbar.ejs %>
-    <!-- 기본은 게시판 형태, 산출물 업로드/다운로드가 핵심 -->
-    <h1 style="font-weight:bold;"> <%= project[0].pname %> </h1> <!--h2> <%= project[0].pm %> </h2-->
-      <br><br>
-      <div class="container-fluid" align="right">
-        <ul class="progressbar">
+</script-->
+</head>
+<body>
+  <% include ./navbar.ejs %>
+  <!-- 기본은 게시판 형태, 산출물 업로드/다운로드가 핵심 -->
+  <h1 style="font-weight:bold;"> <%= project[0].pname %> </h1> <!--h2> <%= project[0].pm %> </h2-->
+  <br><br>
+  <div class="container-fluid" align="right">
+    <ul class="progressbar">
 
-         <% for(var i=0; i<project[0].task.length; i++) { %>
-          <li> <a href=""> <%=i+1%>. <%= project[0].task[i].tname.substr(2) %> </a> </li>
-          <!-- if문으로 active 경우 처리해줄것-->
-         <% } %>
-        </ul>
+      <% for(var i=0; i<project[0].task.length; i++) { %>
+        <li> <a href=""> <%=i+1%>. <%= project[0].task[i].tname.substr(2) %> </a> </li>
+        <!-- if문으로 active 경우 처리해줄것-->
+        <% } %>
+      </ul>
     </div>
 
     <div class="container-fluid">
@@ -76,38 +76,38 @@
                     <br>
 
                     <form ref='upload' id='upload' action='/upload' method='post' encType="multipart/form-data">
-                          <input type="file" name="<%=project[0].task[i]._id %>" multiple="multiple"/>
-
-                          <!-- <input type="hidden" name="tid" value="<%=project[0].task[i]._id %>" /> -->
-                          <input type='submit' value='Upload!' />
-                          <!--span class="glyphicon glyphicon-paperclip" aria-hidden="true" > </span-->
+                      <input type="file" name="<%=project[0].task[i]._id %>" multiple="multiple"/>
+                      
+                      <!-- <input type="hidden" name="tid" value="<%=project[0].task[i]._id %>" /> -->
+                      <input type='submit' value='Upload!' />
+                      <!--span class="glyphicon glyphicon-paperclip" aria-hidden="true" > </span-->
                     </form>
 
                   </div>
                 </div>
               </div>
 
-            <% } %>
-          </div> <!--group-->
-        </div> <!--col(left)-->
+              <% } %>
+            </div> <!--group-->
+          </div> <!--col(left)-->
 
-        <div class="col-md-3">
+          <div class="col-md-3">
 
-          <h3> 프로젝트 개요 </h3>
-          <p> <%= project[0].pdesc %> </p>
-          <p> <%= project[0].bp[0] %> </p>
+            <h3> 프로젝트 개요 </h3>
+            <p> <%= project[0].pdesc %> </p>
+            <p> <%= project[0].bp[0] %> </p>
 
-          <% if(name==='Admin' | name===project[0].pm) { %>
-            <a href="/update/<%=project[0]._id %>"> 수정 </a> <br>
-            <a href="/delete/<%=project[0]._id %>"> 삭제 </a> <br>
-          <% } %>
-          <!--a href="/update/<%=project[0]._id %>"> 수정 </a> <br>
-          <a href="/delete/<%=project[0]._id %>"> 삭제 </a> <br-->
+            <% if(name==='Admin' | name===project[0].pm) { %>
+              <a href="/update/<%=project[0]._id %>"> 수정 </a> <br>
+              <a href="/delete/<%=project[0]._id %>"> 삭제 </a> <br>
+              <% } %>
+              <!--a href="/update/<%=project[0]._id %>"> 수정 </a> <br>
+              <a href="/delete/<%=project[0]._id %>"> 삭제 </a> <br-->
 
-        </div> <!-- right division -->
+            </div> <!-- right division -->
 
-      </div> <!-- div class row -->
-    </div> <!-- container-fluid -->
+          </div> <!-- div class row -->
+        </div> <!-- container-fluid -->
 
-  </body>
-</html>
+      </body>
+      </html>

@@ -9,7 +9,6 @@ router.post('/', function(req, res, next) {
 
 	var form = new multiparty.Form();
 
-	var tid = '';
 	form.on('error', function(err) {
 		console.log('Error parsing form: ' + err.stack);
 	});
@@ -22,14 +21,13 @@ router.post('/', function(req, res, next) {
 	//
 	// });
 
-
-		form.on('field', function(name, value){
-			//console.log('normal field / name = '+name+' , value = '+value);
-			//여기서 밸류는 task id
-			console.log("fields" + value);
-			tid = value;
-
-		});
+		// form.on('field', function(name, value){
+		// 	//console.log('normal field / name = '+name+' , value = '+value);
+		// 	//여기서 밸류는 task id
+		// 	console.log("fields" + value);
+		// 	tid = value;
+		//
+		// });
 
 	form.on('part',function(part){
 		var filename;
@@ -41,8 +39,6 @@ router.post('/', function(req, res, next) {
 			part.resume();
 		}
 
-		console.log(tid);
-		console.log(part.name);
 		var dirname = part.name;
 
 		var dir = ('/tmp/'+dirname);
