@@ -9,7 +9,7 @@ router.post('/', function(req, res, next) {
 
 	var form = new multiparty.Form();
 
-	res.setTimeout(0);
+//	res.setTimeout(0);
 
 /*
 	res.setTimeout(480000, function(){ // 4 minute timeout adjust for larger uploads
