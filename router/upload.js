@@ -16,11 +16,11 @@ router.post('/', function(req, res, next) {
 
 
 	// Close emitted after form parsed
-	form.on('close', function() {
-		console.log('Upload completed! on Close');
-		// res.setHeader('text/plain');
-		res.end('Received ' + count + ' files');
-	});
+	// form.on('close', function() {
+	// 	console.log('Upload completed! on Close');
+	// 	// res.setHeader('text/plain');
+	// 	res.end('Received ' + count + ' files');
+	// });
 
 	form.on('part',function(part){
 		var filename;
