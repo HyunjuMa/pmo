@@ -8,8 +8,7 @@ var mkdirp = require('mkdirp');
 router.post('/', function(req, res, next) {
 
 	var form = new multiparty.Form();
-
-	var dirname = "tttt";
+	
 	form.on('error', function(err) {
 		console.log('Error parsing form: ' + err.stack);
 	});
@@ -23,16 +22,12 @@ router.post('/', function(req, res, next) {
 	// });
 
 
-		form.on('field', function(name, value){
-			//console.log('normal field / name = '+name+' , value = '+value);
-			//여기서 밸류는 task id
-			var dir = ('/tmp/'+value);
-			mkdirp(dir, function(err) {
-			});
-
-			dirname = value;
-
-		});
+		// form.on('field', function(name, value){
+		// 	//console.log('normal field / name = '+name+' , value = '+value);
+		// 	//여기서 밸류는 task id
+		// 	dirname = value;
+		//
+		// });
 
 	form.on('part',function(part){
 		var filename;
@@ -43,6 +38,12 @@ router.post('/', function(req, res, next) {
 		}else{
 			part.resume();
 		}
+
+		var dirname = form.fields['tid'];
+
+		var dir = ('/tmp/'+dirname);
+		mkdirp(dir, function(err) {
+		});
 
 		var writeStream = fs.createWriteStream('/tmp/'+dirname+'/'+filename);
 		part.pipe(writeStream);
