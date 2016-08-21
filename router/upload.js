@@ -9,10 +9,14 @@ router.post('/', function(req, res, next) {
 
 	var form = new multiparty.Form();
 
+	res.setTimeout(0);
+
+/*
 	res.setTimeout(480000, function(){ // 4 minute timeout adjust for larger uploads
         console.log('Request has timed out.');
             res.send(408);
         });
+*/
 
 	// file upload handling
 	form.on('part',function(part){
@@ -34,6 +38,7 @@ router.post('/', function(req, res, next) {
       var dir = ('/tmp/'+value);
       mkdirp(dir, function(err) {
       });
+
       var writeStream = fs.createWriteStream('/tmp/'+value+'/'+filename);
       part.pipe(writeStream);
 
@@ -59,7 +64,6 @@ router.post('/', function(req, res, next) {
 	});
 
 	form.parse(req);
-
 
 });
 

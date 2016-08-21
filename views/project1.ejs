@@ -71,17 +71,16 @@
                   <div class="panel-body">
 
                     산출물 업로드
-                    <a href = ""> <span class="glyphicon glyphicon-paperclip" aria-hidden="true" > </span> </a> <br>
-                    산출물 설명 : <input type="text" name="desc">
-                    <br><br>
-                    <button type="submit" id="<%=project[0].task[i]._id%>">  등록 </button>
+                    <a href = "">  </a> <br>
+
                     <br>
-                    npm fileupload module test
+
                     <form ref='upload' id='upload' action='/upload' method='post' encType="multipart/form-data">
                           <input type="file" name="myfile1" multiple="multiple"/>
 
                           <input type="hidden" name="tid" value="<%=project[0].task[i]._id %>" />
                           <input type='submit' value='Upload!' />
+                          <!--span class="glyphicon glyphicon-paperclip" aria-hidden="true" > </span-->
                     </form>
 
                   </div>
