@@ -8,6 +8,7 @@ var mkdirp = require('mkdirp');
 router.post('/', function(req, res, next) {
 
 	var filename = "filename";
+
 	var form = new multiparty.Form();
 	form.on('error', function(err) {
 		console.log('Error parsing form: ' + err.stack);
@@ -21,25 +22,41 @@ router.post('/', function(req, res, next) {
 		res.end('Received ' + count + ' files');
 	});
 
-	form.on('field', function(name, value){
-      //console.log('normal field / name = '+name+' , value = '+value);
-			//여기서 밸류는 task id
-      var dir = ('/tmp/'+value);
-      	mkdirp(dir, function(err) {
-      });
+	form.on('part',function(part){
+		var filename;
+		var size;
+		if (part.filename) {
+			filename = part.filename;
+			size = part.byteCount;
+		}else{
+			part.resume();
+		}
 
-      var writeStream = fs.createWriteStream('/tmp/'+value+'/'+filename);
-      part.pipe(writeStream);
+		part.on('error', function(err) {
+			console.log('error' + err.stack);
 
-      part.on('data',function(chunk){
-        console.log(filename+' read '+chunk.length + 'bytes');
-      });
-
-      part.on('end',function(){
-        console.log(filename+' Part read complete');
-        writeStream.end();
-			});
 		});
+	});
+
+	form.on('field', function(name, value){
+		//console.log('normal field / name = '+name+' , value = '+value);
+		//여기서 밸류는 task id
+		var dir = ('/tmp/'+value);
+		mkdirp(dir, function(err) {
+		});
+
+		var writeStream = fs.createWriteStream('/tmp/'+value+'/'+filename);
+		part.pipe(writeStream);
+
+		part.on('data',function(chunk){
+			console.log(filename+' read '+chunk.length + 'bytes');
+		});
+
+		part.on('end',function(){
+			console.log(filename+' Part read complete');
+			writeStream.end();
+		});
+	});
 
 	form.parse(req, function(err, fields, files) {
 		console.log(fields);
