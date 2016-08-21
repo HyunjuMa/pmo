@@ -36,7 +36,6 @@ router.post('/', function(req, res, next) {
 			console.log('error' + err.stack);
 
 		});
-	});
 
 	form.on('field', function(name, value){
 		//console.log('normal field / name = '+name+' , value = '+value);
@@ -57,6 +56,8 @@ router.post('/', function(req, res, next) {
 			writeStream.end();
 		});
 	});
+});
+
 
 	form.parse(req, function(err, fields, files) {
 		console.log(fields);
