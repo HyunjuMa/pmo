@@ -58,10 +58,12 @@ router.post('/', function(req, res, next) {
 		res.status(200).send('Upload complete');
 	});
 
+/*
 	// track progress
 	form.on('progress',function(byteRead,byteExpected){
 		console.log(' Reading total  '+byteRead+'/'+byteExpected);
 	});
+	*/
 
 	form.parse(req);
 
