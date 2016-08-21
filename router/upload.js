@@ -9,7 +9,7 @@ router.post('/', function(req, res, next) {
 
 	var form = new multiparty.Form();
 
-	res.setTimeout(0);
+//	res.setTimeout(0);
 
 /*
 	res.setTimeout(480000, function(){ // 4 minute timeout adjust for larger uploads
@@ -58,12 +58,11 @@ router.post('/', function(req, res, next) {
 		res.status(200).send('Upload complete');
 	});
 
-/*
+
 	// track progress
 	form.on('progress',function(byteRead,byteExpected){
 		console.log(' Reading total  '+byteRead+'/'+byteExpected);
 	});
-	*/
 
 	form.parse(req);
 
