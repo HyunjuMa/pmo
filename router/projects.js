@@ -19,52 +19,57 @@ module.exports = function(app, Project) {
       //이부분 조건문으로 빼도 됨
       //for문으로 처리?.......
       Project.find({pm: sess.name}, function(err, myprojects){
-      if(err) return res.status(500).send({error: 'db failure'});
+        if(err) return res.status(500).send({error: 'db failure'});
 
-//      console.log(myprojects);  //출력 잘됨!!
-      res.render('dashboard', {
-        title: "Dashboard",
-        length: 5,
-        page_name: 'dashboard', // navbar set active에서 쓸 것
-        name: sess.name,
-        allprojects: allprojects,
-        myprojects: myprojects
+        //      console.log(myprojects);  //출력 잘됨!!
+        res.render('dashboard', {
+          title: "Dashboard",
+          length: 5,
+          page_name: 'dashboard', // navbar set active에서 쓸 것
+          name: sess.name,
+          allprojects: allprojects,
+          myprojects: myprojects
+        })
       })
-    })
     }).sort({"_id": -1});
   });
 
-    app.get('/newproject', function(req,res){
-      sess = req.session;
+  app.get('/newproject', function(req,res){
+    sess = req.session;
+    if(!sess.name) {
+      //로그인 안된 상태에서 들어오면
+      res.redirect('/');
+    };
 
-      res.render('newproject', {
-        title: "New Project",
-        length: 5,
-        page_name: 'newproject',
-        name: sess.name
-      })
-    });
+    res.render('newproject', {
+      title: "New Project",
+      length: 5,
+      page_name: 'newproject',
+      name: sess.name
+    })
+  });
 
-    app.post('/newprojectadded', function(req,res){
+  app.post('/newprojectadded', function(req,res){
 
-      sess = req.session;
-      var project = new Project();
+    sess = req.session;
+    var project = new Project();
 
-      project.pname = req.body.pname;
-      project.pdesc = req.body.pdesc;
-      project.pm = sess.name;
+    project.pname = req.body.pname;
+    project.pdesc = req.body.pdesc;
+    project.pm = sess.name;
 
-      var tasklist = [];
-      var tasknum = 0;
-      tasklist = req.body.task;
-      tasknum = tasklist.length;
+    var tasklist = [];
+    var tasknum = 0;
+    tasklist = req.body.task;
+    tasknum = tasklist.length;
 
-      for(var i=0; i<tasknum; i++) {
-        var tname = tasklist[i];
-        project.task.push({
-          tname: tname
-        });
-      }
+    for(var i=0; i<tasknum; i++) {
+      var tname = tasklist[i];
+      project.task.push({
+        tname: tname,
+        state: 'todo'
+      });
+    }
 
     project.save(function(err) {
       if(err) {
@@ -73,15 +78,21 @@ module.exports = function(app, Project) {
         return;
       }
       res.redirect('/dashboard');
-      });
-    });//create a project and then go to dashboard
+    });
+  });//create a project and then go to dashboard
 
 
 
 
   app.get('/:project_id', function(req,res){
+
     var pid = req.params.project_id;
     sess = req.session;
+
+    if(!sess.name) {
+      //로그인 안된 상태에서 들어오면
+      res.redirect('/');
+    };
 
     Project.find({_id: pid}, function(err, project){
       if(err) return res.status(500).send({error: 'db failure'});
@@ -102,6 +113,10 @@ module.exports = function(app, Project) {
   app.get('/update/:pid', function(req,res){
 
     sess = req.session;
+    if(!sess.name) {
+      //로그인 안된 상태에서 들어오면
+      res.redirect('/');
+    };
 
     Project.find({_id: req.params.pid}, function(err, project){
       if(err) return res.status(500).send({error: 'db failure'});
@@ -125,61 +140,64 @@ module.exports = function(app, Project) {
     newtasklist = req.body.task;
 
     Project.findOneAndUpdate({_id: pid},
-                             { $set:
-                              {pname: req.body.pname,
-                               pdesc: req.body.pdesc
-                              // task:
-                             }}, function(err, project){
-      if(err) return res.status(500).send({error: 'db failure'});
-      //
-    })
-    res.redirect("/dashboard");
-  });//update
+      { $set:
+        {pname: req.body.pname,
+          pdesc: req.body.pdesc
+          // task:
+        }}, function(err, project){
+          if(err) return res.status(500).send({error: 'db failure'});
+          //
+        })
+        res.redirect("/dashboard");
+      });//update
 
 
-/*
-  app.post('/:pid/taskadded', function(req,res){
-    console.log("taskadded router got its req");
-    var pid = req.params.pid;
-    var addedtasklist = [];
-    addedtasklist = req.body.task;
+      /*
+      app.post('/:pid/taskadded', function(req,res){
+      console.log("taskadded router got its req");
+      var pid = req.params.pid;
+      var addedtasklist = [];
+      addedtasklist = req.body.task;
 
-//find 먼저
-    Project.findOne({_id: pid}, function(err, project) {
+      //find 먼저
+      Project.findOne({_id: pid}, function(err, project) {
       if(err)
-        res.json(err);
+      res.json(err);
       else{
 
-        for(var i=0; i<addedtasklist.length; i++) {
-          var tname = addedtasklist[i];
-          project.task.push({
-            tname: tname
-          });
-        }
-
-        project.save(function(err) {
-          if(err) {
-            console.error(err);
-            res.json({result: 0});
-            return;
-          }
-          res.redirect('/'+pid);
-          });
-      }
+      for(var i=0; i<addedtasklist.length; i++) {
+      var tname = addedtasklist[i];
+      project.task.push({
+      tname: tname
     });
-  });//get pid, and add tasks and save it
+  }
+
+  project.save(function(err) {
+  if(err) {
+  console.error(err);
+  res.json({result: 0});
+  return;
+}
+res.redirect('/'+pid);
+});
+}
+});
+});//get pid, and add tasks and save it
 */
 
-  app.post('/taskadded/:pid', function(req,res){
-    var pid = req.params.pid;
-    var tname = req.body.task;
+app.post('/taskadded/:pid', function(req,res){
+  var pid = req.params.pid;
+  var tname = req.body.task;
 
-    Project.findOne({_id: pid}, function(err, project) {
-      if(err)
-        res.json(err);
-      else{
-        //console.log(tname);
-        project.task.push({tname: tname});
+  Project.findOne({_id: pid}, function(err, project) {
+    if(err)
+    res.json(err);
+    else{
+      //console.log(tname);
+      project.task.push({
+        tname: tname,
+        state: 'todo'
+      });
 
         project.save(function(err) {
           if(err) {
@@ -187,7 +205,7 @@ module.exports = function(app, Project) {
             res.json({result: 0});
           }
           res.redirect("/update/"+pid);
-          });
+        });
       }
     });
     //res.redirect('/update/'+pid);
@@ -207,7 +225,7 @@ module.exports = function(app, Project) {
 
     Project.findOne({_id: pid}, function(err, project) {
       if(err)
-        res.json(err);
+      res.json(err);
       else{
         project.task.pull({_id: tid});
         project.save(function(err, output) {
