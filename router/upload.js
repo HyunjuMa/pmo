@@ -7,6 +7,7 @@ var mkdirp = require('mkdirp');
 /* GET home page. */
 router.post('/', function(req, res, next) {
 
+	var count = 0;
 	var form = new multiparty.Form();
 	form.on('error', function(err) {
 		console.log('Error parsing form: ' + err.stack);
