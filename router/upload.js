@@ -73,8 +73,6 @@ router.post('/', function(req, res, next) {
 
 		// filename = files['myfile1'][0].filename;
 
-		console.log(filename);
-
 		console.log('Upload completed!');
 		//		res.setHeader('text/plain');
 		res.end('Received ' + files.length + ' files');
