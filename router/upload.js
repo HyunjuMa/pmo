@@ -9,8 +9,6 @@ router.post('/', function(req, res, next) {
 
 	var form = new multiparty.Form();
 
-
-
 	// file upload handling
 	form.on('part',function(part){
 		var filename;
@@ -20,7 +18,6 @@ router.post('/', function(req, res, next) {
 			size = part.byteCount;
 		}else{
 			part.resume();
-
 		}
 
     console.log("Write Streaming file :"+filename);
@@ -28,24 +25,21 @@ router.post('/', function(req, res, next) {
     // get field name & value
     form.on('field', function(name,value){
       //console.log('normal field / name = '+name+' , value = '+value);
-
-
+			//여기서 밸류는 task id
       var dir = ('/tmp/'+value);
-
       mkdirp(dir, function(err) {
       });
+      var writeStream = fs.createWriteStream('/tmp/'+value+'/'+filename);
+      part.pipe(writeStream);
 
-      	var writeStream = fs.createWriteStream('/tmp/'+value+'/'+filename);
-        part.pipe(writeStream);
+      part.on('data',function(chunk){
+        console.log(filename+' read '+chunk.length + 'bytes');
+      });
 
-        part.on('data',function(chunk){
-          console.log(filename+' read '+chunk.length + 'bytes');
-        });
-
-        part.on('end',function(){
-          console.log(filename+' Part read complete');
-          writeStream.end();
-        });
+      part.on('end',function(){
+        console.log(filename+' Part read complete');
+        writeStream.end();
+			});
     });
 	});
 
