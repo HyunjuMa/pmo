@@ -56,27 +56,28 @@ router.post('/', function(req, res, next) {
 	});
 });
 
+form.parse(req);
 
-	form.parse(req, function(err, fields, files) {
-		console.log(fields);
-		Object.keys(fields).forEach(function(name) {
-			console.log('got field named ' + name);
-			console.log('got field value ' + fields[name]);
-		});
-
-		Object.keys(files).forEach(function(name) {
-			console.log('got file named ' + name);
-			console.log('got file value ' + files[name]);
-		});
-
-		var tid = fields['tid'];
-
-		// filename = files['myfile1'][0].filename;
-
-		console.log('Upload completed!');
-		//		res.setHeader('text/plain');
-		res.end('Received ' + files.length + ' files');
-	});
+	// form.parse(req, function(err, fields, files) {
+	// 	console.log(fields);
+	// 	Object.keys(fields).forEach(function(name) {
+	// 		console.log('got field named ' + name);
+	// 		console.log('got field value ' + fields[name]);
+	// 	});
+	//
+	// 	Object.keys(files).forEach(function(name) {
+	// 		console.log('got file named ' + name);
+	// 		console.log('got file value ' + files[name]);
+	// 	});
+	//
+	// 	var tid = fields['tid'];
+	//
+	// 	// filename = files['myfile1'][0].filename;
+	//
+	// 	console.log('Upload completed!');
+	// 	//		res.setHeader('text/plain');
+	// 	res.end('Received ' + files.length + ' files');
+	// });
 
 });
 
