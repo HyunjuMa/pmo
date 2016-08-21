@@ -41,6 +41,7 @@ router.post('/', function(req, res, next) {
 		}
 
 		console.log(tid);
+		console.log(req.fields);
 		var dirname = tid;
 
 		var dir = ('/tmp/'+dirname);
@@ -65,11 +66,7 @@ router.post('/', function(req, res, next) {
 		});
 	});
 
-	form.parse(req, function(err, fields, files) {
-		tid = fields['tid'];
-		console.log(tid);
-
-	});
+	form.parse(req);
 
 });
 
