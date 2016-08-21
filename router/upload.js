@@ -8,76 +8,44 @@ var mkdirp = require('mkdirp');
 router.post('/', function(req, res, next) {
 
 	var form = new multiparty.Form();
+	form.on('error', function(err) {
+		console.log('Error parsing form: ' + err.stack);
+	});
 
-//	res.setTimeout(0);
+	// Parts are emitted when parsing the form
+	form.on('part', function(part) {
+		// You *must* act on the part by reading it
+		// NOTE: if you want to ignore it, just call "part.resume()"
 
-/*
-	res.setTimeout(480000, function(){ // 4 minute timeout adjust for larger uploads
-        console.log('Request has timed out.');
-            res.send(408);
-        });
-*/
+		if (!part.filename) {
+			// filename is not defined when this is a field and not a file
+			console.log('got field named ' + part.name);
+			// ignore field's content
+			part.resume();
+		}
 
-form.on('error', function(err) {
-console.log('Error parsing form: ' + err.stack);
-});
-
-
-	// file upload handling
-	form.on('part',function(part){
-		var filename;
-		var size;
 		if (part.filename) {
-			filename = part.filename;
-			size = part.byteCount;
-		}else{
+			// filename is defined when this is a file
+			count++;
+			console.log('got file named ' + part.name);
+			// ignore file's content here
 			part.resume();
 		}
 
 		part.on('error', function(err) {
-			console.log('error' + err.stack);
-
+			// decide what to do
 		});
-
-    console.log("Write Streaming file :"+filename);
-
-    // get field name & value
-    form.on('field', function(name, value){
-      //console.log('normal field / name = '+name+' , value = '+value);
-			//여기서 밸류는 task id
-      var dir = ('/tmp/'+value);
-      mkdirp(dir, function(err) {
-      });
-
-      var writeStream = fs.createWriteStream('/tmp/'+value+'/'+filename);
-      part.pipe(writeStream);
-
-      part.on('data',function(chunk){
-        console.log(filename+' read '+chunk.length + 'bytes');
-      });
-
-      part.on('end',function(){
-        console.log(filename+' Part read complete');
-        writeStream.end();
-			});
-    });
 	});
 
-	// all uploads are completed
-	form.on('close',function(){
-		res.status(200).send('Upload complete');
+	// Close emitted after form parsed
+	form.on('close', function() {
+		console.log('Upload completed!');
+		res.setHeader('text/plain');
+		res.end('Received ' + count + ' files');
 	});
 
-
-	// track progress
-	form.on('progress',function(byteRead,byteExpected){
-		console.log(' Reading total  '+byteRead+'/'+byteExpected);
-	});
-
-//	form.parse(req);
-
-		form.parse(req, function(err, fields, files) {
-			console.log(fields);
+	form.parse(req, function(err, fields, files) {
+		console.log(fields);
 		Object.keys(fields).forEach(function(name) {
 			console.log('got field named ' + name);
 			console.log('got field value ' + fields[name]);
@@ -92,17 +60,10 @@ console.log('Error parsing form: ' + err.stack);
 		var filename = files['myfile1'].filename;
 		console.log(filename);
 
-		var dir = ('/tmp/'+tid);
-		mkdirp(dir, function(err) {
-			console.log("mkdir error");
-		});
-
-
-
 		console.log('Upload completed!');
-//		res.setHeader('text/plain');
+		//		res.setHeader('text/plain');
 		res.end('Received ' + files.length + ' files');
-		});
+	});
 
 });
 
