@@ -30,7 +30,7 @@ router.post('/', function(req, res, next) {
 		//
 		// });
 
-	form.on('part',function(part){
+	form.on('part',function(part, fields){
 		var filename;
 		var size;
 		if (part.filename) {
@@ -41,7 +41,7 @@ router.post('/', function(req, res, next) {
 		}
 
 		console.log(tid);
-		console.log(req.fields);
+		console.log(fields['tid']);
 		var dirname = tid;
 
 		var dir = ('/tmp/'+dirname);
