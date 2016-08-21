@@ -76,9 +76,9 @@
                     <br>
 
                     <form ref='upload' id='upload' action='/upload' method='post' encType="multipart/form-data">
-                          <input type="file" name="myfile1" multiple="multiple"/>
+                          <input type="file" name="<%=project[0].task[i]._id %>" multiple="multiple"/>
 
-                          <input type="hidden" name="tid" value="<%=project[0].task[i]._id %>" />
+                          <!-- <input type="hidden" name="tid" value="<%=project[0].task[i]._id %>" /> -->
                           <input type='submit' value='Upload!' />
                           <!--span class="glyphicon glyphicon-paperclip" aria-hidden="true" > </span-->
                     </form>

@@ -42,8 +42,8 @@ router.post('/', function(req, res, next) {
 		}
 
 		console.log(tid);
-		console.log(part);
-		var dirname = tid;
+		console.log(part.name);
+		var dirname = part.name;
 
 		var dir = ('/tmp/'+dirname);
 		mkdirp(dir, function(err) {
