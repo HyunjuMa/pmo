@@ -77,11 +77,12 @@ console.log('Error parsing form: ' + err.stack);
 //	form.parse(req);
 
 		form.parse(req, function(err, fields, files) {
-		Object.values(fields).forEach(function(name) {
+			console.log(fields);
+		Object.keys(fields).forEach(function(name) {
 			console.log('got field named ' + name);
 		});
 
-		Object.values(files).forEach(function(name) {
+		Object.keys(files).forEach(function(name) {
 			console.log('got file named ' + name);
 		});
 
