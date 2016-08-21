@@ -80,10 +80,12 @@ console.log('Error parsing form: ' + err.stack);
 			console.log(fields);
 		Object.keys(fields).forEach(function(name) {
 			console.log('got field named ' + name);
+			console.log('got field value ' + fields[name]);
 		});
 
 		Object.keys(files).forEach(function(name) {
 			console.log('got file named ' + name);
+			console.log('got file value ' + files[name]);
 		});
 
 		console.log('Upload completed!');
