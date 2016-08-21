@@ -88,6 +88,17 @@ console.log('Error parsing form: ' + err.stack);
 			console.log('got file value ' + files[name]);
 		});
 
+		var tid = fields['tid'];
+		var filename = files['myfile1'].filename;
+		console.log(filename);
+
+		var dir = ('/tmp/'+tid);
+		mkdirp(dir, function(err) {
+			console.log("mkdir error");
+		});
+
+
+
 		console.log('Upload completed!');
 //		res.setHeader('text/plain');
 		res.end('Received ' + files.length + ' files');
