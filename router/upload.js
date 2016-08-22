@@ -51,6 +51,7 @@ router.post('/:pid', function(req, res, next) {
 			writeStream.end();
 			//res.end('Received files');
       res.redirect('/uploaded/'+pid+'/'+tid);
+      //res.redirect('/uploaded/'+pid+'/'+tid+'/'+filename);
 		});
 
 		part.on('error', function(err) {

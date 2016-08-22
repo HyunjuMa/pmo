@@ -217,6 +217,8 @@ app.post('/taskadded/:pid', function(req,res){
   app.get('/uploaded/:pid/:tid', function(req,res){
     var pid = req.params.pid;
     var tid = req.params.tid;
+//     var pdt = req.params.product; //산출물 filename으로 보낸거 product, pdt로 받아옴
+
 
     Project.findOneAndUpdate({ '_id': pid, 'task._id': tid},
                     { $set: {
