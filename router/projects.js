@@ -214,16 +214,16 @@ app.post('/taskadded/:pid', function(req,res){
 
 
   /////file upload
-  app.get('/uploaded/:tid', function(req,res){
+  app.get('/uploaded/:pid/:tid', function(req,res){
+    var pid = req.params.pid;
     var tid = req.params.tid;
 
-    Project.update({"task._id": tid},
+    Project.update({ _id: pid, "task._id": tid},
                     { $set: {
                       "task.$.state": 'inprogress',
                       "task.$.lastupdated": Date.now() }
-                    }, false, true);
-      res.end();
-    //res.redirect('/dashboard');
+                    });
+    res.redirect('/dashboard');
   });
 
 

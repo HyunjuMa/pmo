@@ -5,7 +5,7 @@ var fs = require('fs');
 var mkdirp = require('mkdirp');
 
 /* GET home page. */
-router.post('/', function(req, res, next) {
+router.post('/:pid', function(req, res, next) {
 
 	var form = new multiparty.Form();
 
@@ -39,16 +39,18 @@ router.post('/', function(req, res, next) {
 			part.resume();
 		}
 
-		var dirname = part.name;
+// 		var dirname = part.name;
     var tid = part.name;
-//    var pid = part.id;
-//    console.log("pid: " + pid);
+    var pid = req.params.pid;
 
-		var dir = ('/tmp/'+dirname);
+//     console.log("pid: " + pid);
+
+		var dir = ('/tmp/'+pid+'/'+tid);
 		mkdirp(dir, function(err) {
+      console.log(err);
 		});
 
-		var writeStream = fs.createWriteStream('/tmp/'+dirname+'/'+filename);
+		var writeStream = fs.createWriteStream('/tmp/'+pid+'/'+tid+'/'+filename);
 		part.pipe(writeStream);
 
 		part.on('data',function(chunk){
@@ -59,7 +61,7 @@ router.post('/', function(req, res, next) {
 			console.log(filename+' Part read complete');
 			writeStream.end();
 			//res.end('Received files');
-      res.redirect('/uploaded/'+tid);
+      res.redirect('/uploaded/'+pid+'/'+tid);
 		});
 
 		part.on('error', function(err) {
@@ -68,7 +70,6 @@ router.post('/', function(req, res, next) {
 	});
 
 	form.parse(req);
-
 });
 
 module.exports = router;
