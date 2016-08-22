@@ -40,6 +40,9 @@ router.post('/', function(req, res, next) {
 		}
 
 		var dirname = part.name;
+    var tid = part.name;
+//    var pid = part.id;
+//    console.log("pid: " + pid);
 
 		var dir = ('/tmp/'+dirname);
 		mkdirp(dir, function(err) {
@@ -55,7 +58,8 @@ router.post('/', function(req, res, next) {
 		part.on('end',function(){
 			console.log(filename+' Part read complete');
 			writeStream.end();
-			res.end('Received files');
+			//res.end('Received files');
+      res.redirect('/uploaded/'+tid);
 		});
 
 		part.on('error', function(err) {

@@ -189,6 +189,7 @@ app.post('/taskadded/:pid', function(req,res){
   var pid = req.params.pid;
   var tname = req.body.task;
 
+
   Project.findOne({_id: pid}, function(err, project) {
     if(err)
     res.json(err);
@@ -211,11 +212,19 @@ app.post('/taskadded/:pid', function(req,res){
     //res.redirect('/update/'+pid);
   })
 
-  /////file upload test
 
+  /////file upload
+  app.get('/uploaded/:tid', function(req,res){
+    var tid = req.params.tid;
 
-
-
+    Project.update({"task._id": tid},
+                    { $set: {
+                      "task.$.state": 'inprogress',
+                      "task.$.lastupdated": Date.now() }
+                    }, false, true);
+      res.end();
+    //res.redirect('/dashboard');
+  });
 
 
   //////DELETE///
@@ -224,8 +233,7 @@ app.post('/taskadded/:pid', function(req,res){
     var tid = req.params.tid;
 
     Project.findOne({_id: pid}, function(err, project) {
-      if(err)
-      res.json(err);
+      if(err) res.json(err);
       else{
         project.task.pull({_id: tid});
         project.save(function(err, output) {
