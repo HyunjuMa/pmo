@@ -13,22 +13,6 @@ router.post('/:pid', function(req, res, next) {
 		console.log('Error parsing form: ' + err.stack);
 	});
 
-
-	// Close emitted after form parsed
-	// form.on('close', function() {
-	// 	console.log('Upload completed! on Close');
-	// 	// res.setHeader('text/plain');
-	//
-	// });
-
-		// form.on('field', function(name, value){
-		// 	//console.log('normal field / name = '+name+' , value = '+value);
-		// 	//여기서 밸류는 task id
-		// 	console.log("fields" + value);
-		// 	tid = value;
-		//
-		// });
-
 	form.on('part',function(part){
 		var filename;
 		var size;
@@ -45,10 +29,15 @@ router.post('/:pid', function(req, res, next) {
 
 //     console.log("pid: " + pid);
 
-		var dir = ('/tmp/'+pid+'/'+tid);
+		var dir = ('/tmp/'+pid);
+    var dir2 = (dir+'/'+tid);
 		mkdirp(dir, function(err) {
-      console.log(err);
+      if(err) console.error(err);
 		});
+    mkdirp(dir2, function(err2){
+          if(err2) console.log("mkdir 2 error:" + err2);
+          else{ console.log("mkdir works fine"); }
+    }); //callback 고려해서 mkdir 두개 따로둬야함
 
 		var writeStream = fs.createWriteStream('/tmp/'+pid+'/'+tid+'/'+filename);
 		part.pipe(writeStream);

@@ -218,12 +218,12 @@ app.post('/taskadded/:pid', function(req,res){
     var pid = req.params.pid;
     var tid = req.params.tid;
 
-    Project.update({ _id: pid, "task._id": tid},
+    Project.findOneAndUpdate({ '_id': pid, 'task._id': tid},
                     { $set: {
-                      "task.$.state": 'inprogress',
+                      "task.$.state": "inprogress",
                       "task.$.lastupdated": Date.now() }
-                    });
-    res.redirect('/dashboard');
+                    }, function(err, doc) {});
+    res.redirect('/'+pid);
   });
 
 
