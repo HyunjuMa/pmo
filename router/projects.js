@@ -109,7 +109,7 @@ var Project = require('../models/project');
       //console.log(pid); //working fine
       //console.log(project); //working fine
 
-      res.render('viewproject', {
+      res.render('project1', {
         title: project.pname,
         length: 5,
         page_name: 'project1',
