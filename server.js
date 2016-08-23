@@ -6,7 +6,6 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var fs = require('fs');
 var mongoose = require('mongoose');
-var session = require('express-session');
 var busboy = require('connect-busboy');
 //var fileUpload = require('express-fileupload');
 //var path = require('path');

@@ -1,14 +1,9 @@
-
 var express = require('express');
 var app = express();
-//var multer = require('multer');
-//var router = require('./router/main')(app);
-var bodyParser = require('body-parser');
 var session = require('express-session');
 var fs = require('fs');
 var mongoose = require('mongoose');
-var session = require('express-session');
-var busboy = require('connect-busboy');
+var multiparty = require('multiparty');
 
 var Project = require('../models/project');
 
@@ -17,7 +12,7 @@ var Project = require('../models/project');
   app.get('/dashboard', function(req,res){
     sess = req.session;
     if(!sess.name) {
-      //로그인 안된 상태에서 들어오면
+      //로그인 안된 상태에서 들어오면 메인으로 돌려보냄
       res.redirect('/');
     };
 
@@ -94,7 +89,8 @@ var Project = require('../models/project');
 
 
 
-//여기에서 파일 띄워주기도 해야함???
+//여기에서 파일 띄워주기도 해야함!!!
+
   app.get('/:pid', function(req,res){
 
     var pid = req.params.pid;
@@ -105,16 +101,61 @@ var Project = require('../models/project');
       res.redirect('/');
     };
 
+
     Project.find({_id: pid}, function(err, project){
       if(err) return res.status(500).send({error: 'db failure'});
       //console.log(pid); //working fine
       //console.log(project); //working fine
+      var product = [];
+      var path = ('/tmp/'+pid);
+
+      for(var i=0; i<project[0].task.length; i++) {
+        //product[i] = new Array(10);
+        product[i] = [];
+        var tid = project[0].task[i]._id;
+        if(project[0].task[i].state==='todo') {
+          //do nothing
+          console.log(tid + ' has nothing in it!');
+        }
+        else {
+          var path_task = (path+'/'+tid);
+          console.log(tid + ' has something in it');
+          console.log("safe i   " + i);
+          fs.readdir(path_task, function(err, items) {
+            product[i] = new Array(items.length); //made a double array, looks like 'product[tasknumber][pdt];'
+            product[i][0] = tid;
+            console.log("i   " + i);
+            console.log("the value of i is : " + i);
+            for(var j=1; j<=items.length; j++) {
+              product[i][j] = items[j];
+              console.log(product[i][0]+'에 들어있는거: '+product[i][j]);
+            }
+          })
+        }
+      }
+
+      //fs.lstatSync(path_string).isDirectory()
+
+//       fs.readdir(path, function(err, items) {
+//           for (var i=0; i<items.length; i++) {
+//               var file = path + '/' + items[i];
+
+//               console.log("Start: " + file);
+//               fs.stat(file, function(f) {
+//                   return function(err, stats) {
+//                      console.log(f);
+//                      console.log(stats["size"]);
+//                   }
+//               }(file));
+//           }
+//       });
 
       res.render('project1', {
         title: project[0].pname,
         length: 5,
         page_name: 'project1',
         name: sess.name,
+        product: product,
         project: project
       });
 
