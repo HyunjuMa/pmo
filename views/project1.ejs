@@ -20,7 +20,7 @@
 <body>
   <% include ./navbar.ejs %>
   <!-- 기본은 게시판 형태, 산출물 업로드/다운로드가 핵심 -->
-  <h1 style="font-weight:bold;"> <%= project[0].pname %> </h1> 
+  <h1 style="font-weight:bold;"> <%= project[0].pname %> </h1>
   <br><br>
   <div class="container-fluid" align="right">
     <ul class="progressbar">
@@ -75,24 +75,25 @@
 
                   </div> <!--group-->
                 </div> <!--col(left)-->
+              </div>
 
-                <div class="col-md-3">
+              <div class="col-md-3">
 
-                  <h3> 프로젝트 개요 </h3>
-                  <p> <%= project[0].pdesc %> </p>
-                  <p> <%= project[0].bp[0] %> </p>
+                <h3> 프로젝트 개요 </h3>
+                <p> <%= project[0].pdesc %> </p>
+                <p> <%= project[0].bp[0] %> </p>
 
-                  <% if(name === 'Admin' | name === project[0].pm  ) { %>
-                    <a href="/project/update/<%=project[0]._id %>"> 수정 </a> <br>
-                    <a href="/project/delete/<%=project[0]._id %>"> 삭제 </a> <br>
-                    <% } %>
-                    <!--a href="/update/<%=project[0]._id %>"> 수정 </a> <br>
-                    <a href="/delete/<%=project[0]._id %>"> 삭제 </a> <br-->
+                <% if(name === 'Admin' | name === project[0].pm  ) { %>
+                  <a href="/project/update/<%=project[0]._id %>"> 수정 </a> <br>
+                  <a href="/project/delete/<%=project[0]._id %>"> 삭제 </a> <br>
+                  <% } %>
+                  <!--a href="/update/<%=project[0]._id %>"> 수정 </a> <br>
+                  <a href="/delete/<%=project[0]._id %>"> 삭제 </a> <br-->
 
-                  </div> <!-- right division --> 
+                </div> <!-- right division -->
 
-                </div> <!-- div class row -->
-              </div> <!-- container-fluid -->
+              </div> <!-- div class row -->
+            </div> <!-- container-fluid -->
 
-            </body>
-            </html>
+          </body>
+          </html>
