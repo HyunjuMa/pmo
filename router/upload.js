@@ -37,7 +37,7 @@ router.post('/:pid', function(req, res, next) {
 		});
     mkdirp(dir2, function(err2){
           if(err2) console.log("mkdir 2 error:" + err2);
-          else{ console.log("mkdir works fine"); }
+         // else{ console.log("mkdir works fine"); }
     }); //callback 고려해서 mkdir 두개 따로둬야함
 
 		var writeStream = fs.createWriteStream('/tmp/'+pid+'/'+tid+'/'+filename);
@@ -51,8 +51,7 @@ router.post('/:pid', function(req, res, next) {
 			console.log(filename+' Part read complete');
 			writeStream.end();
 			//res.end('Received files');
-      res.redirect('project/uploaded/'+pid+'/'+tid);
-      //res.redirect('/uploaded/'+pid+'/'+tid+'/'+filename);
+      res.redirect('../project/uploaded/'+pid+'/'+tid);
 		});
 
 		part.on('error', function(err) {

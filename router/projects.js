@@ -241,9 +241,6 @@ app.post('/taskadded/:pid', function(req,res){
   });
 
 
-
-
-
   //////DELETE///
   app.delete('/:pid/:tid', function(req,res){
     var pid = req.params.pid;
