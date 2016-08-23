@@ -114,7 +114,7 @@ var Project = require('../models/project');
         fs.readdir(path, function(err, items) {
           console.log('2   ' + tname);
           console.log(path);
-          for(var j=1; j<=items.length; j++) {
+          for(var j=0; j<items.length; j++) {
             //product[i][j] = items[j];
             //console.log(product[i][0]+'에 들어있는거: '+product[i][j]);
             console.log(items[j]);
