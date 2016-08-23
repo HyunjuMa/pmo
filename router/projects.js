@@ -122,8 +122,6 @@ var Project = require('../models/project');
           console.log(tid + ' has something in it');
           console.log("safe i   " + i);
 
-          generate_callback(i);
-
           fs.readdir(path_task, function(err, items) {
             product[i] = new Array(items.length); //made a double array, looks like 'product[tasknumber][pdt];'
             product[i][0] = tid;
@@ -132,10 +130,7 @@ var Project = require('../models/project');
             for(var j=1; j<=items.length; j++) {
               product[i][j] = items[j];
               console.log(product[i][0]+'에 들어있는거: '+product[i][j]);
-              function generate_callback(param){
-                console.log("does nothing");
-                return ;
-              };
+
             }
           })
         }
