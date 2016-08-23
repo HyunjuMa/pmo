@@ -135,7 +135,7 @@ var Project = require('../models/project');
               function generate_callback(param){
                 console.log("does nothing");
                 return ;
-              }
+              };
             }
           })
         }
