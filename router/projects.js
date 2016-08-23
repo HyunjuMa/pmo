@@ -118,7 +118,7 @@ var Project = require('../models/project');
             //console.log(items[j]);
           }
         })
-      };
+      };// reads file names in the dir
 
       for(var i=0; i<project[0].task.length; i++) {
         //product[i] = new Array(10);
@@ -135,33 +135,8 @@ var Project = require('../models/project');
           //generate_callback(i);
 
           readDir(path_task, i);
-          // fs.readdir(path_task, function(err, items) {
-          //   product[i] = new Array(items.length); //made a double array, looks like 'product[tasknumber][pdt];'
-          //   product[i][0] = tid;
-          //   console.log("i   " + i);
-          //   console.log("the value of i is : " + i);
-          //   for(var j=1; j<=items.length; j++) {
-          //     product[i][j] = items[j];
-          //     console.log(product[i][0]+'에 들어있는거: '+product[i][j]);
-          //
-          //   }
-          // })
         }
       }
-
-//       fs.readdir(path, function(err, items) {
-//           for (var i=0; i<items.length; i++) {
-//               var file = path + '/' + items[i];
-
-//               console.log("Start: " + file);
-//               fs.stat(file, function(f) {
-//                   return function(err, stats) {
-//                      console.log(f);
-//                      console.log(stats["size"]);
-//                   }
-//               }(file));
-//           }
-//       });
 
       res.render('project1', {
         title: project[0].pname,
