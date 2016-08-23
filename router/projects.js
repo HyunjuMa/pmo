@@ -114,7 +114,7 @@ var Project = require('../models/project');
           console.log(path);
           for(var j=0; j<items.length; j++) {
             product[i][j] = items[j];
-            console.log(product[i][0]+'에 들어있는거: '+product[i][j]);
+            console.log(i+'번째에 들어있는거: '+product[i][j]);
             //console.log(items[j]);
           }
         })
