@@ -27,7 +27,7 @@
   			  type:"delete",
   			  dataType:"json",
   			  success: function(result){
-            location.href="../dashboard";
+            location.href="../project/dashboard";
   			  },
   			  error:function(request,status,error){
   		       console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -45,7 +45,7 @@
   			  type:"post",
   			  dataType:"json",
   			  success: function(result){
-            location.href="../project/update/"+pid;
+            location.href="../update/"+pid;
             //이거체크
   			  },
   			  error:function(request,status,error){
@@ -65,7 +65,7 @@
   			  type:"delete",
   			  dataType:"json",
   			  success: function(result){
-            location.href="../project/update/"+pid;
+            location.href="../update/"+pid;
   			  },
   			  error:function(request,status,error){
   		       console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
