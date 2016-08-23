@@ -110,8 +110,9 @@ var Project = require('../models/project');
       var path = ('/tmp/'+pid);
 
       function readDir(path, tname) {
+        console.log('1  ' + tname);
         fs.readdir(path, function(err, items) {
-
+          console.log('2   ' + tname);
           console.log(path);
           for(var j=1; j<=items.length; j++) {
             //product[i][j] = items[j];
@@ -132,7 +133,7 @@ var Project = require('../models/project');
         else {
           var path_task = (path+'/'+tid);
           console.log(tid + ' has something in it');
-          console.log("safe i   " + i);
+//          console.log("safe i   " + i);
 
           var tname = project[0].task[i].tname;
 
