@@ -13,8 +13,6 @@ var busboy = require('connect-busboy');
 var Project = require('../models/project');
 
 
-//module.exports = function(app, Project) {
-
 
   app.get('/dashboard', function(req,res){
     sess = req.session;
@@ -94,6 +92,9 @@ var Project = require('../models/project');
 
 
 
+
+
+//여기에서 파일 띄워주기도 해야함???
   app.get('/:pid', function(req,res){
 
     var pid = req.params.pid;
@@ -160,7 +161,7 @@ var Project = require('../models/project');
           //
         })
         res.redirect("/project/dashboard");
-      });//update
+  });//update
 
 
       /*
@@ -240,6 +241,9 @@ app.post('/taskadded/:pid', function(req,res){
   });
 
 
+
+
+
   //////DELETE///
   app.delete('/:pid/:tid', function(req,res){
     var pid = req.params.pid;
@@ -276,6 +280,5 @@ app.post('/taskadded/:pid', function(req,res){
     })
   }); //delete, 각 PM과 Admin이 프로젝트 보기 에서 삭제할때
 
-//};
 
 module.exports = app;

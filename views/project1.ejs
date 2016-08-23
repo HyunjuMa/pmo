@@ -11,15 +11,17 @@
   <title> <%= title %> </title>
 
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="common/css/style.css">
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/common/css/style.css">
 
-  <link rel="stylesheet" href="common/css/progressbar.css">
+  <link rel="stylesheet" href="/common/css/progressbar.css">
+
 </head>
 <body>
   <% include ./navbar.ejs %>
   <!-- 기본은 게시판 형태, 산출물 업로드/다운로드가 핵심 -->
+
   <h1 style="font-weight:bold;"> <%= project[0].pname %> </h1>
   <br><br>
   <div class="container-fluid" align="right">
@@ -27,7 +29,6 @@
 
       <% for(var i=0; i<project[0].task.length; i++) { %>
         <li> <a href=""> <%=i+1%>. <%= project[0].task[i].tname.substr(2) %> </a> </li>
-        <!-- if문으로 active 경우 처리해줄것-->
         <% } %>
       </ul>
     </div>
@@ -39,61 +40,47 @@
           <div class="panel-group" id="accordion">
 
             <% for (var i=0; i<project[0].task.length; i++) { %>
-              <div class="panel panel-default">
-                <div class="panel-heading">
+            <div class="panel panel-default">
+              <div class="panel-heading">
 
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href= "#<%=project[0].task[i]._id%>"> Task # <%= (i+1) %> : <%= project[0].task[i].tname.substr(2) %> </a>
-                  </h4>
-                </div>
-
-                <% if ( project[0].task[i].state === "inprogress" ) { %>
-
-                  <!-- 여길 <div id="<%=project[0].task[i]._id%>" class="panel-collapse collapse in"> 로 해주면 열려있음. 진행중인거 이프문으로 여기 오게.. -->
-                  <div id="<%=project[0].task[i]._id%>" class="panel-collapse collapse in">
-                    <ul>
-                      <!--                     <% for(var i=0; i<) {%>
-                      <% } %> 여기서부터 다시...... 0822 0554.. -->
-
-                    </ul>
-                    <% } else { %>
-                      <div id="<%=project[0].task[i]._id%>" class="panel-collapse collapse">
-                        <% } %>
-
-                        <div class="panel-body">
-                          <form ref='upload' id='upload' action='/project/upload/<%=project[0]._id%>' method='post' encType="multipart/form-data">
-
-                            산출물 업로드: <input type="file" name="<%=project[0].task[i]._id %>" multiple="multiple" />
-                            <input type='submit' value='Upload!' />
-                            <!--span class="glyphicon glyphicon-paperclip" aria-hidden="true" > </span-->
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-
-                    <% } %>
-
-                  </div> <!--group-->
-                </div> <!--col(left)-->
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href= "#<%=project[0].task[i]._id%>"> Task # <%= (i+1) %> : <%= project[0].task[i].tname.substr(2) %> </a>
+                </h4>
               </div>
+              <div id="<%=project[0].task[i]._id%>" class="panel-collapse collapse">
 
-              <div class="col-md-3">
 
-                <h3> 프로젝트 개요 </h3>
-                <p> <%= project[0].pdesc %> </p>
-                <p> <%= project[0].bp[0] %> </p>
+                <div class="panel-body">
+                <form ref='upload' id='upload' action='/upload/<%=project[0]._id%>' method='post' encType="multipart/form-data">
 
-                <% if(name === 'Admin' | name === project[0].pm  ) { %>
-                  <a href="/project/update/<%=project[0]._id %>"> 수정 </a> <br>
-                  <a href="/project/delete/<%=project[0]._id %>"> 삭제 </a> <br>
-                  <% } %>
-                  <!--a href="/update/<%=project[0]._id %>"> 수정 </a> <br>
-                  <a href="/delete/<%=project[0]._id %>"> 삭제 </a> <br-->
+                  산출물 업로드: <input type="file" name="<%=project[0].task[i]._id %>" multiple="multiple" />
+                  <input type='submit' value='Upload!' />
+                  <!--span class="glyphicon glyphicon-paperclip" aria-hidden="true" > </span-->
+                </form>
+                </div>
+              </div>
+            </div>
+          <% } %>
+          </div> <!--group-->
+        </div> <!--col(left)-->
 
-                </div> <!-- right division -->
+        <div class="col-md-3">
 
-              </div> <!-- div class row -->
-            </div> <!-- container-fluid -->
+          <h3> 프로젝트 개요 </h3>
+          <p> <%= project[0].pdesc %> </p>
+          <p> <%= project[0].bp[0] %> </p>
 
-          </body>
-          </html>
+          <% if(name === 'Admin' | name === project[0].pm  ) { %>
+            <a href="/project/update/<%=project[0]._id %>"> 수정 </a> <br>
+            <a href="/project/delete/<%=project[0]._id %>"> 삭제 </a> <br>
+          <% } %>
+          <!--a href="/update/<%=project[0]._id %>"> 수정 </a> <br>
+          <a href="/delete/<%=project[0]._id %>"> 삭제 </a> <br-->
+
+        </div> <!-- right division -->
+
+       </div> <!-- div class row -->
+     </div> <!-- container-fluid -->
+
+</body>
+</html>
