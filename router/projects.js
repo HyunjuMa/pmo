@@ -109,7 +109,7 @@ var Project = require('../models/project');
       var product = [];
       var path = ('/tmp/'+pid);
 
-      function readDir(path) {
+      function readDir(path, tname) {
         fs.readdir(path, function(err, items) {
 
           console.log(path);
@@ -134,9 +134,11 @@ var Project = require('../models/project');
           console.log(tid + ' has something in it');
           console.log("safe i   " + i);
 
+          var tname = project[0].task[i].tname;
+
           //generate_callback(i);
 
-          readDir(path_task);
+          readDir(path_task, tname);
           // fs.readdir(path_task, function(err, items) {
           //   product[i] = new Array(items.length); //made a double array, looks like 'product[tasknumber][pdt];'
           //   product[i][0] = tid;
