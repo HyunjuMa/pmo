@@ -107,7 +107,7 @@ var Project = require('../models/project');
     Project.find({_id: pid}, function(err, project){
       if(err) return res.status(500).send({error: 'db failure'});
       //console.log(pid); //working fine
-      console.log(pid); //working fine
+      console.log(project); //working fine
       //
       // res.render('project1', {
       //   title: "project1",
