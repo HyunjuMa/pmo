@@ -82,7 +82,7 @@ console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"er
                         <% } %>
 
                         <div class="panel-body">
-                          <form ref='upload' id='upload' action='/upload/<%=project[0]._id%>' method='post' encType="multipart/form-data">
+                          <form ref='upload' id='upload' action='/project/upload/<%=project[0]._id%>' method='post' encType="multipart/form-data">
 
                             산출물 업로드: <input type="file" name="<%=project[0].task[i]._id %>" multiple="multiple" />
                             <input type='submit' value='Upload!' />
