@@ -87,7 +87,7 @@ var Project = require('../models/project');
         res.json({result: 0});
         return;
       }
-      res.redirect('/dashboard');
+      res.redirect('/project/dashboard');
     });
   });//create a project and then go to dashboard
 
@@ -158,7 +158,7 @@ var Project = require('../models/project');
           if(err) return res.status(500).send({error: 'db failure'});
           //
         })
-        res.redirect("/dashboard");
+        res.redirect("/project/dashboard");
       });//update
 
 
@@ -215,7 +215,7 @@ app.post('/taskadded/:pid', function(req,res){
             console.error(err);
             res.json({result: 0});
           }
-          res.redirect("/update/"+pid);
+          res.redirect("/project/update/"+pid);
         });
       }
     });
@@ -235,7 +235,7 @@ app.post('/taskadded/:pid', function(req,res){
                       "task.$.state": "inprogress",
                       "task.$.lastupdated": Date.now() }
                     }, function(err, doc) {});
-    res.redirect('/'+pid);
+    res.redirect('/project/'+pid);
   });
 
 
@@ -253,7 +253,7 @@ app.post('/taskadded/:pid', function(req,res){
             res.json(err);
           }
           //res.json(output));
-          res.redirect("/update/"+pid);
+          res.redirect("/project/update/"+pid);
         })
       }
     });
@@ -271,7 +271,7 @@ app.post('/taskadded/:pid', function(req,res){
   app.get('/delete/:pid', function(req,res) {
     Project.remove({_id: req.params.pid}, function(err, deletedproject){
       if(err) return res.status(500).send({error: 'db failure'});
-      res.redirect('/dashboard');
+      res.redirect('/project/dashboard');
     })
   }); //delete, 각 PM과 Admin이 프로젝트 보기 에서 삭제할때
 
