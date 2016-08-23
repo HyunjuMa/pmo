@@ -1,6 +1,6 @@
 
 module.exports = function(app, User) {
-//user schema test
+  //user schema test
   app.get('/api/users', function(req,res){
     User.find(function(err, users){
       if(err) return res.status(500).send({error: 'db failure'});
@@ -32,7 +32,7 @@ module.exports = function(app, User) {
 
 
 
-//login**
+  //login**
   app.post('/login', function(req,res){
     var name = req.body.name;
     var pw = req.body.pw;
@@ -46,7 +46,7 @@ module.exports = function(app, User) {
         return res.status(500);
       }
       if(!user) {
-        
+
         console.log('no user found under that name/password');
         return res.status(404);
       }

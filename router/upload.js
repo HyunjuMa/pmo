@@ -3,6 +3,7 @@ var router = express.Router();
 var multiparty = require('multiparty');
 var fs = require('fs');
 var mkdirp = require('mkdirp');
+var path = require("path");
 
 /* GET home page. */
 router.post('/:pid', function(req, res, next) {

@@ -3,7 +3,7 @@
 
 //var Project = require('../models/project');
 
-module.exports = function(app, Project) {
+//module.exports = function(app, Project) {
 
 
   app.get('/dashboard', function(req,res){
@@ -265,6 +265,8 @@ app.post('/taskadded/:pid', function(req,res){
     })
   }); //delete, 각 PM과 Admin이 프로젝트 보기 에서 삭제할때
 
-};
+//};
+
+module.exports = function(app, Project);
 
 //module.exports = app;
