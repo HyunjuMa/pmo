@@ -8,7 +8,7 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
 
-  <title><%= title %></title>
+  <title> <%= title %> </title>
 
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
@@ -64,7 +64,7 @@ console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"er
                 <div class="panel-heading">
 
                   <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href= "#<%=project[0].task[i]._id%>"> Task # <%= i+1 %> : <%= project[0].task[i].tname.substr(2) %> </a>
+                    <a data-toggle="collapse" data-parent="#accordion" href= "#<%=project[0].task[i]._id%>"> Task # <%= (i+1) %> : <%= project[0].task[i].tname.substr(2) %> </a>
                   </h4>
                 </div>
 
