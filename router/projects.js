@@ -1,7 +1,8 @@
-//var express = require('express');
-//var app = express.Router();
+var express = require('express');
+var app = express.Router();
 
-//var Project = require('../models/project');
+var Project = require('../models/project');
+var fs = require('fs');
 
 //module.exports = function(app, Project) {
 
@@ -267,6 +268,4 @@ app.post('/taskadded/:pid', function(req,res){
 
 //};
 
-module.exports = function(app, Project);
-
-//module.exports = app;
+module.exports = app;
