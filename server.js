@@ -45,8 +45,8 @@ var upload = require('./router/upload');
 app.use('/upload', upload);
 
 //var Project = require('./models/project');
-var router3 = require('./router/projects');
-app.use('/project', router3);
+//var router3 = require('./router/projects');
+//app.use('/project', router3);
 
 
 // connect to mongod server
