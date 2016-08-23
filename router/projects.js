@@ -94,9 +94,9 @@ var Project = require('../models/project');
 
 
 
-  app.get('/:project_id', function(req,res){
+  app.get('/:pid', function(req,res){
 
-    var pid = req.params.project_id;
+    var pid = req.params.pid;
     sess = req.session;
 
     if(!sess.name) {
