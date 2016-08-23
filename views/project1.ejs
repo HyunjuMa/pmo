@@ -59,7 +59,7 @@ console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"er
         <div class="col-md-9">
           <div class="panel-group" id="accordion">
 
-            <% for(var i=0; i<project[0].task.length; i++) { %>
+            <% for (var i=0; i<project[0].task.length; i++) { %>
               <div class="panel panel-default">
                 <div class="panel-heading">
 
@@ -68,7 +68,7 @@ console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"er
                   </h4>
                 </div>
 
-                <% if(project[0].task[i].state === "inprogress") { %>
+                <% if ( project[0].task[i].state === "inprogress" ) { %>
 
                   <!-- 여길 <div id="<%=project[0].task[i]._id%>" class="panel-collapse collapse in"> 로 해주면 열려있음. 진행중인거 이프문으로 여기 오게.. -->
                   <div id="<%=project[0].task[i]._id%>" class="panel-collapse collapse in">
@@ -93,6 +93,7 @@ console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"er
                     </div>
 
                     <% } %>
+
                   </div> <!--group-->
                 </div> <!--col(left)-->
 
@@ -102,7 +103,7 @@ console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"er
                   <p> <%= project[0].pdesc %> </p>
                   <p> <%= project[0].bp[0] %> </p>
 
-                  <% if(name === 'Admin' | name === project[0].pm) { %>
+                  <% if(name === 'Admin' | name === project[0].pm  ) { %>
                     <a href="/project/update/<%=project[0]._id %>"> 수정 </a> <br>
                     <a href="/project/delete/<%=project[0]._id %>"> 삭제 </a> <br>
                     <% } %>
