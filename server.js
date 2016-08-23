@@ -36,7 +36,8 @@ var router = require('./router/index')(app, fs);
 
 var User = require('./models/user');
 var router2 = require('./router/users')(app, User);
-//
+//일단 유저는 그대로
+
 // var Project = require('./models/project');
 // var router3 = require('./router/projects')(app, Project);
 
@@ -47,6 +48,7 @@ app.use('/upload', upload);
 var Project = require('./models/project');
 var router3 = require('./router/projects');
 app.use('/project', router3);
+//이렇게 바꾸면서 바꿔야하는것들: views/ejs의 모든 클릭 이벤트
 
 
 // connect to mongod server

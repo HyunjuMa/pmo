@@ -103,8 +103,8 @@ console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"er
                   <p> <%= project[0].bp[0] %> </p>
 
                   <% if(name==='Admin' | name===project[0].pm) { %>
-                    <a href="/update/<%=project[0]._id %>"> 수정 </a> <br>
-                    <a href="/delete/<%=project[0]._id %>"> 삭제 </a> <br>
+                    <a href="/project/update/<%=project[0]._id %>"> 수정 </a> <br>
+                    <a href="/project/delete/<%=project[0]._id %>"> 삭제 </a> <br>
                     <% } %>
                     <!--a href="/update/<%=project[0]._id %>"> 수정 </a> <br>
                     <a href="/delete/<%=project[0]._id %>"> 삭제 </a> <br-->

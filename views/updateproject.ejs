@@ -23,7 +23,7 @@
       if(result)
       {
         $.ajax({
-  			  url:"/delete/"+id,
+  			  url:"/project/delete/"+id,
   			  type:"delete",
   			  dataType:"json",
   			  success: function(result){
@@ -41,11 +41,12 @@
        var result = confirm(tname+"을(를) 추가하시겠습니까?");
        if(result){
          $.ajax({
-  			  url:"/"+pid+"/"+tname,
+  			  url:"/project/"+pid+"/"+tname,
   			  type:"post",
   			  dataType:"json",
   			  success: function(result){
-            location.href="../update/"+pid;
+            location.href="../project/update/"+pid;
+            //이거체크
   			  },
   			  error:function(request,status,error){
   		       console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -60,11 +61,11 @@
       if(result)
       {
         $.ajax({
-  			  url:"/"+pid+"/"+tid,
+  			  url:"/project/"+pid+"/"+tid,
   			  type:"delete",
   			  dataType:"json",
   			  success: function(result){
-            location.href="../update/"+pid;
+            location.href="../project/update/"+pid;
   			  },
   			  error:function(request,status,error){
   		       console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -83,7 +84,7 @@
       <div class="row">
         <div class="form-box">
           <div class="form-top">
-            <form role="form" action="/update/<%=project[0]._id %>"method="post" class="form-newproject">
+            <form role="form" action="/project/update/<%=project[0]._id %>"method="post" class="form-newproject">
               <div class="form-group" style="font-weight:bold;">
                    PM: <%=name%>
               </div> (PM변경은 Administrator에게 요청하세요)
@@ -112,7 +113,7 @@
                    <!-- if문으로 active 경우 처리해줄것 -->
                   <% } %>
 
-                  <% for(var k=0; k<optiontasks.length; k++) { %> <form role="form" action="/taskadded/<%=project[0]._id %>" method="post"> <li> <input type="hidden" name="task" value="<%=optiontasks[k]%>"> <%= optiontasks[k].substr(2) %> <button type="submit"> <span class="glyphicon glyphicon-plus" aria-hidden="true" > </span> </button> </li> </form> <% } %>
+                  <% for(var k=0; k<optiontasks.length; k++) { %> <form role="form" action="/project/taskadded/<%=project[0]._id %>" method="post"> <li> <input type="hidden" name="task" value="<%=optiontasks[k]%>"> <%= optiontasks[k].substr(2) %> <button type="submit"> <span class="glyphicon glyphicon-plus" aria-hidden="true" > </span> </button> </li> </form> <% } %>
 
                 </ul>
 
