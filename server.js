@@ -31,11 +31,23 @@ app.use(session({
   saveUninitialized: true
 }));
 
+
+var router = require('./router/index')(app, fs);
+
+var User = require('./models/user');
+var router2 = require('./router/users')(app, User);
+//
+// var Project = require('./models/project');
+// var router3 = require('./router/projects')(app, Project);
+
+
 var upload = require('./router/upload');
 app.use('/upload', upload);
 
+//var Project = require('./models/project');
+var router3 = require('./router/projects');
+app.use('/project', router3);
 
-var router = require('./router/index')(app, fs);
 
 // connect to mongod server
 var db = mongoose.connection;
@@ -45,9 +57,3 @@ db.once('open', function() {
 });
 
 mongoose.connect('mongodb://localhost/pmo'); //사용할 디비 이름
-
-//define db model
-var User = require('./models/user');
-var router2 = require('./router/users')(app, User);
-var Project = require('./models/project');
-var router3 = require('./router/projects')(app, Project);

@@ -1,8 +1,17 @@
-var express = require('express');
-var app = express.Router();
+
+
+var app = express();
+//var multer = require('multer');
+//var router = require('./router/main')(app);
+var bodyParser = require('body-parser');
+var session = require('express-session');
+var fs = require('fs');
+var mongoose = require('mongoose');
+var session = require('express-session');
+var busboy = require('connect-busboy');
 
 var Project = require('../models/project');
-var fs = require('fs');
+
 
 //module.exports = function(app, Project) {
 
