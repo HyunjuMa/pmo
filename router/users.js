@@ -54,7 +54,7 @@ module.exports = function(app, User) {
       sess = req.session;
       sess.name = name;
       console.log("*login succeed with session name : " + sess.name);
-      res.redirect('/dashboard');
+      res.redirect('project/dashboard');
       //dashboard 부르기 전에 내 프로젝트 목록 받아와서 뿌려야 함.
       //res.redirect('/findmyproject');
       //return res.status(200).send();
