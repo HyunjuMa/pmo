@@ -107,16 +107,16 @@ var Project = require('../models/project');
     Project.find({_id: pid}, function(err, project){
       if(err) return res.status(500).send({error: 'db failure'});
       //console.log(pid); //working fine
-      console.log(project); //working fine
-      //
-      // res.render('project1', {
-      //   title: "project1",
-      //   length: 5,
-      //   page_name: 'project1',
-      //   name: sess.name,
-      //   project: project
-      // });
-      res.send("zz");
+      //console.log(project); //working fine
+
+      res.render('viewproject', {
+        title: project.pname,
+        length: 5,
+        page_name: 'project1',
+        name: sess.name,
+        project: project
+      });
+
     });
 
   })
