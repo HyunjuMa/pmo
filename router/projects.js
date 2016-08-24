@@ -106,7 +106,7 @@ var Project = require('../models/project');
       if(err) return res.status(500).send({error: 'db failure'});
       //console.log(pid); //working fine
       //console.log(project); //working fine
-      var product = [];
+      //var product = [];
       var path = ('/tmp/'+pid);
 
       function readDir(path, i) {
