@@ -108,7 +108,7 @@ app.get('/:pid', function(req,res){
 
     var path = ('/tmp/'+pid);
 
-    var read = function readDir(path, i) {
+    function readDir(path, i) {
       fs.readdir(path, function(err, items) {
         console.log(path);
         for(var j=0; j<items.length; j++) {
@@ -135,21 +135,16 @@ app.get('/:pid', function(req,res){
         //          console.log("safe i   " + i);
         //generate_callback(i);
 
-        readDir(path_task, i);
+        var readdone = readDir(path_task, i);
+        console.log(readdone);
       }
     }
 
-    // var fs = require("fs");
-    //
-    // var data = fs.readFileSync('input.txt');
-    //
-    // console.log(data.toString());
-    // console.log("Program Ended");
-    console.log(read.toString());
+
     project.save(function (err) {
       if(err) {
         console.error('ERROR!!');
-        return callback(false);
+        //return callback(false);
       }
       console.log('got here: render *** ' );
       res.render('project1', {
