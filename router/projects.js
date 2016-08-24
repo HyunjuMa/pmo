@@ -113,19 +113,19 @@ app.get('/:pid', function(req,res){
       fs.readdir(path, function(err, items) {
         console.log(path);
         for(var j=0; j<items.length; j++) {
-          project[0].task[i].product[j] = items[j];
+          project.task[i].product[j] = items[j];
           // product[i][j] = items[j];
-          console.log(i+'번째에 들어있는거: '+ project[0].task[i].product[j]);
+          console.log(i+'번째에 들어있는거: '+ project.task[i].product[j]);
           //console.log(items[j]);
         }
       })
     };// reads file names in the dir
 
-    for(var i=0; i<project[0].task.length; i++) {
+    for(var i=0; i<project.task.length; i++) {
       //product[i] = new Array(10);
       //product[i] = [];
-      var tid = project[0].task[i]._id;
-      if(project[0].task[i].state==='todo') {
+      var tid = project.task[i]._id;
+      if(project.task[i].state==='todo') {
         //do nothing
         console.log(tid + ' has nothing in it!');
       }
@@ -139,7 +139,7 @@ app.get('/:pid', function(req,res){
       }
     }
 
-    for(var i=0; i<project[0].task.length; i++) { console.log(i+' 번째 product test: ' + project[0].task[i].product); }
+    for(var i=0; i<project.task.length; i++) { console.log(i+' 번째 product test: ' + project.task[i].product); }
 
     //     user.save(function (err) {
     //         if(err) {
@@ -152,7 +152,7 @@ app.get('/:pid', function(req,res){
         console.error('ERROR!!');
       }
       res.render('project1', {
-        title: project[0].pname,
+        title: project.pname,
         length: 5,
         page_name: 'project1',
         name: sess.name,
