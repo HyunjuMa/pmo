@@ -109,6 +109,8 @@ app.get('/:pid', function(req,res){
     //var product = [];
     var path = ('/tmp/'+pid);
 
+    function callback(){};
+
     function readDir(path, i) {
       fs.readdir(path, function(err, items) {
         console.log(path);
