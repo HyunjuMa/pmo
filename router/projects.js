@@ -109,6 +109,7 @@ app.get('/:pid', function(req,res){
     var path = ('/tmp/'+pid);
 
     function readDir(path, i) {
+      setTimeout( function() {
       fs.readdir(path, function(err, items) {
         console.log(path);
         for(var j=0; j<items.length; j++) {
@@ -118,33 +119,31 @@ app.get('/:pid', function(req,res){
           //console.log(items[j]);
         }
         return 0;
-      })
+        })
+      }, 3000);
     };// reads file names in the dir
 
-    for(var i=0; i<project.task.length; i++) {
-      //product[i] = new Array(10);
-      //product[i] = [];
-      var tid = project.task[i]._id;
-      if(project.task[i].state==='todo') {
-        //do nothing
-        console.log(tid + ' has nothing in it!');
+
+      for(var i=0; i<project.task.length; i++) {
+        //product[i] = new Array(10);
+        //product[i] = [];
+        var tid = project.task[i]._id;
+        if(project.task[i].state==='todo') {
+          //do nothing
+          console.log(tid + ' has nothing in it!');
+        }
+        else {
+          var path_task = (path+'/'+tid);
+          console.log(tid + ' has something in it');
+
+          readDir(path_task, i);
+        }
       }
-      else {
-        var path_task = (path+'/'+tid);
-        console.log(tid + ' has something in it');
-        //          console.log("safe i   " + i);
-        //generate_callback(i);
-
-        var timeout = setTimeout( readDir(path_task, i) {
-          console.log(path_task);
-        }, 1000, "zz");
-
-        clearTimeout(timeout);
-      }
-    }
 
 
-    project.save(function (err) {
+
+    function last() {
+      project.save(function (err) {
       if(err) {
         console.error('ERROR!!');
         //return callback(false);
@@ -158,11 +157,13 @@ app.get('/:pid', function(req,res){
         project: project
       });
     })
+    }
 
-
+    readDir( function() {
+      last();
+    });
 
   });
-
 })
 
 app.get('/update/:pid', function(req,res){
