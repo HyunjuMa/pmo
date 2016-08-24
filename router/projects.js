@@ -108,22 +108,22 @@ app.get('/:pid', function(req,res){
 
     var path = ('/tmp/'+pid);
 
-    function readDir(path, i) {
-      // fs.readdir(path, function(err, items) {
-      //   console.log(path);
-      //   for(var j=0; j<items.length; j++) {
-      //     project.task[i].product[j] = items[j];
-      //     // product[i][j] = items[j];
-      //     console.log(i+'번째에 들어있는거: '+ project.task[i].product[j]);
-      //     //console.log(items[j]);
-      //   }
-      //   return 1;
-      //   })
-    };// reads file names in the dir
+    // function readDir(path, i) {
+    //   fs.readdir(path, function(err, items) {
+    //     console.log(path);
+    //     for(var j=0; j<items.length; j++) {
+    //       project.task[i].product[j] = items[j];
+    //       // product[i][j] = items[j];
+    //       console.log(i+'번째에 들어있는거: '+ project.task[i].product[j]);
+    //       //console.log(items[j]);
+    //     }
+    //     return 1;
+    //     })
+    // };// reads file names in the dir
 
       var i = 0;
       //for(var i=0; i<project.task.length; i++) {
-      while(i<project.task.lengh){
+      while(i<project.task.length){
         //product[i] = new Array(10);
         //product[i] = [];
         var tid = project.task[i]._id;
@@ -135,9 +135,16 @@ app.get('/:pid', function(req,res){
           var path_task = (path+'/'+tid);
           console.log(tid + ' has something in it');
 
-          if(readDir(path_task, i)) {
-            i++;
-          }
+          fs.readdir(path, function(err, items) {
+            console.log(path);
+            for(var j=0; j<items.length; j++) {
+              project.task[i].product[j] = items[j];
+              // product[i][j] = items[j];
+              console.log(i+'번째에 들어있는거: '+ project.task[i].product[j]);
+              //console.log(items[j]);
+              i++;
+            }
+            })
         }
       }
 
