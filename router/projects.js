@@ -148,7 +148,6 @@ app.get('/:pid', function(req,res){
         console.log('got here: render');
         res.render('project1', {
           title: project.pname,
-          //title: "zz",
           length: 5,
           page_name: 'project1',
           name: sess.name,
