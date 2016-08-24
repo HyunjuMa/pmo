@@ -109,7 +109,6 @@ app.get('/:pid', function(req,res){
     var path = ('/tmp/'+pid);
 
     function readDir(path, i) {
-      setTimeout( function() {
       fs.readdir(path, function(err, items) {
         console.log(path);
         for(var j=0; j<items.length; j++) {
@@ -120,7 +119,6 @@ app.get('/:pid', function(req,res){
         }
         return 0;
         })
-      }, 5000);
     };// reads file names in the dir
 
 
@@ -136,7 +134,8 @@ app.get('/:pid', function(req,res){
           var path_task = (path+'/'+tid);
           console.log(tid + ' has something in it');
 
-          readDir(path_task, i);
+          var res = readDir(path_task, i);
+          console.log(res);
         }
       }
 
