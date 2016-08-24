@@ -139,7 +139,7 @@ var Project = require('../models/project');
         }
       }
 
-      for(var i=0; i<project[0].task.length; i++) { console.log(i+' 번째 product test: ' + project[0].task[i].product); }
+      // for(var i=0; i<project[0].task.length; i++) { console.log(i+' 번째 product test: ' + project[0].task[i].product); }
 
       res.render('project1', {
         title: project[0].pname,
