@@ -140,7 +140,7 @@ app.get('/:pid', function(req,res){
           //generate_callback(i);
 
         //  readDir(path_task, i);
-            fs.readdir(path, function(err, items) {
+            fs.readdir(path_task, function(err, items) {
               console.log(path);
               for(var j=0; j<items.length; j++) {
                 project.task[i].product[j] = items[j];
@@ -148,7 +148,7 @@ app.get('/:pid', function(req,res){
                 console.log(i+'번째에 들어있는거: '+ project.task[i].product[j]);
                 //console.log(items[j]);
               }
-              return 0;
+              i++;
             })
 
         }
