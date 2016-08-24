@@ -109,6 +109,7 @@ app.get('/:pid', function(req,res){
       var path = ('/tmp/'+pid);
 
       var i = 0;
+
       while(i<project.task.length) {
       //for(var i=0; i<project.task.length; i++) {
         //product[i] = new Array(10);
@@ -120,6 +121,7 @@ app.get('/:pid', function(req,res){
           i++;
         }
         else {
+          console.log(i);
           var path_task = (path+'/'+tid);
           //console.log(tid + ' has something in it');
           //          console.log("safe i   " + i);
