@@ -113,8 +113,9 @@ var Project = require('../models/project');
         fs.readdir(path, function(err, items) {
           console.log(path);
           for(var j=0; j<items.length; j++) {
-            product[i][j] = items[j];
-            console.log(i+'번째에 들어있는거: '+product[i][j]);
+            project[0].task[i].product[j] = items[j];
+            // product[i][j] = items[j];
+            console.log(i+'번째에 들어있는거: '+ project[0].task[i].product[j]);
             //console.log(items[j]);
           }
         })
@@ -136,15 +137,16 @@ var Project = require('../models/project');
 
           readDir(path_task, i);
         }
+        console.log('product test: ' + project[0].task[i].product);
       }
-      console.log(product);
+
 
       res.render('project1', {
         title: project[0].pname,
         length: 5,
         page_name: 'project1',
         name: sess.name,
-        product: product,
+        //product: product,
         project: project
       });
 
