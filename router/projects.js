@@ -139,13 +139,6 @@ app.get('/:pid', function(req,res){
       }
     }
 
-    for(var i=0; i<project.task.length; i++) { console.log(i+' 번째 product test: ' + project.task[i].product); }
-
-    //     user.save(function (err) {
-    //         if(err) {
-    //             console.error('ERROR!');
-    //         }
-    //     });
 
     project.save(function (err) {
       if(err) {
