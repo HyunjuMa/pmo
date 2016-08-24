@@ -53,6 +53,14 @@
                 <div class="panel-body">
                 <form ref='upload' id='upload' action='/upload/<%=project[0]._id%>' method='post' encType="multipart/form-data">
 
+                  <% if(project[0].task[i].state==="todo") {} else { %>
+                    <ul>
+                      <% for(var j=0; j<product[i][j].length; j++) { %>
+                        <li> <%= product[i][j] %> </li>
+                      <% } %>
+                    </ul>
+                    <% } %>
+
                   산출물 업로드: <input type="file" name="<%=project[0].task[i]._id %>" >
                   <input type='submit' value='Upload!' />
                   <!--span class="glyphicon glyphicon-paperclip" aria-hidden="true" > </span-->
