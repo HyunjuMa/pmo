@@ -154,8 +154,8 @@ app.get('/:pid', function(req,res){
           project: project
         });
       })
-
     });
+})
 
 app.get('/update/:pid', function(req,res){
 
