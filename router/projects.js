@@ -135,8 +135,11 @@ app.get('/:pid', function(req,res){
         //          console.log("safe i   " + i);
         //generate_callback(i);
 
-        var readdone = readDir(path_task, i);
-        console.log(readdone);
+        var timeout = setTimeout( readDir(path_task, i) {
+          console.log(path_task);
+        }, 1000, "zz");
+
+        clearTimeout(timeout);
       }
     }
 
