@@ -118,7 +118,7 @@ app.get('/:pid', function(req,res){
           console.log(i+'번째에 들어있는거: '+ project.task[i].product[j]);
           //console.log(items[j]);
         }
-        return j;
+        return 0;
       })
     };// reads file names in the dir
 
@@ -136,11 +136,11 @@ app.get('/:pid', function(req,res){
         //          console.log("safe i   " + i);
         //generate_callback(i);
 
-        var j = readDir(path_task, i);
+        readDir(path_task, i);
       }
     }
 
-    project.save(j, function (err) {
+    project.save(function (err) {
       if(err) {
         console.error('ERROR!!');
       }
