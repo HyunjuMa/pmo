@@ -134,8 +134,8 @@ app.get('/:pid', function(req,res){
           var path_task = (path+'/'+tid);
           console.log(tid + ' has something in it');
 
-          var res = readDir(path_task, i);
-          console.log(res);
+          readDir(path_task, i);
+
         }
       }
 
