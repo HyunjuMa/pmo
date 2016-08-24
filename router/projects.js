@@ -101,26 +101,12 @@ app.get('/:pid', function(req,res){
     res.redirect('/');
   };
 
-
-    Project.findOne({_id: pid}, function(err, project){
+  Project.findOne({_id: pid}, function(err, project){
       if(err) return res.status(500).send({error: 'db failure'});
       //console.log(pid); //working fine
       //console.log(project); //working fine
-      //var product = [];
-      var path = ('/tmp/'+pid);
 
-      // function readDir(path, i) {
-      //   fs.readdir(path, function(err, items) {
-      //     console.log(path);
-      //     for(var j=0; j<items.length; j++) {
-      //       project.task[i].product[j] = items[j];
-      //       // product[i][j] = items[j];
-      //       console.log(i+'번째에 들어있는거: '+ project.task[i].product[j]);
-      //       //console.log(items[j]);
-      //     }
-      //     return 0;
-      //   })
-      // };// reads file names in the dir
+      var path = ('/tmp/'+pid);
 
       var i = 0;
       while(i<project.task.length) {
@@ -140,16 +126,16 @@ app.get('/:pid', function(req,res){
           //generate_callback(i);
 
         //  readDir(path_task, i);
-            fs.readdir(path_task, function(err, items) {
-              console.log(path);
-              for(var j=0; j<items.length; j++) {
-                project.task[i].product[j] = items[j];
-                // product[i][j] = items[j];
-                console.log(i+'번째에 들어있는거: '+ project.task[i].product[j]);
+          fs.readdir(path_task, function(err, items) {
+          //console.log(path_task);
+            for(var j=0; j<items.length; j++) {
+            project.task[i].product[j] = items[j];
+            console.log(tid + ' has something in it');
+            console.log(i+'번째에 들어있는거: '+ project.task[i].product[j]);
                 //console.log(items[j]);
-              }
-              i++;
-            })
+            }
+            i++;
+          })
 
         }
       }
@@ -160,8 +146,8 @@ app.get('/:pid', function(req,res){
         }
         console.log('got here: render');
         res.render('project1', {
-          //title: project.pname,
-          title: "zz",
+          title: project.pname,
+          //title: "zz",
           length: 5,
           page_name: 'project1',
           name: sess.name,
