@@ -123,7 +123,7 @@ var Project = require('../models/project');
 
       for(var i=0; i<project[0].task.length; i++) {
         //product[i] = new Array(10);
-        product[i] = [];
+        //product[i] = [];
         var tid = project[0].task[i]._id;
         if(project[0].task[i].state==='todo') {
           //do nothing
