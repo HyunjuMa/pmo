@@ -101,17 +101,14 @@ app.get('/:pid', function(req,res){
     res.redirect('/');
   };
 
-
   Project.findOne({_id: pid}, function(err, project){
     if(err) return res.status(500).send({error: 'db failure'});
     //console.log(pid); //working fine
     //console.log(project); //working fine
-    //var product = [];
+
     var path = ('/tmp/'+pid);
 
-    function callback(){};
-
-    function readDir(path, i) {
+    var read = function readDir(path, i) {
       fs.readdir(path, function(err, items) {
         console.log(path);
         for(var j=0; j<items.length; j++) {
@@ -120,7 +117,7 @@ app.get('/:pid', function(req,res){
           console.log(i+'번째에 들어있는거: '+ project.task[i].product[j]);
           //console.log(items[j]);
         }
-        return callback(true);
+        return 0;
       })
     };// reads file names in the dir
 
@@ -142,15 +139,21 @@ app.get('/:pid', function(req,res){
       }
     }
 
-    project.save(function (err, callback) {
+    // var fs = require("fs");
+    //
+    // var data = fs.readFileSync('input.txt');
+    //
+    // console.log(data.toString());
+    // console.log("Program Ended");
+    console.log(read.toString());
+    project.save(function (err) {
       if(err) {
         console.error('ERROR!!');
         return callback(false);
       }
-      console.log('got here: render, num affected: ' );
+      console.log('got here: render *** ' );
       res.render('project1', {
-        //title: project.pname,
-        title: "zz",
+        title: project.pname,
         length: 5,
         page_name: 'project1',
         name: sess.name,
