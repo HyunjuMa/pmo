@@ -108,43 +108,77 @@ app.get('/:pid', function(req,res){
     //console.log(project); //working fine
     //var product = [];
     var path = ('/tmp/'+pid);
+    //
+    // function readDir(path, i) {
+    //   fs.readdir(path, function(err, items) {
+    //     console.log(path);
+    //     for(var j=0; j<items.length; j++) {
+    //       project.task[i].product[j] = items[j];
+    //       // product[i][j] = items[j];
+    //       console.log(i+'번째에 들어있는거: '+ project.task[i].product[j]);
+    //       //console.log(items[j]);
+    //     }
+    //     return 0;
+    //   })
+    // };// reads file names in the dir
+    //
+    // for(var i=0; i<project.task.length; i++) {
+    //   //product[i] = new Array(10);
+    //   //product[i] = [];
+    //   var tid = project.task[i]._id;
+    //   if(project.task[i].state==='todo') {
+    //     //do nothing
+    //     console.log(tid + ' has nothing in it!');
+    //   }
+    //   else {
+    //     var path_task = (path+'/'+tid);
+    //     console.log(tid + ' has something in it');
+    //     //          console.log("safe i   " + i);
+    //     //generate_callback(i);
+    //
+    //     readDir(path_task, i);
+    //   }
+    // }
 
-    function readDir(path, i) {
-      fs.readdir(path, function(err, items) {
-        console.log(path);
-        for(var j=0; j<items.length; j++) {
-          project.task[i].product[j] = items[j];
-          // product[i][j] = items[j];
-          console.log(i+'번째에 들어있는거: '+ project.task[i].product[j]);
-          //console.log(items[j]);
-        }
-        return 0;
-      })
-    };// reads file names in the dir
-
-    for(var i=0; i<project.task.length; i++) {
-      //product[i] = new Array(10);
-      //product[i] = [];
-      var tid = project.task[i]._id;
-      if(project.task[i].state==='todo') {
-        //do nothing
-        console.log(tid + ' has nothing in it!');
-      }
-      else {
-        var path_task = (path+'/'+tid);
-        console.log(tid + ' has something in it');
-        //          console.log("safe i   " + i);
-        //generate_callback(i);
-
-        readDir(path_task, i);
-      }
-    }
-
-    project.save(function (err, numAffected) {
+    project.save(function (err, callback) {
       if(err) {
         console.error('ERROR!!');
+        return callback(false);
       }
-      console.log('got here: render, num affected: ' + numAffected);
+      
+      console.log('got here: render, num affected: ' );
+
+          function readDir(path, i) {
+            fs.readdir(path, function(err, items) {
+              console.log(path);
+              for(var j=0; j<items.length; j++) {
+                project.task[i].product[j] = items[j];
+                // product[i][j] = items[j];
+                console.log(i+'번째에 들어있는거: '+ project.task[i].product[j]);
+                //console.log(items[j]);
+              }
+              return 0;
+            })
+          };// reads file names in the dir
+
+          for(var i=0; i<project.task.length; i++) {
+            //product[i] = new Array(10);
+            //product[i] = [];
+            var tid = project.task[i]._id;
+            if(project.task[i].state==='todo') {
+              //do nothing
+              console.log(tid + ' has nothing in it!');
+            }
+            else {
+              var path_task = (path+'/'+tid);
+              console.log(tid + ' has something in it');
+              //          console.log("safe i   " + i);
+              //generate_callback(i);
+
+              readDir(path_task, i);
+            }
+          } return callback(true);
+
       res.render('project1', {
         //title: project.pname,
         title: "zz",
