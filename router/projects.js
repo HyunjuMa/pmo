@@ -118,6 +118,7 @@ app.get('/:pid', function(req,res){
           console.log(i+'번째에 들어있는거: '+ project.task[i].product[j]);
           //console.log(items[j]);
         }
+        return 0;
       })
     };// reads file names in the dir
 
