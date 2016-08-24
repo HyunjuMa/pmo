@@ -144,6 +144,7 @@ app.get('/:pid', function(req,res){
       if(err) {
         console.error('ERROR!!');
       }
+      console.log('got here: render');
       res.render('project1', {
         //title: project.pname,
         title: "zz",
