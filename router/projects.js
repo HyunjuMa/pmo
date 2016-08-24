@@ -139,7 +139,7 @@ app.get('/:pid', function(req,res){
           //          console.log("safe i   " + i);
           //generate_callback(i);
 
-          readDir(path_task, i);
+        //  readDir(path_task, i);
             fs.readdir(path, function(err, items) {
               console.log(path);
               for(var j=0; j<items.length; j++) {
