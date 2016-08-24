@@ -152,7 +152,7 @@ app.get('/:pid', function(req,res){
         console.error('ERROR!!');
       }
       res.render('project1', {
-        title: project.pname,
+        title: project[0].pname,
         length: 5,
         page_name: 'project1',
         name: sess.name,
