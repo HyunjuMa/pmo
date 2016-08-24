@@ -117,12 +117,13 @@ app.get('/:pid', function(req,res){
           console.log(i+'번째에 들어있는거: '+ project.task[i].product[j]);
           //console.log(items[j]);
         }
-        return 0;
+        return 1;
         })
     };// reads file names in the dir
 
-
-      for(var i=0; i<project.task.length; i++) {
+      var i = 0;
+      //for(var i=0; i<project.task.length; i++) {
+      while(i<project.task.lengh){
         //product[i] = new Array(10);
         //product[i] = [];
         var tid = project.task[i]._id;
@@ -134,8 +135,9 @@ app.get('/:pid', function(req,res){
           var path_task = (path+'/'+tid);
           console.log(tid + ' has something in it');
 
-          readDir(path_task, i);
-
+          if(readDir(path_task, i)) {
+            i++;
+          }
         }
       }
 
