@@ -137,6 +137,7 @@ var Project = require('../models/project');
           readDir(path_task, i);
         }
       }
+      console.log(product);
 
       res.render('project1', {
         title: project[0].pname,
