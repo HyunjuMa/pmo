@@ -130,6 +130,7 @@ app.get('/:pid', function(req,res){
         if(project.task[i].state==='todo') {
           //do nothing
           console.log(tid + ' has nothing in it!');
+          i++;
         }
         else {
           var path_task = (path+'/'+tid);
