@@ -120,7 +120,7 @@ app.get('/:pid', function(req,res){
         }
         return 0;
         })
-      }, 3000);
+      }, 5000);
     };// reads file names in the dir
 
 
