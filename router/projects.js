@@ -174,7 +174,7 @@ app.get('/update/:pid', function(req,res){
     res.redirect('/');
   };
 
-  Project.find({_id: req.params.pid}, function(err, project){
+  Project.findOne({_id: req.params.pid}, function(err, project){
     if(err) return res.status(500).send({error: 'db failure'});
     //console.log(pid); //working fine
     //console.log(project); //working fine
