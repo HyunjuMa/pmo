@@ -121,7 +121,6 @@ app.get('/:pid', function(req,res){
           i++;
         }
         else {
-          console.log(i);
           var path_task = (path+'/'+tid);
           //console.log(tid + ' has something in it');
           //          console.log("safe i   " + i);
