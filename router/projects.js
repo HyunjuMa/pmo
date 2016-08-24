@@ -140,11 +140,11 @@ app.get('/:pid', function(req,res){
       }
     }
 
-    project.save(function (err) {
+    project.save(function (err, numAffected) {
       if(err) {
         console.error('ERROR!!');
       }
-      console.log('got here: render');
+      console.log('got here: render, num affected: ' + numAffected);
       res.render('project1', {
         //title: project.pname,
         title: "zz",
