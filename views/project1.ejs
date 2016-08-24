@@ -78,7 +78,7 @@
           <p> <%= project.pdesc %> </p>
           <p> <%= project.bp[0] %> </p>
 
-          <% if(name === 'Admin' | name === project.pm  ) { %>
+          <% if(name === 'Admin' | name === project.pm ) { %>
             <a href="/project/update/<%=project._id %>"> 수정 </a> <br>
             <a href="/project/delete/<%=project._id %>"> 삭제 </a> <br>
           <% } %>
