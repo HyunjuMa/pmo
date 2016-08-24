@@ -109,16 +109,16 @@ app.get('/:pid', function(req,res){
     var path = ('/tmp/'+pid);
 
     function readDir(path, i) {
-      fs.readdir(path, function(err, items) {
-        console.log(path);
-        for(var j=0; j<items.length; j++) {
-          project.task[i].product[j] = items[j];
-          // product[i][j] = items[j];
-          console.log(i+'번째에 들어있는거: '+ project.task[i].product[j]);
-          //console.log(items[j]);
-        }
-        return 1;
-        })
+      // fs.readdir(path, function(err, items) {
+      //   console.log(path);
+      //   for(var j=0; j<items.length; j++) {
+      //     project.task[i].product[j] = items[j];
+      //     // product[i][j] = items[j];
+      //     console.log(i+'번째에 들어있는거: '+ project.task[i].product[j]);
+      //     //console.log(items[j]);
+      //   }
+      //   return 1;
+      //   })
     };// reads file names in the dir
 
       var i = 0;
