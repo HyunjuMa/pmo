@@ -141,7 +141,9 @@ app.get('/:pid', function(req,res){
       else {
         var path_task = (path+'/'+tid);
         console.log(tid + ' has something in it! it will call a function named read');
-        read(path_task, callback);
+        read(path_task, function() {
+          console.log(this);
+        });
       }
     }
 
