@@ -125,7 +125,7 @@ app.get('/:pid', function(req,res){
 
         callback();
       })
-
+      if(i==(project.task.length-1)) { saveandrender();}
     }
 
     //         var done = 0;
@@ -146,20 +146,23 @@ app.get('/:pid', function(req,res){
     }
 
 
-    project.save(function (err) {
-      if(err) {
-        console.error('ERROR!!');
-      }
-      console.log('got here: render');
-      res.render('project1', {
-        title: project.pname,
-        length: 5,
-        page_name: 'project1',
-        name: sess.name,
-        project: project
-      });
-    })
+    function saveandrender() {
+      project.save(function (err) {
+        if(err) {
+          console.error('ERROR!!');
+        }
+        console.log('got here: render');
+        res.render('project1', {
+          title: project.pname,
+          length: 5,
+          page_name: 'project1',
+          name: sess.name,
+          project: project
+        });
+      })
+    }
   });
+  
 })
 
 app.get('/update/:pid', function(req,res){
