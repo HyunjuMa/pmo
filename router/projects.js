@@ -123,11 +123,12 @@ app.get('/:pid', function(req,res){
           console.log(i+'번째에 들어있는거: '+ project.task[i].product[j]);
           //console.log(items[j]);
         }
-        callback();
         cnt--;
         console.log(cnt);
       })
-      if(cnt==0) { saveandrender();}
+      if(cnt===0) {
+        callback();
+        saveandrender();}
     }
 
     //         var done = 0;
@@ -152,6 +153,7 @@ app.get('/:pid', function(req,res){
 
 
     function saveandrender() {
+      console.log('save and render got its call');
       project.save(function (err) {
         if(err) {
           console.error('ERROR!!');
