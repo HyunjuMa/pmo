@@ -24,12 +24,12 @@
       if(result)
       {
         $.ajax({
-  			  url:"../delete/"+id,
+  			  url:"/project/delete/"+id,
   			  type:"delete",
   			  dataType:"json",
   			  success: function(result){
-            console.log("project deleted");
-            location.href="../dashboard";
+            //console.log("project deleted");
+            //location.href="../dashboard";
   			  },
   			  error:function(request,status,error){
   		       console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
