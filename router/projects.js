@@ -316,8 +316,10 @@ app.delete('/:pid/:tid', function(req,res){
 });//delete task from a project, 수정화면에서 마이너스 버튼 누르면 여기로 와야함
 
 app.delete('/delete/:pid', function(req,res){
+  console.log('?');
   Project.remove({_id: req.params.pid}, function(err, deletedproject){
     if(err) return res.status(500).send({error: 'db failure'});
+    console.log('여기 오긴 왔다');
     res.redirect('/project/dashboard');
   })
 });// 프로젝트 수정 화면에서 delete
