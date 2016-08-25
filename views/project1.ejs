@@ -55,9 +55,9 @@
 
                   <% if(project.task[i].state==="todo") {} else { %>
                     <ul>
-
-                        <li> <%= project.task[i].product[0] %> </li>
-
+                      <% for(var j=0; j<project.task[i].product.length; j++) {
+                        <li> <%= project.task[i].product[j] %> </li>
+                      <% } %>
                     </ul>
                     <% } %>
 
