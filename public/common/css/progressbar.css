@@ -15,7 +15,7 @@
       text-transform: uppercase;
       color: #7d7d7d;
   }
-  .progressbar li:before {
+  .progressbar li:todo {
       width: 30px;
       height: 30px;
       content: counter(step);
@@ -28,7 +28,7 @@
       border-radius: 50%;
       background-color: white;
   }
-  .progressbar li:after {
+  .progressbar li:done {
       width: 100%;
       height: 2px;
       content: '';
@@ -38,15 +38,15 @@
       left: -50%;
       z-index: -1;
   }
-  .progressbar li:first-child:after {
+  .progressbar li:first-child:done {
       content: none;
   }
-  .progressbar li.active {
+  .progressbar li.inprogress {
       color: green;
   }
-  .progressbar li.active:before {
+  .progressbar li.active:todo {
       border-color: #55b776;
   }
-  .progressbar li.active + li:after {
+  .progressbar li.inprogress + li:done {
       background-color: #55b776;
   }

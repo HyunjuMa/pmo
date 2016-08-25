@@ -29,9 +29,11 @@
 
       <% for(var i=0; i<project.task.length; i++) { %>
         <% if(project.task[i].state === "inprogress") { %>
-          <li class="active"> <a href="#<%=project.task[i]._id%>"> <%=i+1%>. <%= project.task[i].tname.substr(2) %> </a> </li>
+          <li class="inprogress"> <a href="#<%=project.task[i]._id%>"> <%=i+1%>. <%= project.task[i].tname.substr(2) %> </a> </li>
+        <% } else if(project.task[i].state ==="todo"){ %>
+          <li class="todo"> <a href="#<%=project.task[i]._id%>"> <%=i+1%>. <%= project.task[i].tname.substr(2) %> </a> </li>
         <% } else { %>
-          <li class="before"> <a href="#<%=project.task[i]._id%>"> <%=i+1%>. <%= project.task[i].tname.substr(2) %> </a> </li>
+          <li class="done"> <a href="#<%=project.task[i]._id%>"> <%=i+1%>. <%= project.task[i].tname.substr(2) %> </a> </li>
         <% } %>
       <% } %>
     </ul>
