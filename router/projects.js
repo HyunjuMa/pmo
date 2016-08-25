@@ -118,7 +118,7 @@ app.get('/:pid', function(req,res){
         check[cnt] = 0;
 
         for(var j=0; j<items.length; j++) {
-          console.log(i +'  '+ j);
+          //console.log(i +'  '+ j);
           project.task[i].product[j] = items[j];
           console.log(tid + ' has something in it');
           console.log(i+'번째에 들어있는거: '+ project.task[i].product[j]);
@@ -127,6 +127,7 @@ app.get('/:pid', function(req,res){
         }
         callback();
         cnt--;
+        console.log(cnt);
       })
       if(cnt==0) { saveandrender();}
     }
