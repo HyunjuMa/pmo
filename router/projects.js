@@ -308,10 +308,12 @@ app.get('/download/:pid/:tid/:filename', function(req, res) {
   var dir = ('/tmp/'+pid+'/'+tid+'/'+filename);
   console.log("download router called with dir " + dir);
 
-  fs.readFile(dir, function (err, data) {
+  fs.readFile(dir, 'utf8', function (err, data) {
     if(err) return console.log('error...' + err);
     console.log(data);
   });
+
+  res.redirect('/project/'+pid);
 
 })
 
