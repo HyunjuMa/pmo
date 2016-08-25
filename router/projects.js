@@ -110,10 +110,12 @@ app.get('/:pid', function(req,res){
     //console.log(project); //working fine
 
     var path = ('/tmp/'+pid);
+    var check = [];
 
     function read(path_task, i, callback) {
       fs.readdir(path_task, function(err, items) {
         var readdone = 0;
+        check[i] = 0;
 
         for(var j=0; j<items.length; j++) {
           console.log(i +'  '+ j);
@@ -121,11 +123,12 @@ app.get('/:pid', function(req,res){
           console.log(tid + ' has something in it');
           console.log(i+'번째에 들어있는거: '+ project.task[i].product[j]);
           //console.log(items[j]);
+          check[i]=1;
         }
 
         callback();
       })
-      if(i==(project.task.length-1)) { saveandrender();}
+      if(check[project.task.length-1]===1) { saveandrender();}
     }
 
     //         var done = 0;
