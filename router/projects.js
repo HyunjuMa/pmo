@@ -140,6 +140,7 @@ app.get('/:pid', function(req,res){
         //do nothing
         console.log(tid + ' has nothing in it!');
         cnt--;
+        console.log(cnt got minus);
       }
 
       else {
