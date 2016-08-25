@@ -124,11 +124,11 @@ app.get('/:pid', function(req,res){
           //console.log(items[j]);
         }
         cnt--;
-        console.log(cnt);
+        if(cnt===0) {
+          callback();
+          saveandrender();}
       })
-      if(cnt===0) {
-        callback();
-        saveandrender();}
+
     }
 
     //         var done = 0;
