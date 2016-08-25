@@ -84,20 +84,20 @@
       <div class="row">
         <div class="form-box">
           <div class="form-top">
-            <form role="form" action="/project/update/<%=project[0]._id %>" method="post" class="form-newproject">
+            <form role="form" action="/project/update/<%=project._id %>" method="post" class="form-newproject">
               <div class="form-group" style="font-weight:bold;">
                    PM: <%=name%>
               </div> (PM변경은 Administrator에게 요청하세요)
               <div class="form-group">
                 <label class="sr-only" for="projectname">프로젝트명</label>
-                   프로젝트명: <input type="text" name="pname" value="<%= project[0].pname %>" class="form-projectname form-control" id="pname">
+                   프로젝트명: <input type="text" name="pname" value="<%= project.pname %>" class="form-projectname form-control" id="pname">
               </div>
               <div class="form-group">
                  <label class="sr-only" for="form-password">프로젝트설명</label>
-                   설명: <input type="text" name="pdesc" value="<%= project[0].pdesc %>" class="form-projectdesc form-control" id="pdesc">
+                   설명: <input type="text" name="pdesc" value="<%= project.pdesc %>" class="form-projectdesc form-control" id="pdesc">
               </div>
 
-              <button type="submit" class="btn" style="margin:auto; display:inline;"> 수정 </button> <button type='button' id="<%=project[0]._id %>" class="btn" style="display:inline;" onclick="removeProj(this.id)"> 프로젝트 삭제</button>
+              <button type="submit" class="btn" style="margin:auto; display:inline;"> 수정 </button> <button type='button' id="<%=project._id %>" class="btn" style="display:inline;" onclick="removeProj(this.id)"> 프로젝트 삭제</button>
             </form>
 
 
@@ -105,15 +105,15 @@
                   Task <br>
 
                 <ul>
-                  <% optiontasks=["3.작업요청","5.IP할당","9.시설현황"]; for(var i=0; i<project[0].task.length; i++) { %>
+                  <% optiontasks=["3.작업요청","5.IP할당","9.시설현황"]; for(var i=0; i<project.task.length; i++) { %>
 
                    <li>
-                     <a href=""> <%= project[0].task[i].tname.substr(2) %> </a> <% for(var j=0; j<3; j++) { if(optiontasks[j] == project[0].task[i].tname) { %> <button name="<%=project[0]._id %>" id="<%=project[0].task[i]._id %>" onclick="removeTask(this.name, this.id)"> <span class="glyphicon glyphicon-minus" aria-hidden="true" > </span></button>  <% optiontasks.splice(j, 1); }}%>
+                     <a href=""> <%= project.task[i].tname.substr(2) %> </a> <% for(var j=0; j<3; j++) { if(optiontasks[j] == project.task[i].tname) { %> <button name="<%=project._id %>" id="<%=project.task[i]._id %>" onclick="removeTask(this.name, this.id)"> <span class="glyphicon glyphicon-minus" aria-hidden="true" > </span></button>  <% optiontasks.splice(j, 1); }}%>
                    </li>
                    <!-- if문으로 active 경우 처리해줄것 -->
                   <% } %>
 
-                  <% for(var k=0; k<optiontasks.length; k++) { %> <form role="form" action="/project/taskadded/<%=project[0]._id %>" method="post"> <li> <input type="hidden" name="task" value="<%=optiontasks[k]%>"> <%= optiontasks[k].substr(2) %> <button type="submit"> <span class="glyphicon glyphicon-plus" aria-hidden="true" > </span> </button> </li> </form> <% } %>
+                  <% for(var k=0; k<optiontasks.length; k++) { %> <form role="form" action="/project/taskadded/<%=project._id %>" method="post"> <li> <input type="hidden" name="task" value="<%=optiontasks[k]%>"> <%= optiontasks[k].substr(2) %> <button type="submit"> <span class="glyphicon glyphicon-plus" aria-hidden="true" > </span> </button> </li> </form> <% } %>
 
                 </ul>
 
