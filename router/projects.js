@@ -115,7 +115,7 @@ app.get('/:pid', function(req,res){
     function read(path_task, i, callback) {
       fs.readdir(path_task, function(err, items) {
         var readdone = 0;
-        check[i] = 0;
+        check[cnt] = 0;
 
         for(var j=0; j<items.length; j++) {
           console.log(i +'  '+ j);
@@ -123,23 +123,26 @@ app.get('/:pid', function(req,res){
           console.log(tid + ' has something in it');
           console.log(i+'번째에 들어있는거: '+ project.task[i].product[j]);
           //console.log(items[j]);
-          check[i]=1;
+          check[cnt] = 1;
         }
-
         callback();
+        cnt--;
       })
-      if(check[project.task.length-1]===1) { saveandrender();}
+      if(cnt==0) { saveandrender();}
     }
 
     //         var done = 0;
     for(var i=0; i<project.task.length; i++) {
       var tid = project.task[i]._id;
+      var cnt = project.task.length;
       if(project.task[i].state==='todo') {
         //do nothing
         console.log(tid + ' has nothing in it!');
+        cnt--;
       }
 
       else {
+        // cnt ++;
         var path_task = (path+'/'+tid);
         console.log(tid + ' has something in it! it will call a function named read');
         read(path_task, i, function() {
