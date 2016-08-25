@@ -23,10 +23,11 @@
       if(result)
       {
         $.ajax({
-  			  url:"/project/delete/"+id,
+  			  url:"../delete/"+id,
   			  type:"delete",
   			  dataType:"json",
   			  success: function(result){
+            console.log("project deleted");
             location.href="../dashboard";
   			  },
   			  error:function(request,status,error){
