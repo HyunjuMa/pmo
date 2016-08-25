@@ -142,7 +142,6 @@ app.get('/:pid', function(req,res){
         console.log('cnt got minus');
         cnt--;
         if(cnt===0) {
-          callback();
           saveandrender();
         }
       }
