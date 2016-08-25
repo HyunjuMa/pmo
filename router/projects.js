@@ -100,6 +100,9 @@ app.get('/:pid', function(req,res){
     //로그인 안된 상태에서 들어오면
     res.redirect('/');
   };
+  
+  
+// http://metaduck.com/01-asynchronous-iteration-patterns.html
 
   Project.findOne({_id: pid}, function(err, project){
       if(err) return res.status(500).send({error: 'db failure'});
@@ -108,38 +111,38 @@ app.get('/:pid', function(req,res){
 
       var path = ('/tmp/'+pid);
 
-      var i = 0;
+                function read(path_task, callback) {
+              fs.readdir(path_task, function(err, items) {
 
-      while(i<project.task.length) {
-      //for(var i=0; i<project.task.length; i++) {
-        //product[i] = new Array(10);
-        //product[i] = [];
-        var tid = project.task[i]._id;
-        if(project.task[i].state==='todo') {
-          //do nothing
-          console.log(tid + ' has nothing in it!');
-          i++;
+              for(var j=0; j<items.length; j++) {
+                console.log(i +'  '+ j);
+              project.task[i].product[j] = items[j];
+              console.log(tid + ' has something in it');
+              console.log(i+'번째에 들어있는거: '+ project.task[i].product[j]);
+                  //console.log(items[j]);
+              }
+              if()
+                callback();
+            })
+
+          }
+
+
+
+//         var done = 0;
+        for(var i=0; i<project.task.length; i++) {
+          var tid = project.task[i]._id;
+          if(project.task[i].state==='todo') {
+            //do nothing
+            console.log(tid + ' has nothing in it!');
+          }
+
+          else {
+            var path_task = (path+'/'+tid);
+            read(path_task, callback);
+          }
         }
-        else {
-          var path_task = (path+'/'+tid);
-          //console.log(tid + ' has something in it');
-          //          console.log("safe i   " + i);
-          //generate_callback(i);
 
-        //  readDir(path_task, i);
-          fs.readdir(path_task, function(err, items) {
-          //console.log(path_task);
-            for(var j=0; j<items.length; j++) {
-            project.task[i].product[j] = items[j];
-            console.log(tid + ' has something in it');
-            console.log(i+'번째에 들어있는거: '+ project.task[i].product[j]);
-                //console.log(items[j]);
-            }
-            i++;
-          })
-
-        }
-      }
 
       project.save(function (err) {
         if(err) {
