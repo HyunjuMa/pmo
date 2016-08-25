@@ -28,18 +28,22 @@
     <ul class="progressbar">
 
       <% for(var i=0; i<project.task.length; i++) { %>
-        <li> <a href=""> <%=i+1%>. <%= project.task[i].tname.substr(2) %> </a> </li>
+        <% if(project.task[i].state === "inprogress") { %>
+          <li class="active"> <a href="#<%=project.task[i]._id%>"> <%=i+1%>. <%= project.task[i].tname.substr(2) %> </a> </li>
+        <% } else { %>
+          <li class="before"> <a href="#<%=project.task[i]._id%>"> <%=i+1%>. <%= project.task[i].tname.substr(2) %> </a> </li>
+        <% } %>
       <% } %>
-      </ul>
-    </div>
+    </ul>
+  </div>
 
-    <div class="container-fluid">
-      <div class="row">
+  <div class="container-fluid">
+    <div class="row">
 
-        <div class="col-md-9">
-          <div class="panel-group" id="accordion">
+      <div class="col-md-9">
+        <div class="panel-group" id="accordion">
 
-            <% for (var i=0; i<project.task.length; i++) { %>
+          <% for (var i=0; i<project.task.length; i++) { %>
             <div class="panel panel-default">
               <div class="panel-heading">
 
@@ -52,50 +56,54 @@
                 <div id="<%=project.task[i]._id%>" style="text-align:left;" class="panel-collapse collapse in">
               <% } else { %>
 
-              <div id="<%=project.task[i]._id%>" style="text-align:left;" class="panel-collapse collapse">
-              <% } %>
+                <div id="<%=project.task[i]._id%>" style="text-align:left;" class="panel-collapse collapse">
+                        <% } %>
 
 
                 <div class="panel-body">
-                <form ref='upload' id='upload' action='/upload/<%=project._id%>' method='post' encType="multipart/form-data">
+                  <form ref='upload' id='upload' action='/upload/<%=project._id%>' method='post' encType="multipart/form-data">
 
                   <% if(project.task[i].state==="todo") {} else { %>
                     <p> 등록된 산출물 </p>
                     <ul style="text-align:left;">
                       <% for (var j=0; j<project.task[i].product.length; j++) { %>
-                        <li> <%= project.task[i].product[j] %> </li>
+                      <li> <%= project.task[i].product[j] %> </li>
                       <% } %>
                     </ul>
                   <% } %>
 
-                  산출물 업로드: <input type="file" name="<%=project.task[i]._id %>" >
-                  <input type='submit' value='Upload!' />
-                  <!--span class="glyphicon glyphicon-paperclip" aria-hidden="true" > </span-->
-                </form>
+                    산출물 업로드: <input type="file" name="<%=project.task[i]._id %>" >
+                    <input type='submit' value='Upload!' />
+                    <!--span class="glyphicon glyphicon-paperclip" aria-hidden="true" > </span-->
+                  </form>
                 </div>
-              </div>
-            </div>
-          <% } %>
-          </div> <!--group-->
+                </div>
+                </div>
+                        <% } %>
+            </div> <!--group-->
         </div> <!--col(left)-->
 
-        <div class="col-md-3">
 
-          <h3> 프로젝트 개요 </h3>
-          <p> <%= project.pdesc %> </p>
-          <p> <%= project.bp[0] %> </p>
 
-          <% if(name === 'Admin' | name === project.pm ) { %>
-            <a href="/project/update/<%=project._id %>"> 수정 </a> <br>
-            <a href="/project/delete/<%=project._id %>"> 삭제 </a> <br>
-          <% } %>
-          <!--a href="/update/<%=project._id %>"> 수정 </a> <br>
-          <a href="/delete/<%=project._id %>"> 삭제 </a> <br-->
 
-        </div> <!-- right division -->
 
-       </div> <!-- div class row -->
-     </div> <!-- container-fluid -->
+                    <div class="col-md-3">
 
-</body>
-</html>
+                      <h3> 프로젝트 개요 </h3>
+                      <p> <%= project.pdesc %> </p>
+                      <p> <%= project.bp[0] %> </p>
+
+                      <% if(name === 'Admin' | name === project.pm ) { %>
+                        <a href="/project/update/<%=project._id %>"> 수정 </a> <br>
+                        <a href="/project/delete/<%=project._id %>"> 삭제 </a> <br>
+                        <% } %>
+                        <!--a href="/update/<%=project._id %>"> 수정 </a> <br>
+                        <a href="/delete/<%=project._id %>"> 삭제 </a> <br-->
+
+                      </div> <!-- right division -->
+
+                    </div> <!-- div class row -->
+                  </div> <!-- container-fluid -->
+
+                </body>
+                </html>
