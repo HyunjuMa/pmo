@@ -55,7 +55,7 @@
               </div>
 
               <% if(project.task[i].state==="inprogress") { %>
-                <div id="<%=project.task[i]._id%>" style="text-align:left;" class="panel-collapse collapse in">  <a href="/project/done/<%=project._id%>/<%=project.task[i]._id%>" Confirm! </a>
+                <div id="<%=project.task[i]._id%>" style="text-align:left;" class="panel-collapse collapse in">  <a href="/project/done/<%=project._id%>/<%=project.task[i]._id%>"> Confirm! </a>
 
                 <% } else { %>
                 <div id="<%=project.task[i]._id%>" style="text-align:left;" class="panel-collapse collapse">
