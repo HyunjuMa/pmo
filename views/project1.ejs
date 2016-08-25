@@ -76,7 +76,7 @@
                     <p> 등록된 산출물 </p>
                     <ul style="text-align:left;">
                       <% for (var j=0; j<project.task[i].product.length; j++) { %>
-                      <li> <%= project.task[i].product[j] %> </li>
+                      <li><a href="/project/download/<%=project._id%>/<%=project.task[i]._id%>/<%=project.task[i].product[j]%>" > <%= project.task[i].product[j] %> </a> </li>
                       <% } %>
                     </ul>
                     <% } %>
