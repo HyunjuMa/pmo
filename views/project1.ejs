@@ -47,14 +47,20 @@
                   <a data-toggle="collapse" data-parent="#accordion" href= "#<%=project.task[i]._id%>"> Task # <%= (i+1) %> : <%= project.task[i].tname.substr(2) %> </a>
                 </h4>
               </div>
-              <div id="<%=project.task[i]._id%>" class="panel-collapse collapse">
+
+              <% if(project.task[i].state==="inprogress") { %>
+                <div id="<%=project.task[i]._id%>" style="text-align:left;" class="panel-collapse collapse in">
+              <% } else { %>
+
+              <div id="<%=project.task[i]._id%>" style="text-align:left;" class="panel-collapse collapse">
+              <% } %>
 
 
                 <div class="panel-body">
                 <form ref='upload' id='upload' action='/upload/<%=project._id%>' method='post' encType="multipart/form-data">
 
                   <% if(project.task[i].state==="todo") {} else { %>
-                    <p style="text-align:left; weight: 100"> 등록된 산출물 </p>
+                    <p> 등록된 산출물 </p>
                     <ul style="text-align:left;">
                       <% for (var j=0; j<project.task[i].product.length; j++) { %>
                         <li> <%= project.task[i].product[j] %> </li>
