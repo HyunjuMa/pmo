@@ -111,7 +111,7 @@ app.get('/:pid', function(req,res){
 
     var path = ('/tmp/'+pid);
 
-    function read(path_task, callback) {
+    function read(path_task, i, callback) {
       fs.readdir(path_task, function(err, items) {
         var readdone = 0;
 
@@ -128,8 +128,6 @@ app.get('/:pid', function(req,res){
 
     }
 
-
-
     //         var done = 0;
     for(var i=0; i<project.task.length; i++) {
       var tid = project.task[i]._id;
@@ -141,7 +139,7 @@ app.get('/:pid', function(req,res){
       else {
         var path_task = (path+'/'+tid);
         console.log(tid + ' has something in it! it will call a function named read');
-        read(path_task, function() {
+        read(path_task, i, function() {
           console.log(this);
         });
       }
