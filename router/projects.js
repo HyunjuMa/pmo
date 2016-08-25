@@ -100,64 +100,66 @@ app.get('/:pid', function(req,res){
     //로그인 안된 상태에서 들어오면
     res.redirect('/');
   };
-  
-  
-// http://metaduck.com/01-asynchronous-iteration-patterns.html
+
+
+  // http://metaduck.com/01-asynchronous-iteration-patterns.html
 
   Project.findOne({_id: pid}, function(err, project){
-      if(err) return res.status(500).send({error: 'db failure'});
-      //console.log(pid); //working fine
-      //console.log(project); //working fine
+    if(err) return res.status(500).send({error: 'db failure'});
+    //console.log(pid); //working fine
+    //console.log(project); //working fine
 
-      var path = ('/tmp/'+pid);
+    var path = ('/tmp/'+pid);
 
-                function read(path_task, callback) {
-              fs.readdir(path_task, function(err, items) {
+    function read(path_task, callback) {
+      fs.readdir(path_task, function(err, items) {
+        var readdone = 0;
 
-              for(var j=0; j<items.length; j++) {
-                console.log(i +'  '+ j);
-              project.task[i].product[j] = items[j];
-              console.log(tid + ' has something in it');
-              console.log(i+'번째에 들어있는거: '+ project.task[i].product[j]);
-                  //console.log(items[j]);
-              }
-              if()
-                callback();
-            })
-
-          }
-
-
-
-//         var done = 0;
-        for(var i=0; i<project.task.length; i++) {
-          var tid = project.task[i]._id;
-          if(project.task[i].state==='todo') {
-            //do nothing
-            console.log(tid + ' has nothing in it!');
-          }
-
-          else {
-            var path_task = (path+'/'+tid);
-            read(path_task, callback);
-          }
+        for(var j=0; j<items.length; j++) {
+          console.log(i +'  '+ j);
+          project.task[i].product[j] = items[j];
+          console.log(tid + ' has something in it');
+          console.log(i+'번째에 들어있는거: '+ project.task[i].product[j]);
+          //console.log(items[j]);
         }
 
-
-      project.save(function (err) {
-        if(err) {
-          console.error('ERROR!!');
-        }
-        console.log('got here: render');
-        res.render('project1', {
-          title: project.pname,
-          length: 5,
-          page_name: 'project1',
-          name: sess.name,
-          project: project
-        });
+        callback();
       })
-    });
+
+    }
+
+
+
+    //         var done = 0;
+    for(var i=0; i<project.task.length; i++) {
+      var tid = project.task[i]._id;
+      if(project.task[i].state==='todo') {
+        //do nothing
+        console.log(tid + ' has nothing in it!');
+      }
+
+      else {
+        var path_task = (path+'/'+tid);
+        console.log(tid + ' has something in it! it will call a function named read');
+        read(path_task, callback);
+      }
+    }
+
+
+    project.save(function (err) {
+      if(err) {
+        console.error('ERROR!!');
+      }
+      console.log('got here: render');
+      res.render('project1', {
+        title: project.pname,
+        length: 5,
+        page_name: 'project1',
+        name: sess.name,
+        project: project
+      });
+    })
+  });
 })
 
 app.get('/update/:pid', function(req,res){
@@ -197,9 +199,9 @@ app.post('/update/:pid', function(req,res){
       }}, function(err, project){
         if(err) return res.status(500).send({error: 'db failure'});
         //
-  })
-  res.redirect("/project/dashboard");
-});//update
+      })
+      res.redirect("/project/dashboard");
+    });//update
 
 
     /*
