@@ -29,7 +29,7 @@
 
       <% for(var i=0; i<project.task.length; i++) { %>
         <li> <a href=""> <%=i+1%>. <%= project.task[i].tname.substr(2) %> </a> </li>
-        <% } %>
+      <% } %>
       </ul>
     </div>
 
@@ -55,11 +55,11 @@
 
                   <% if(project.task[i].state==="todo") {} else { %>
                     <ul>
-                      <% for(var j=0; j<project.task[i].product.length; j++) {
+                      <% for (var j=0; j<project.task[i].product.length; j++) { %>
                         <li> <%= project.task[i].product[j] %> </li>
                       <% } %>
                     </ul>
-                    <% } %>
+                  <% } %>
 
                   산출물 업로드: <input type="file" name="<%=project.task[i]._id %>" >
                   <input type='submit' value='Upload!' />
