@@ -126,7 +126,8 @@ app.get('/:pid', function(req,res){
         cnt--;
         if(cnt===0) {
           callback();
-          saveandrender();}
+          saveandrender();
+        }
       })
 
     }
@@ -140,6 +141,10 @@ app.get('/:pid', function(req,res){
         console.log(tid + ' has nothing in it!');
         console.log('cnt got minus');
         cnt--;
+        if(cnt===0) {
+          callback();
+          saveandrender();
+        }
       }
 
       else {
