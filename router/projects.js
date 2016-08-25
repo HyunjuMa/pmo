@@ -140,7 +140,7 @@ app.get('/:pid', function(req,res){
         var path_task = (path+'/'+tid);
         console.log(tid + ' has something in it! it will call a function named read');
         read(path_task, i, function() {
-          console.log(this);
+          //console.log(this);
         });
       }
     }
@@ -161,9 +161,10 @@ app.get('/:pid', function(req,res){
         });
       })
     }
-  });
-  
-})
+
+  }); //Project.findOne
+
+}) //app.get
 
 app.get('/update/:pid', function(req,res){
 
