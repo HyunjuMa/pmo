@@ -54,7 +54,7 @@
                 <form ref='upload' id='upload' action='/upload/<%=project._id%>' method='post' encType="multipart/form-data">
 
                   <% if(project.task[i].state==="todo") {} else { %>
-                    <p style="font-weight: 100"> 등록된 산출물  </p>
+                    <p style="text-align:left; weight: 100"> 등록된 산출물 </p>
                     <ul style="text-align:left;">
                       <% for (var j=0; j<project.task[i].product.length; j++) { %>
                         <li> <%= project.task[i].product[j] %> </li>
