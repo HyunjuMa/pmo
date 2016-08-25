@@ -56,7 +56,7 @@
 
               <% if(project.task[i].state==="inprogress") { %>
                 <div id="<%=project.task[i]._id%>" style="text-align:left;" class="panel-collapse collapse in">
-                  <form action='/done/<%=project._id%>/<%=project.task[i]._id%>' method='get'> <button type="submit" value="Confirm!"/> </form>
+                  <form action='/project/done/<%=project._id%>/<%=project.task[i]._id%>' method='get'> <button type="submit" value="Confirm!"> </button> </form>
               <% } else { %>
 
                 <div id="<%=project.task[i]._id%>" style="text-align:left;" class="panel-collapse collapse">
