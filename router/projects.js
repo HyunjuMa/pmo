@@ -301,11 +301,11 @@ app.get('/done/:pid/:tid', function(req,res) {
 
 //file download
 ///project/download/<%=project._id%>/<%=project.task[i]._id%>/j
-app.get('/download/:pid/:tid/:index', function(req, res) {
+app.get('/download/:pid/:tid/:filename', function(req, res) {
   var pid = req.params.pid;
   var tid = req.params.tid;
-  var index = req.params.index;
-  var dir = ('/tmp/'+pid+'/'+tid+'/');
+  var filename = req.params.filename;
+  var dir = ('/tmp/'+pid+'/'+tid+'/'+filename);
   console.log("download router called with dir " + dir);
 
   fs.readFile(dir, function (err, data) {
