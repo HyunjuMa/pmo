@@ -110,7 +110,7 @@ app.get('/:pid', function(req,res){
     //console.log(project); //working fine
 
     var path = ('/tmp/'+pid);
-    var check = [];
+    var cnt = project.task.length;
 
     function read(path_task, i, callback) {
       fs.readdir(path_task, function(err, items) {
@@ -124,7 +124,7 @@ app.get('/:pid', function(req,res){
           //console.log(items[j]);
         }
         callback();
-        //cnt--;
+        cnt--;
         console.log(cnt);
       })
       if(cnt==0) { saveandrender();}
@@ -133,20 +133,18 @@ app.get('/:pid', function(req,res){
     //         var done = 0;
     for(var i=0; i<project.task.length; i++) {
       var tid = project.task[i]._id;
-      var cnt = project.task.length;
+
       if(project.task[i].state==='todo') {
         //do nothing
         console.log(tid + ' has nothing in it!');
-        cnt--;
         console.log('cnt got minus');
+        cnt--;
       }
 
       else {
-        // cnt ++;
-        cnt--;
         var path_task = (path+'/'+tid);
         console.log(tid + ' has something in it! it will call a function named read');
-        read(path_task, i, cnt, function() {
+        read(path_task, i, function() {
           //console.log(this);
         });
       }
