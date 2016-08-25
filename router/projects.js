@@ -4,6 +4,8 @@ var session = require('express-session');
 var fs = require('fs');
 var mongoose = require('mongoose');
 var multiparty = require('multiparty');
+var http = require('http');
+
 
 var Project = require('../models/project');
 
@@ -297,6 +299,23 @@ app.get('/done/:pid/:tid', function(req,res) {
   res.redirect('/project/'+pid);
 })
 
+//file download
+///project/download/<%=project._id%>/<%=project.task[i]._id%>/j
+app.get('/download/:pid/:tid/:index', function(req, res) {
+  var pid = req.params.pid;
+  var tid = req.params.tid;
+  var index = req.params.index;
+  var dir = ('/tmp/'+pid+'/'+tid+'/');
+
+  fs.readFile(dir, 'utf8', function(err, data) {
+    if(err) return console.log(err);
+    console.log(data);
+  });
+
+})
+
+
+
 
 //////DELETE///
 app.delete('/:pid/:tid', function(req,res){
@@ -334,6 +353,11 @@ app.get('/delete/:pid', function(req,res) {
     res.redirect('/project/dashboard');
   })
 }); //delete, 각 PM과 Admin이 프로젝트 보기 에서 삭제할때
+
+
+
+
+
 
 
 module.exports = app;
