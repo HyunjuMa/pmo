@@ -28,12 +28,10 @@
     <ul class="progressbar">
 
       <% for(var i=0; i<project.task.length; i++) { %>
-        <% if(project.task[i].state === "inprogress") { %>
-          <li class="active"> <a href="#<%=project.task[i]._id%>"> <%=i+1%>. <%= project.task[i].tname.substr(2) %> </a> </li>
-        <% } else if(project.task[i].state ==="todo"){ %>
+        <% if(project.task[i].state ==="todo"){ %>
           <li class="before"> <a href="#<%=project.task[i]._id%>"> <%=i+1%>. <%= project.task[i].tname.substr(2) %> </a> </li>
         <% } else { %>
-          <li class="after"> <a href="#<%=project.task[i]._id%>"> <%=i+1%>. <%= project.task[i].tname.substr(2) %> </a> </li>
+          <li class="active"> <a href="#<%=project.task[i]._id%>"> <%=i+1%>. <%= project.task[i].tname.substr(2) %> </a> </li>
         <% } %>
       <% } %>
     </ul>
@@ -55,7 +53,7 @@
               </div>
 
               <% if(project.task[i].state==="inprogress") { %>
-                <div id="<%=project.task[i]._id%>" style="text-align:left;" class="panel-collapse collapse in">  <a href="/project/done/<%=project._id%>/<%=project.task[i]._id%>"> Confirm! </a>
+                <div id="<%=project.task[i]._id%>" style="text-align:left;" class="panel-collapse collapse in">
 
                 <% } else { %>
                 <div id="<%=project.task[i]._id%>" style="text-align:left;" class="panel-collapse collapse">
@@ -64,15 +62,26 @@
                 <div class="panel-body">
                   <form ref='upload' id='upload' action='/upload/<%=project._id%>' method='post' encType="multipart/form-data">
 
-                  <% if(project.task[i].state==="todo") {} else { %>
+                  <% if(project.task[i].state==="todo") { %>
+<!--                     does nothing for now -->
+                  <% } else if(project.task[i].state==="inprogress") { %>
                     <p> 등록된 산출물 </p>
                     <ul style="text-align:left;">
                       <% for (var j=0; j<project.task[i].product.length; j++) { %>
                       <li> <%= project.task[i].product[j] %> </li>
                       <% } %>
                     </ul>
-                  <% } %>
+                    <a href="/project/done/<%=project._id%>/<%=project.task[i]._id%>"> Confirm! </a>
+                  <% } else { %>
+                    <p> 등록된 산출물 </p>
+                    <ul style="text-align:left;">
+                      <% for (var j=0; j<project.task[i].product.length; j++) { %>
+                      <li> <%= project.task[i].product[j] %> </li>
+                      <% } %>
+                    </ul>
+                    <% } %>
 
+                    <br><br> <hr>
                     산출물 업로드: <input type="file" name="<%=project.task[i]._id %>" >
                     <input type='submit' value='Upload!' />
                     <!--span class="glyphicon glyphicon-paperclip" aria-hidden="true" > </span-->
