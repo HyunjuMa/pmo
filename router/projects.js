@@ -87,12 +87,7 @@ app.post('/newprojectadded', function(req,res){
 });//create a project and then go to dashboard
 
 
-
-
-
-
 //여기에서 파일 띄워주기도 해야함!!!
-
 app.get('/:pid', function(req,res){
 
   var pid = req.params.pid;
@@ -102,9 +97,6 @@ app.get('/:pid', function(req,res){
     //로그인 안된 상태에서 들어오면
     res.redirect('/');
   };
-
-
-  // http://metaduck.com/01-asynchronous-iteration-patterns.html
 
   Project.findOne({_id: pid}, function(err, project){
     if(err) return res.status(500).send({error: 'db failure'});
@@ -176,7 +168,6 @@ app.get('/:pid', function(req,res){
     }
 
   }); //Project.findOne
-
 }) //app.get
 
 app.get('/update/:pid', function(req,res){
@@ -306,15 +297,15 @@ app.get('/download/:pid/:tid/:filename', function(req, res) {
   var tid = req.params.tid;
   var filename = req.params.filename;
   var dir = ('/tmp/'+pid+'/'+tid+'/'+filename);
-  console.log("download router called with dir " + dir);
+  //console.log("download router called with dir " + dir);
 
-  fs.readFile(dir, 'utf8', function (err, data) {
+  var file = fs.readFile(dir, 'utf8', function (err, data) {
     if(err) return console.log('error...' + err);
     console.log(data);
   });
+  fs.writeFileSync(('/tmp/'+filename), file);
 
   res.redirect('/project/'+pid);
-
 })
 
 
