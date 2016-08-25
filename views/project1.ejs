@@ -107,8 +107,8 @@
                       <p> <%= project.bp[0] %> </p>
 
                       <% if(name === 'Admin' | name === project.pm ) { %>
-                        <a href="/project/update/<%=project._id %>"> 수정 </a> <br>
-                        <a href="/project/delete/<%=project._id %>"> 삭제 </a> <br>
+                        <a href="/project/update/<%=project._id %>" onclick="return confirm('프로젝트 수정 화면으로 이동합니다');" > 수정 </a> <br>
+                        <a href="/project/delete/<%=project._id %>" onclick="return confirm('프로젝트를 정말 삭제하시겠습니까?');"> 삭제 </a> <br>
                         <% } %>
                         <!--a href="/update/<%=project._id %>"> 수정 </a> <br>
                         <a href="/delete/<%=project._id %>"> 삭제 </a> <br-->
