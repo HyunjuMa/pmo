@@ -197,7 +197,7 @@ app.get('/update/:pid', function(req,res){
 })
 
 app.post('/update/:pid', function(req,res){
-  console.log("post update ");
+  // console.log("post update ");
   var pid = req.params.pid;
   var newtasklist = [];
   newtasklist = req.body.task;
@@ -235,17 +235,6 @@ app.post('/update/:pid', function(req,res){
   });
 }
 
-project.save(function(err) {
-if(err) {
-console.error(err);
-res.json({result: 0});
-return;
-}
-res.redirect('/'+pid);
-});
-}
-});
-});//get pid, and add tasks and save it
 */
 
 app.post('/taskadded/:pid', function(req,res){
@@ -290,6 +279,19 @@ app.get('/uploaded/:pid/:tid', function(req,res){
   }, function(err, doc) {});
   res.redirect('/project/'+pid);
 });
+
+//when done button is clicked
+app.get('/done/:pid/:tid', function(req,res) {
+  var pid = req.params.pid;
+  var tid = req.params.tid;
+
+  Project.findOneAndUpdate({ '_id': pid, 'task._id': tid},
+  { $set: {
+    "task.$.state": "done",
+    "task.$.lastupdated": Date.now() }
+  }, function(err, doc) {});
+  res.redirect('/project/'+pid);
+})
 
 
 //////DELETE///

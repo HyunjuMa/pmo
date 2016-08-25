@@ -29,11 +29,11 @@
 
       <% for(var i=0; i<project.task.length; i++) { %>
         <% if(project.task[i].state === "inprogress") { %>
-          <li class="inprogress"> <a href="#<%=project.task[i]._id%>"> <%=i+1%>. <%= project.task[i].tname.substr(2) %> </a> </li>
+          <li class="active"> <a href="#<%=project.task[i]._id%>"> <%=i+1%>. <%= project.task[i].tname.substr(2) %> </a> </li>
         <% } else if(project.task[i].state ==="todo"){ %>
-          <li class="todo"> <a href="#<%=project.task[i]._id%>"> <%=i+1%>. <%= project.task[i].tname.substr(2) %> </a> </li>
+          <li class="before"> <a href="#<%=project.task[i]._id%>"> <%=i+1%>. <%= project.task[i].tname.substr(2) %> </a> </li>
         <% } else { %>
-          <li class="done"> <a href="#<%=project.task[i]._id%>"> <%=i+1%>. <%= project.task[i].tname.substr(2) %> </a> </li>
+          <li class="after"> <a href="#<%=project.task[i]._id%>"> <%=i+1%>. <%= project.task[i].tname.substr(2) %> </a> </li>
         <% } %>
       <% } %>
     </ul>
@@ -56,6 +56,7 @@
 
               <% if(project.task[i].state==="inprogress") { %>
                 <div id="<%=project.task[i]._id%>" style="text-align:left;" class="panel-collapse collapse in">
+                  <form action='/done/<%=project._id%>/<%=project.task[i]._id%>' method='get'> <button type="submit" value="Confirm!"/> </form>
               <% } else { %>
 
                 <div id="<%=project.task[i]._id%>" style="text-align:left;" class="panel-collapse collapse">
