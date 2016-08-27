@@ -81,7 +81,7 @@
 
               <button type="submit" class="btn" style="margin:auto; display:inline;"> 수정 </button>
             </form>
-            <a href="/project/delete/<%=project._id%>" onclick="return confirm('프로젝트를 정말 삭제하시겠습니까?');"> 프로젝트 삭제 </a>
+            <button> <a href="/project/delete/<%=project._id%>" onclick="return confirm('프로젝트를 정말 삭제하시겠습니까?');"> 프로젝트 삭제 </a> </button>
             <!-- <button type='button' id="<%=project._id %>" class="btn" style="display:inline;" onclick="/"> 프로젝트 삭제 </button> -->
 
 
@@ -103,10 +103,8 @@
 
                   <!--input type="checkbox" name="task" value="bp" checked> 인력/BP 관리<br-->
                 </div><!-- /input-group -->
+                <a href="/project/<%=project._id%>"> 내 프로젝트로 이동 </a> <a href="/project/dashboard"> 대시보드로 이동 </a>
 
-              <div class="form-group">
-
-              </div>
 
           </div>
         </div>
