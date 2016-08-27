@@ -27,6 +27,10 @@
   <div class="container-fluid" align="right">
     <ul class="progressbar">
 
+
+      <!-- var fruits = ["Banana", "Orange", "Apple", "Mango"];
+      fruits.sort(); -->
+      <% project.task.sort(); %>
       <% for(var i=0; i<project.task.length; i++) { %>
         <% if(project.task[i].state ==="todo"){ %>
           <li class="before"> <a href="#<%=project.task[i]._id%>"> <%=i+1%>. <%= project.task[i].tname.substr(2) %> </a> </li>
