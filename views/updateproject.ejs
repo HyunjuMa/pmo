@@ -39,7 +39,7 @@
 
 
     function removeTask(pid, tid){
-      var result = confirm("이 작업에 등록된 산출물이 있을 수 있습니다. 정말 삭제하시겠습니까?");
+      var result = confirm("이 작업에 등록된 산출물이 있습니다. 등록된 산출물도 함께 삭제됩니다. 정말 삭제하시겠습니까?");
       if(result)
       {
         $.ajax({
@@ -55,6 +55,25 @@
   		  });
       }
     }
+
+    function removeTask2(pid, tid){
+      var result = confirm("이 작업에 등록된 산출물이 없습니다. 작업을 삭제합니다.");
+      if(result)
+      {
+        $.ajax({
+          url:"/project/"+pid+"/"+tid,
+          type:"delete",
+          dataType:"json",
+          success: function(result){
+            location.href="../update/"+pid;
+          },
+          error:function(request,status,error){
+             console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+          }
+        });
+      }
+    }
+
   </script>
 
   </head>
@@ -89,11 +108,19 @@
                   Task <br>
 
                 <ul>
+                  <% project.task.sort(); %>
                   <% optiontasks=["3.작업요청","5.IP할당","9.시설현황"]; for(var i=0; i<project.task.length; i++) { %>
 
                    <li>
-                     <% project.task.sort(); %>
-                     <a href=""> <%= project.task[i].tname.substr(2) %> </a> <% for(var j=0; j<3; j++) { if(optiontasks[j] == project.task[i].tname) { %> <button name="<%=project._id %>" id="<%=project.task[i]._id %>" onclick="removeTask(this.name, this.id)"> <span class="glyphicon glyphicon-minus" aria-hidden="true" > </span></button>  <% optiontasks.splice(j, 1); }}%>
+                     <a href="/project/<%=project._id %>"> <%= project.task[i].tname.substr(2) %> </a> <% for(var j=0; j<3; j++) { %>
+                       <% if(optiontasks[j] == project.task[i].tname) { %>
+                         <% if(project.task[i].state=="inprogress" || project.task[i].state=="done") { %>
+                           <button name="<%=project._id %>" id="<%=project.task[i]._id %>" onclick="removeTask(this.name, this.id)"> <span class="glyphicon glyphicon-minus" aria-hidden="true" > </span></button>
+                         <% } else {%>
+                           <button name="<%=project._id %>" id="<%=project.task[i]._id %>" onclick="removeTask2(this.name, this.id)"> <span class="glyphicon glyphicon-minus" aria-hidden="true" > </span></button>
+                         <% } %>
+                       <% optiontasks.splice(j, 1); %>
+                     <% }} %>
                    </li>
                    <!-- if문으로 active 경우 처리해줄것 -->
                   <% } %>
