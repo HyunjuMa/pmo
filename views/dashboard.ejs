@@ -42,7 +42,7 @@
                   <td> <a href = "<%= myprojects[i]._id %>" > <%= myprojects[i].pname %> </a> </td>
                   <td> <%= myprojects[i].pdesc %> </td>
                   <td> <% myprojects[i].task.sort(); for(var j=0; j<myprojects[i].task.length; j++) { if(myprojects[i].task[j].state ==="inprogress"){ %>
-                    <%= myprojects[i].task[j].tname %>
+                    <%= myprojects[i].task[j].tname.substr(2) %>
                   <% }} %> 진행중 </td> <!-- 진행상황 쓸예정 -->
                   <td> <a href = "update/<%= myprojects[i]._id %>"> <span class="glyphicon glyphicon-wrench" aria-hidden="true" > </span> </a>  </td>
 

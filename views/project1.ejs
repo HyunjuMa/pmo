@@ -27,9 +27,7 @@
   <div class="container-fluid" align="right">
     <ul class="progressbar">
 
-
-      <!-- var fruits = ["Banana", "Orange", "Apple", "Mango"];
-      fruits.sort(); -->
+      <!-- tname에 1.@@ 2.@@ 으로 하드코딩 되어있는거 이거 하려고였음. + - 해도 순서는 그대로 -->
       <% project.task.sort(); %>
       <% for(var i=0; i<project.task.length; i++) { %>
         <% if(project.task[i].state ==="todo"){ %>
