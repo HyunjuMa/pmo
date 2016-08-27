@@ -1,19 +1,6 @@
 
 module.exports = function(app, User) {
-  //user schema test
-  app.get('/api/users', function(req,res){
-    User.find(function(err, users){
-      if(err) return res.status(500).send({error: 'db failure'});
-      res.json(users);
-    })
-  });//getall
-
-  app.get('/api/users/:user_id', function(req,res){
-    res.end();
-  });
-  app.get('/api/users/name/:name', function(req,res){
-    res.end();
-  });
+ 
 
   app.post('/newuser', function(req,res){
     var user = new User();
@@ -29,7 +16,6 @@ module.exports = function(app, User) {
       res.redirect('/admin');
     });
   });//create user (can be done by 'Admin' only)
-
 
 
   //login**
@@ -55,13 +41,10 @@ module.exports = function(app, User) {
       sess.name = name;
       console.log("*login succeed with session name : " + sess.name);
       res.redirect('project/dashboard');
-      //dashboard 부르기 전에 내 프로젝트 목록 받아와서 뿌려야 함.
-      //res.redirect('/findmyproject');
-      //return res.status(200).send();
     })
-
   });
 
+  
   app.get('/logout', function(req,res){
     sess = req.session;
     if(sess.name) {
@@ -77,7 +60,13 @@ module.exports = function(app, User) {
   })
 
   app.get('/admin', function(req,res){
+
     sess = req.session;
+    if(!sess.name) {
+      //로그인 안된 상태에서 들어오면 메인으로 돌려보냄
+      res.redirect('/');
+    };
+    
     User.find(function(err, allusers){
       if(err) return res.status(500).send({error: 'db failure: failed to retrieve all users'});
 
@@ -91,26 +80,26 @@ module.exports = function(app, User) {
     })
   })
 
-  app.post('/changepw', function(req,res){
-    User.findOne({_id: req.body.uid}, function(err, user) {
-      if(err) res.json(err);
-      else {
-        user.pw = req.body.pw;
-        user.save();
-        res.redirect('/admin');
-      }
+  app.post('/updateUser/:uid', function(req,res) {
+    console.log(req.params.uid);
+    console.log(req.body.pw);
+    User.findOneAndUpdate({_id: req.params.uid},
+                          { $set:
+                           {pw: req.body.pw}}, function(err, user) {
+      if(err) return res.status(500).send({error: 'db failuer'});
+    }
+    )
+    res.redirect("/admin");
+  }); //pw update
 
-    })
-  }); //update using get req
 
-  app.delete('/deleteUser/:uid', function(req,res){
+  app.get('/deleteUser/:uid', function(req,res){
     User.remove({_id: req.params.uid}, function(err) {
-//       console.log("delete request : "+ req.params.uid);
+       console.log("delete request : "+ req.params.uid);
       if(err) return res.status(500).send({error: 'db failure'});
-      //res.redirect('/admin');
-      res.end();
+      res.redirect('/admin');
+      //res.end();
     })
   });//delete
-
 
 }

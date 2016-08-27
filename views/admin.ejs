@@ -16,49 +16,7 @@
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="common/css/style.css">
 
-    <link rel="stylesheet" href="common/css/progressbar.css">
-
     <% include ./navbar.ejs %>
-
-    <script>
-    function removeUser(id){
-      var result = confirm("사용자를 정말 삭제하시겠습니까?");
-      // 사용자를 삭제해도 그 사용자의 프로젝트는 삭제되지 않음. 다시 바인딩해주면 사용 가능
-      if(result)
-      {
-        //console.log("delete request : "+ id);
-        $.ajax({
-  			  url:"/deleteUser/"+id,
-  			  type:"delete",
-  			  dataType:"json",
-  			  success: function(result){
-            location.href="../admin";
-  			  },
-  			  error:function(request,status,error){
-  		       console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-  			  }
-  		  });
-      }
-    }
-/*
-     function updateUser(id) {
-       var result = confirm(tname+"을(를) 추가하시겠습니까?");
-       if(result){
-         $.ajax({
-  			  url:"/"+pid+"/"+tname,
-  			  type:"post",
-  			  dataType:"json",
-  			  success: function(result){
-            location.href="../update/"+pid;
-  			  },
-  			  error:function(request,status,error){
-  		       console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-  			  }
-  		  });
-       }
-     }*/
-
-    </script>
 
   </head>
   <body>
@@ -66,39 +24,50 @@
   <div class="container-fluid">
     <div class="row">
 
-    <h3> 새 사용자 등록 </h3>
-    <form action="/newuser" method="post">
-      사용자 이름 <input type="text" name="name">
-      비밀번호 <input type="password" name="pw">
-      <button type="submit"> 등록 </button>
-    </form>
+    <div class="form-box">
+      <div class="form-top">
 
-     <form action="" method="post" float="middle">
-        <table>
-        <thead>
+        <h3> 새 사용자 등록 </h3>
+        <form action="/newuser" method="post">
+          사용자 이름 <input type="text" name="name">
+          비밀번호 <input type="password" name="pw">
+          <button type="submit"> 등록 </button>
+        </form>
+      </div>
+    </div>
+    </div>
+    <br><br> <hr>
+
+    <h3> 사용자 목록 </h3>
+
+      <div class="table-responsive">
+        <table class="table" style="text-align:left;">
+        <thead class="thead-default">
         <tr>
-          <th>#</th>
+          <th>&nbsp; # &nbsp;</th>
           <th>이름</th>
-          <!--th>비밀번호 재설정</th-->
+          <th>비밀번호 재설정</th>
           <th>사용자 삭제</th>
-
         </tr>
         </thead>
         <tbody>
           <% for(var i=0; i<users.length; i++) { %>
+          <form action="/updateUser/<%=users[i]._id%>" method="post">
+
           <tr>
             <td> <%= i+1 %> </td>
             <td> <%= users[i].name %> </td>
-            <!--td> <input type="hidden" name="uid" value="<%= users[i]._id %> " > <input type="password" name="pw"> <button type="submit"> <span class="glyphicon glyphicon-wrench" aria-hidden="true" > </span> </button> </td-->
-            <td> <button id="<%= users[i]._id %>" onclick="removeUser(this.id)"> <span class="glyphicon glyphicon-trash" aria-hidden="true" > </span> </button> </td>
+            <td> <input type="password" name="pw" placeholder="New password.."> <button type="submit" onclick="return confirm('사용자의 비밀번호를 재설정하시겠습니까?');" > <span class="glyphicon glyphicon-wrench" aria-hidden="true" > </span> </button> </td>
+            <td> <a href="/deleteUser/<%=users[i]._id %>" onclick="return confirm('이 사용자를 삭제하시겠습니까? 사용자를 삭제해도 프로젝트는 유지됩니다.');" > <span class="glyphicon glyphicon-trash" aria-hidden="true" > </span> </a> </td>
 
           </tr>
+          </form>
          <% } %>
         </tbody>
       </table>
-      </form>
-
     </div>
+
+
     </div> <!--container-->
   </body>
 </html>
