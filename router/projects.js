@@ -109,7 +109,10 @@ app.get('/:pid', function(req,res){
     function read(path_task, i, callback) {
       fs.readdir(path_task, function(err, items) {
         var readdone = 0;
-
+        if(err) {
+          console.log(err);
+          return 0;
+        }
         for(var j=0; j<items.length; j++) {
           //console.log(i +'  '+ j);
           project.task[i].product[j] = items[j];
