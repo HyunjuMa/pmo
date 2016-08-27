@@ -53,11 +53,11 @@
                   <a data-toggle="collapse" data-parent="#accordion" href= "#<%=project.task[i]._id%>"> Task # <%= (i+1) %> : <%= project.task[i].tname.substr(2) %> </a>
                 </h4>
               </div>
-
-              <% if(project.task[i].state==="inprogress") { %>
+              <% if(project.task[i].state==="todo") { %>
+                <div id="<%=project.task[i]._id%>" style="text-align:left;" class="panel-collapse collapse out">
+              <% } else if(project.task[i].state==="inprogress") { %>
                 <div id="<%=project.task[i]._id%>" style="text-align:left;" class="panel-collapse collapse in">
-
-                <% } else { %>
+              <% } else if(project.task[i].state==="done") { %>
                 <div id="<%=project.task[i]._id%>" style="text-align:left;" class="panel-collapse collapse">
               <% } %>
 
