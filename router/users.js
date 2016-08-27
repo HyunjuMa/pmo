@@ -105,8 +105,10 @@ module.exports = function(app, User) {
 
   app.delete('/deleteUser/:uid', function(req,res){
     User.remove({_id: req.params.uid}, function(err) {
+//       console.log("delete request : "+ req.params.uid);
       if(err) return res.status(500).send({error: 'db failure'});
-      res.redirect('/admin');
+      //res.redirect('/admin');
+      res.end();
     })
   });//delete
 

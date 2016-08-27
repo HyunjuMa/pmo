@@ -23,9 +23,10 @@
     <script>
     function removeUser(id){
       var result = confirm("사용자를 정말 삭제하시겠습니까?");
-      // 사용자를 삭제해도 그 사용자의 프로젝트는 삭제되지 않음. 다시 바인딩해주면 사용 가능 
+      // 사용자를 삭제해도 그 사용자의 프로젝트는 삭제되지 않음. 다시 바인딩해주면 사용 가능
       if(result)
       {
+        //console.log("delete request : "+ id);
         $.ajax({
   			  url:"/deleteUser/"+id,
   			  type:"delete",
@@ -89,7 +90,7 @@
             <td> <%= i+1 %> </td>
             <td> <%= users[i].name %> </td>
             <!--td> <input type="hidden" name="uid" value="<%= users[i]._id %> " > <input type="password" name="pw"> <button type="submit"> <span class="glyphicon glyphicon-wrench" aria-hidden="true" > </span> </button> </td-->
-            <td> <button onclick="removeUser(this.id)"> <span class="glyphicon glyphicon-trash" aria-hidden="true" > </span> </button> </td>
+            <td> <button id="<%= users[i]._id %>" onclick="removeUser(this.id)"> <span class="glyphicon glyphicon-trash" aria-hidden="true" > </span> </button> </td>
 
           </tr>
          <% } %>
