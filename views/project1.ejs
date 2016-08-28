@@ -67,7 +67,7 @@
                 <div class="panel-body">
                   <form ref='upload' id='upload' action='/upload/<%=project._id%>' method='post' encType="multipart/form-data">
 
-                  <% if(project.task[i].state==="done") { curr++;%>
+                  <% if(project.task[i].state==="done") { curr++; %>
                     <p> 등록된 산출물 </p>
                     <ul style="text-align:left;">
                       <% for (var j=0; j<project.task[i].product.length; j++) { %>
@@ -84,7 +84,7 @@
                     <a href="/project/done/<%=project._id%>/<%=project.task[i]._id%>"> Confirm! </a>
                   <% } else { %>
                     <% if(i>0 && curr<i) { %>
-                      <p stype="color:red;"> 앞 단계를 진행한 후 열어주세요.</p>
+                      <p style="color: red;"> 앞 단계를 진행한 후 열어주세요.</p>
                     <% } else {} %>
                   <% } %>
 

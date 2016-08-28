@@ -87,6 +87,24 @@ app.post('/newprojectadded', function(req,res){
 });//create a project and then go to dashboard
 
 
+app.get('/templates', function(req,res) {
+  sess = req.session;
+  if(!sess.name) {
+    //로그인 안된 상태에서 들어오면
+    res.redirect('/');
+  };
+
+  res.render('templates', {
+    title: "Templates",
+    length: 5,
+    page_name: 'templates',
+    name: sess.name
+  })
+})
+
+
+
+
 //여기에서 파일 띄워주기도 해야함!!!
 app.get('/:pid', function(req,res){
 
