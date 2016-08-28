@@ -325,7 +325,6 @@ app.get('/download/:pid/:tid/:filename', function(req, res) {
     //console.log(data);
   });
   //fs.writeFileSync(('/tmp/'+filename), file);
-  var mimetype = mime.lookup(file);
   res.setHeader('Content-disposition', 'attachment; filename=' + filename);
 
   var filestream = fs.createReadStream(file);
