@@ -5,6 +5,8 @@ var fs = require('fs');
 var mongoose = require('mongoose');
 var multiparty = require('multiparty');
 var http = require('http');
+var path = require('path');
+var mime = require('mime');
 
 
 var Project = require('../models/project');
@@ -319,12 +321,14 @@ app.get('/download/:pid/:tid/:filename', function(req, res) {
   var filename = req.params.filename;
   var dir = ('/tmp/'+pid+'/'+tid+'/'+filename);
   //console.log("download router called with dir " + dir);
-
-  var file = fs.readFile(dir, 'utf8', function (err, data) {
-    if(err) return console.log('error...' + err);
-    //console.log(data);
-  });
+  //
+  // var file = fs.readFile(dir, 'utf8', function (err, data) {
+  //   if(err) return console.log('error...' + err);
+  //   //console.log(data);
+  // });
   //fs.writeFileSync(('/tmp/'+filename), file);
+
+  var file = dir;
   res.setHeader('Content-disposition', 'attachment; filename=' + filename);
 
   var filestream = fs.createReadStream(file);
