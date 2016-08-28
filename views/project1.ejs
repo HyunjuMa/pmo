@@ -45,6 +45,8 @@
       <div class="col-md-9">
         <div class="panel-group" id="accordion">
 
+          <% var curr = 0; %>
+          <!-- curr은 '현재'지표 -->
           <% for (var i=0; i<project.task.length; i++) { %>
             <div class="panel panel-default">
               <div class="panel-heading">
@@ -53,35 +55,38 @@
                   <a data-toggle="collapse" data-parent="#accordion" href= "#<%=project.task[i]._id%>"> Task # <%= (i+1) %> : <%= project.task[i].tname.substr(2) %> </a>
                 </h4>
               </div>
-              <% if(project.task[i].state==="todo") { %>
-                <div id="<%=project.task[i]._id%>" style="text-align:left;" class="panel-collapse collapse out">
+              <% if(project.task[i].state==="done") { %>
+                <div id="<%=project.task[i]._id%>" style="text-align:left;" class="panel-collapse collapse">
+                  <!--   -->
               <% } else if(project.task[i].state==="inprogress") { %>
                 <div id="<%=project.task[i]._id%>" style="text-align:left;" class="panel-collapse collapse in">
-              <% } else if(project.task[i].state==="done") { %>
+              <% } else if(project.task[i].state==="todo") { %>
                 <div id="<%=project.task[i]._id%>" style="text-align:left;" class="panel-collapse collapse">
               <% } %>
 
                 <div class="panel-body">
                   <form ref='upload' id='upload' action='/upload/<%=project._id%>' method='post' encType="multipart/form-data">
 
-                  <% if(project.task[i].state==="todo") { %>
-<!--                     does nothing for now -->
-                  <% } else if(project.task[i].state==="inprogress") { %>
-                    <p> 등록된 산출물 </p>
-                    <ul style="text-align:left;">
-                      <% for (var j=0; j<project.task[i].product.length; j++) { %>
-                      <li> <a href="/project/download/<%=project._id%>/<%=project.task[i]._id%>/<%=project.task[i].product[j]%>" > <%= project.task[i].product[j] %> </a> </li>
-                      <% } %>
-                    </ul>
-                    <a href="/project/done/<%=project._id%>/<%=project.task[i]._id%>"> Confirm! </a>
-                  <% } else { %>
+                  <% if(project.task[i].state==="done") { curr++;%>
                     <p> 등록된 산출물 </p>
                     <ul style="text-align:left;">
                       <% for (var j=0; j<project.task[i].product.length; j++) { %>
                       <li><a href="/project/download/<%=project._id%>/<%=project.task[i]._id%>/<%=project.task[i].product[j]%>" > <%= project.task[i].product[j] %> </a> </li>
                       <% } %>
                     </ul>
-                    <% } %>
+                  <% } else if(project.task[i].state==="inprogress") { curr++; %>
+                    <p> 등록된 산출물 </p>
+                    <ul style="text-align:left;">
+                      <% for (var j=0; j<project.task[i].product.length; j++) { %>
+                      <li> <a href="/project/download/<%=project._id%>/<%=project.task[i]._id%>/<%=project.task[i].product[j]%>" > <%= project.task[i].product[j] %> </a> </li>
+                      <% } %> 삭제 도 만들어야 함ㅜ
+                    </ul>
+                    <a href="/project/done/<%=project._id%>/<%=project.task[i]._id%>"> Confirm! </a>
+                  <% } else { %>
+                    <% if(i>0 && curr<i) {
+                      앞 단계를 진행한 후 열어주세요.
+                    <% } else {} %>
+                  <% } %>
 
 
                   <% if(name === 'Admin' | name === project.pm ) { %>
