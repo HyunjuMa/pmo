@@ -326,8 +326,8 @@ app.get('/download/:pid/:tid/:filename', function(req, res) {
   });
   //fs.writeFileSync(('/tmp/'+filename), file);
 
-  res.download(file);
-  //res.redirect('/project/'+pid);
+  //res.download(file);
+  res.redirect('/project/'+pid);
 })
 
 
