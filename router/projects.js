@@ -104,10 +104,8 @@ app.get('/templates', function(req,res) {
   })
 })
 
-
-
-
 //여기에서 파일 띄워주기도 해야함!!!
+//만약 inprogress인데 없으면 todo로 보내기도 여기에서
 app.get('/:pid', function(req,res){
 
   var pid = req.params.pid;
@@ -132,6 +130,9 @@ app.get('/:pid', function(req,res){
         if(err) {
           console.log(err);
           return 0;
+        }
+        if(items.length==0) {
+          project.task[i].state = "todo";
         }
         for(var j=0; j<items.length; j++) {
           //console.log(i +'  '+ j);
@@ -364,6 +365,7 @@ app.get('/deleteFile/:pid/:tid/:filename', function(req,res) {
 
   fs.unlinkSync(dir);
   
+
   res.redirect('/project/'+pid);
   //res.end();
 })
