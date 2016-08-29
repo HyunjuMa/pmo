@@ -356,7 +356,17 @@ app.get('/download/:pid/:tid/:filename', function(req, res) {
 //   filestream.pipe(res);
 // });
 
+app.get('/deleteFile/:pid/:tid/:filename', function(req,res) {
+  var pid = req.params.pid;
+  var tid = req.params.tid;
+  var filename = req.params.filename;
+  var dir = ('/tmp/'+pid+'/'+tid+'/'+filename);
 
+  fs.unlinkSync(dir);
+  
+  res.redirect('/project/'+pid);
+  //res.end();
+})
 
 
 
