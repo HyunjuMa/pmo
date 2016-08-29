@@ -321,21 +321,15 @@ app.get('/download/:pid/:tid/:filename', function(req, res) {
   var tid = req.params.tid;
   var filename = req.params.filename;
   var dir = ('/tmp/'+pid+'/'+tid+'/'+filename);
-  //console.log("download router called with dir " + dir);
-  //
-  // var file = fs.readFile(dir, 'utf8', function (err, data) {
-  //   if(err) return console.log('error...' + err);
-  //   //console.log(data);
-  // });
-  //fs.writeFileSync(('/tmp/'+filename), file);
 
-  var file = dir;
-  res.setHeader('Content-disposition', 'attachment; filename=' + filename);
 
-  var filestream = fs.createReadStream(file);
-  filestream.pipe(res);
+//   var file = dir;
+//   res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+//   var filestream = fs.createReadStream(file);
 
-  //res.download(file);
+//   filestream.pipe(res);
+
+  res.download(dir);
   //res.redirect('/project/'+pid);
 })
 
@@ -364,7 +358,7 @@ app.get('/deleteFile/:pid/:tid/:filename', function(req,res) {
   var dir = ('/tmp/'+pid+'/'+tid+'/'+filename);
 
   fs.unlinkSync(dir);
-  
+
 
   res.redirect('/project/'+pid);
   //res.end();
