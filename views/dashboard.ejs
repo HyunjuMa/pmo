@@ -72,7 +72,11 @@
                   <td> <%= allprojects[i].pm %> </td>
                   <td> <a href = "<%= allprojects[i]._id %>" > <%= allprojects[i].pname %> </a> </td>
                   <td> <%= allprojects[i].pdesc %> </td>
-                  <td> zzz </td> <!-- 진행상황 쓸예정 -->
+                  <td> <% allprojects[i].task.sort(); for(var j=0; j<allprojects[i].task.length; j++) { if(allprojects[i].task[j].state === "inprogress") { %>
+                      <%= allprojects[i].task[j].tname.substr(2); %>
+                    <% break; }} %>
+                  </td>
+
                 </tr>
                <% } %>
               </tbody>
