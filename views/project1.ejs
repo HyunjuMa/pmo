@@ -78,8 +78,8 @@
                     <p> 등록된 산출물 </p>
                     <ul style="text-align:left;">
                       <% for (var j=0; j<project.task[i].product.length; j++) { %>
-                      <li> <a href="/project/download/<%=project._id%>/<%=project.task[i]._id%>/<%=project.task[i].product[j]%>" > <%= project.task[i].product[j] %> </a> </li>
-                      <% } %> 삭제 도 만들어야 함ㅜ
+                      <li> <a href="/project/download/<%=project._id%>/<%=project.task[i]._id%>/<%=project.task[i].product[j]%>" > <%= project.task[i].product[j] %> </a> <a href="/project/deleteFile/<%=project._id%>/<%=project.task[i]._id%>/<%=project.task[i].product[j]%>"> <span class="glyphicon glyphicon-trash" aria-hidden="true" > </span> </a> </li>
+                      <% } %> 
                     </ul>
                     <a href="/project/done/<%=project._id%>/<%=project.task[i]._id%>"> Confirm! </a>
                   <% } else { %>
