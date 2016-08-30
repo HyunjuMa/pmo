@@ -92,10 +92,15 @@
                     <br><hr>
                     <h5> 산출물 업로드 </h5>
                     <input type="file" name="<%=project.task[i]._id %>" >
-                    <br> <button type='submit'> 업로드 </button>
+                    <button type='submit'> 업로드 </button>
                     <!--span class="glyphicon glyphicon-paperclip" aria-hidden="true" > </span-->
                   <% } %>
                   </form>
+                  <form action="/project/taskdesc/<%=project._id%>/<%=project.task[i]._id%>" method="post">
+                    <textarea name="taskdesc" rows="5" cols="100" style="border:gray solid 1px;"> <%= project.task[i].desc %> </textarea>
+                    <button type="submit"> 메모 등록 </button>
+                  </form>
+
                 </div>
                 </div>
                 </div>

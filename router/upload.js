@@ -9,6 +9,7 @@ var path = require("path");
 router.post('/:pid', function(req, res, next) {
 
 	var form = new multiparty.Form();
+  var desc = req.body.pdt_desc;
 
 	form.on('error', function(err) {
 		console.log('Error parsing form: ' + err.stack);

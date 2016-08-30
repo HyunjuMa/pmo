@@ -340,6 +340,17 @@ app.get('/deleteFile/:pid/:tid/:filename', function(req,res) {
   //res.end();
 })
 
+app.post('/taskdesc/:pid/:tid', function(req,res) {
+  var pid = req.params.pid;
+  var tid = req.params.tid;
+  var desc = req.body.taskdesc;
+
+  Project.findOneAndUpdate({ '_id': pid, 'task._id': tid},
+  { $set: {
+    "task.$.desc": desc }
+  }, function(err, doc) {});
+  res.redirect('/project/'+pid);
+})
 
 //////DELETE///
 app.delete('/:pid/:tid', function(req,res){
