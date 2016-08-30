@@ -323,33 +323,9 @@ app.get('/download/:pid/:tid/:filename', function(req, res) {
   var dir = ('/tmp/'+pid+'/'+tid+'/'+filename);
 
 
-//   var file = dir;
-//   res.setHeader('Content-disposition', 'attachment; filename=' + filename);
-//   var filestream = fs.createReadStream(file);
-
-//   filestream.pipe(res);
-
   res.download(dir);
-  //res.redirect('/project/'+pid);
 })
 
-
-// var path = require('path');
-// var mime = require('mime');
-//
-// app.get('/download', function(req, res){
-//
-//   var file = __dirname + '/upload-folder/dramaticpenguin.MOV';
-//
-//   var filename = path.basename(file);
-//   var mimetype = mime.lookup(file);
-//
-//   res.setHeader('Content-disposition', 'attachment; filename=' + filename);
-//   res.setHeader('Content-type', mimetype);
-//
-//   var filestream = fs.createReadStream(file);
-//   filestream.pipe(res);
-// });
 
 app.get('/deleteFile/:pid/:tid/:filename', function(req,res) {
   var pid = req.params.pid;
@@ -363,7 +339,6 @@ app.get('/deleteFile/:pid/:tid/:filename', function(req,res) {
   res.redirect('/project/'+pid);
   //res.end();
 })
-
 
 
 //////DELETE///
@@ -402,11 +377,6 @@ app.get('/delete/:pid', function(req,res) {
     res.redirect('/project/dashboard');
   })
 }); //delete, 각 PM과 Admin이 프로젝트 보기 에서 삭제할때
-
-
-
-
-
 
 
 module.exports = app;
