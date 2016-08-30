@@ -45,16 +45,24 @@
       <div class="col-md-9">
         <div class="panel-group" id="accordion">
 
-          <% var curr = 0; %>
-          <!-- curr은 '현재'지표 -->
+          <% var curr = 0; var open = 0;%>
+          
+          
           <% for (var i=0; i<project.task.length; i++) { %>
             <div class="panel panel-default">
               <div class="panel-heading">
+                
+                
+<!--                 var fruits = ["Banana", "Orange", "Apple", "Mango"];
+                var a = fruits.indexOf("Apple"); -->
+                
 
                 <h4 class="panel-title">
                   <a data-toggle="collapse" data-parent="#accordion" href= "#<%=project.task[i]._id%>"> Task # <%= (i+1) %> : <%= project.task[i].tname.substr(2) %> </a>
                 </h4>
               </div>
+              
+              
               <% if(project.task[i].state==="done") { %>
                 <div id="<%=project.task[i]._id%>" style="text-align:left;" class="panel-collapse collapse">
                   <!--   -->
@@ -97,8 +105,9 @@
                   <% } %>
                   </form>
                   <form action="/project/taskdesc/<%=project._id%>/<%=project.task[i]._id%>" method="post">
-                    <textarea name="taskdesc" rows="5" cols="100" style="border:gray solid 1px;"> <%= project.task[i].desc %> </textarea>
-                    <button type="submit"> 메모 등록 </button>
+
+                    <textarea name="taskdesc" rows="7" cols="70" style="border:gray solid 1px;"> <%= project.task[i].desc %> </textarea>
+                    <button type="submit"> 메모 등록/수정 </button>
                   </form>
 
                 </div>
