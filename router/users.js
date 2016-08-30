@@ -1,6 +1,6 @@
 
 module.exports = function(app, User) {
- 
+
 
   app.post('/newuser', function(req,res){
     var user = new User();
@@ -32,9 +32,7 @@ module.exports = function(app, User) {
         return res.status(500);
       }
       if(!user) {
-
-        console.log('no user found under that name/password');
-        return res.status(404);
+        return res.send("이름/비밀번호를 확인해주세요");
       }
       //success
       sess = req.session;
@@ -44,7 +42,7 @@ module.exports = function(app, User) {
     })
   });
 
-  
+
   app.get('/logout', function(req,res){
     sess = req.session;
     if(sess.name) {
@@ -66,7 +64,7 @@ module.exports = function(app, User) {
       //로그인 안된 상태에서 들어오면 메인으로 돌려보냄
       res.redirect('/');
     };
-    
+
     User.find(function(err, allusers){
       if(err) return res.status(500).send({error: 'db failure: failed to retrieve all users'});
 

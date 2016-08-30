@@ -68,38 +68,38 @@
                   <form ref='upload' id='upload' action='/upload/<%=project._id%>' method='post' encType="multipart/form-data">
 
                   <% if(project.task[i].state==="done") { curr++; %>
-                    <p> 등록된 산출물 </p>
+                    <h5> 등록된 산출물 </h5>
                     <ul style="text-align:left;">
                       <% for (var j=0; j<project.task[i].product.length; j++) { %>
                       <li><a href="/project/download/<%=project._id%>/<%=project.task[i]._id%>/<%=project.task[i].product[j]%>" > <%= project.task[i].product[j] %> </a> &nbsp;  <% if(name === 'Admin' | name === project.pm ) { %> <a href="/project/deleteFile/<%=project._id%>/<%=project.task[i]._id%>/<%=project.task[i].product[j]%>"> <span class="glyphicon glyphicon-trash" aria-hidden="true" > </span> </a> <% } %> </li>
                       <% } %>
                     </ul>
                   <% } else if(project.task[i].state==="inprogress") { curr++; %>
-                    <p> 등록된 산출물 </p>
+                    <h5> 등록된 산출물 </h5>
                     <ul style="text-align:left;">
                       <% for (var j=0; j<project.task[i].product.length; j++) { %>
                       <li> <a href="/project/download/<%=project._id%>/<%=project.task[i]._id%>/<%=project.task[i].product[j]%>" > <%= project.task[i].product[j] %> </a> &nbsp;  <% if(name === 'Admin' | name === project.pm ) { %> <a href="/project/deleteFile/<%=project._id%>/<%=project.task[i]._id%>/<%=project.task[i].product[j]%>"> <span class="glyphicon glyphicon-trash" aria-hidden="true" > </span> </a> <% } %> </li>
                       <% } %>
                     </ul>
-                    <a href="/project/done/<%=project._id%>/<%=project.task[i]._id%>"> Confirm! </a>
+                    <button> <a href="/project/done/<%=project._id%>/<%=project.task[i]._id%>"> Confirm! </a> </button>
                   <% } else { %>
                     <% if(i>0 && curr<i) { %>
                       <p style="color: red;"> 앞 단계를 진행한 후 열어주세요. </p>
                     <% } else {} %>
                   <% } %>
 
-
                   <% if(name === 'Admin' | name === project.pm ) { %>
                     <br><hr>
-                    산출물 업로드: <input type="file" name="<%=project.task[i]._id %>" >
-                    <input type='submit' value='Upload!' />
+                    <h5> 산출물 업로드 </h5>
+                    <input type="file" name="<%=project.task[i]._id %>" >
+                    <br> <button type='submit'> 업로드 </button>
                     <!--span class="glyphicon glyphicon-paperclip" aria-hidden="true" > </span-->
                   <% } %>
                   </form>
                 </div>
                 </div>
                 </div>
-                        <% } %>
+            <% } %>
             </div> <!--group-->
         </div> <!--col(left)-->
 
