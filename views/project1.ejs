@@ -45,30 +45,27 @@
       <div class="col-md-9">
         <div class="panel-group" id="accordion">
 
-          <% var curr = 0; var open = 0;%>
-          
-          
+          <% var curr = 0; var states = []; var open = 0;%>
+          <% for (var i=0; i<project.task.length; i++) { states[i] = project.task[i].state; } %>
+          <% var x = states.indexOf("inprogress"); if(x>0) { open = x; } else { open = states.indexOf("todo")} ; %>
           <% for (var i=0; i<project.task.length; i++) { %>
             <div class="panel panel-default">
               <div class="panel-heading">
-                
-                
+
+
 <!--                 var fruits = ["Banana", "Orange", "Apple", "Mango"];
                 var a = fruits.indexOf("Apple"); -->
-                
+
 
                 <h4 class="panel-title">
                   <a data-toggle="collapse" data-parent="#accordion" href= "#<%=project.task[i]._id%>"> Task # <%= (i+1) %> : <%= project.task[i].tname.substr(2) %> </a>
                 </h4>
               </div>
-              
-              
-              <% if(project.task[i].state==="done") { %>
-                <div id="<%=project.task[i]._id%>" style="text-align:left;" class="panel-collapse collapse">
-                  <!--   -->
-              <% } else if(project.task[i].state==="inprogress") { %>
+
+
+              <% if(i===open) { %>
                 <div id="<%=project.task[i]._id%>" style="text-align:left;" class="panel-collapse collapse in">
-              <% } else if(project.task[i].state==="todo") { %>
+              <% } else { %>
                 <div id="<%=project.task[i]._id%>" style="text-align:left;" class="panel-collapse collapse">
               <% } %>
 
