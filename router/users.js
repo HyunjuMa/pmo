@@ -71,7 +71,7 @@ module.exports = function(app, User) {
       res.render('admin', {
         title: "관리 페이지",
         length: 5,
-        page_name: 'adminpage', // navbar set active에서 쓸 것
+        page_name: 'admin', // navbar set active에서 쓸 것
         users: allusers,
         name: sess.name
       })

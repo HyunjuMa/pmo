@@ -36,9 +36,9 @@
       </div>
     </div>
     </div>
-    <br><br> <hr>
-
-    <h3> 사용자 목록 </h3>
+    <div class="form-box">
+      <div class="form-top">
+    <h3 style="text-align:left;"> 사용자 목록 </h3>
 
       <div class="table-responsive">
         <table class="table" style="text-align:left;">
@@ -56,9 +56,10 @@
 
           <tr>
             <td> <%= i+1 %> </td>
-            <td> <%= users[i].name %> </td>
-            <td> <input type="password" name="pw" placeholder="New password.."> <button type="submit" onclick="return confirm('사용자의 비밀번호를 재설정하시겠습니까?');" > <span class="glyphicon glyphicon-wrench" aria-hidden="true" > </span> </button> </td>
-            <td> <a href="/deleteUser/<%=users[i]._id %>" onclick="return confirm('이 사용자를 삭제하시겠습니까? 사용자를 삭제해도 프로젝트는 유지됩니다.');" > <span class="glyphicon glyphicon-trash" aria-hidden="true" > </span> </a> </td>
+            <td> <% if(users[i].name === 'Admin') { %> <strong> <%= users[i].name %> </strong> <% } else { %> <%= users[i].name %> <% } %> </td>
+
+            <td> <% if(users[i].name === 'Admin') {} else { %> <input type="password" name="pw" placeholder="New password.."> <button type="submit" onclick="return confirm('사용자의 비밀번호를 재설정하시겠습니까?');" > <span class="glyphicon glyphicon-wrench" aria-hidden="true" > </span> </button> <% } %> </td>
+            <td> <% if(users[i].name === 'Admin') {} else { %> <a href="/deleteUser/<%=users[i]._id %>" onclick="return confirm('이 사용자를 삭제하시겠습니까? 사용자를 삭제해도 프로젝트는 유지됩니다.');"  > <span class="glyphicon glyphicon-trash" aria-hidden="true" > </span> </a> <% } %> </td>
 
           </tr>
           </form>
@@ -66,6 +67,7 @@
         </tbody>
       </table>
     </div>
+      </div></div>
 
 
     </div> <!--container-->
